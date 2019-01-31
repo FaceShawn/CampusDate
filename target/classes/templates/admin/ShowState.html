@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- 一个常用的针对移动网页优化过的页面的 viewport meta 标签 -->
+    <title>系统状态展示</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Manage.css}" />
+    
+<script th:src="@{js/jquery-1.11.3.min.js}" type="text/javascript" ></script>
+<script type="text/javascript">
+	
+</script>
+    
+</head>
+
+<body>
+
+	<div id="header"><!-- div标签定义一个块级元素，
+div标签可以把文档分割为独立的、不同的部分。它可以用作严格的组织工具，并且不使用任何格式与其关联。 -->
+	<p>欢迎访问校园预约系统---系统状态页面</p>
+	<!-- p标签定义段落,span标签被用来组合文档中的行内元素,a标签指向超链接地址。 -->
+</div>
+
+<div id="content">
+
+<div id="left">
+	<h1>管理员菜单</h1>
+	<!-- h1到h6标签代表标签字体的由大到小 -->
+	<div id="menu">
+		<a th:href="@{/admin/ShowState}">系统状态</a><br/>
+		<a th:href="@{/admin/Maintence}">管理员维护</a><br/>
+		
+		<a th:href="@{/admin/Change}">修改密码</a><br/>
+		
+		<a th:href="@{/}">返回主页面</a>
+		<!-- 采用了thymeleaf这套模板 -->
+	</div>
+</div>
+
+
+<div id="right">
+	<div id="hmenu">
+		<ul>
+			<li><a th:href="@{/}">返回主页面</a></li>
+			<li><a th:href="@{/admin/Change}">修改密码(学生/老师)</a></li>
+			<li><a th:href="@{/admin/Maintence}">管理员维护</a></li>
+			<li>重要岗位  谨慎操作</li>
+		</ul>
+		<!-- ul标签定义无序列表,li标签定义列表项目 -->
+	</div>
+	
+	<div class="operation">
+		当前系统状态信息↓:
+	</div>
+	<div class="ft">
+		<table>
+			<tr>
+				<td>1.当前在线人数共
+					<span style="color:#DE5B25;" th:text="${count}"> 10 </span>人
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="clearf"></div>
+</div>
+
+<div id="footer">
+	<p>
+		版权所有：哈尔滨工业大学(威海) &nbsp;&nbsp;
+		邮编：264209 &nbsp;&nbsp;
+		地址：山东省威海市文化西路2号
+	</p>
+</div>
+</div>
+</body>
+</html>
+

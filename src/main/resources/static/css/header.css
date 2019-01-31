@@ -1,0 +1,60 @@
+#header a{
+  color:#444;
+}
+#logo{
+  height: 80%;
+  width: 30%;
+  text-align: center;
+  position: relative;
+  top:10%;
+  left:5%;
+}
+#logo .img{
+  border: 1px solid red;
+  float: left;
+  width:20%;
+  height:4rem;
+  background: url("../img/logo.jpg") no-repeat;
+  background-size: 100% 100%;
+  border-radius: 50%;
+}
+#logo .content{
+  font-size: 0.9rem;
+  color:#888;
+  float:right;
+}
+#topnav{
+  position: absolute;
+  width: 55%;
+  height: 30%;
+  top:60%;
+  left:40%;
+}
+#topnav li{
+  font-size: 0.8rem;
+  width: 11%;
+  float: left;
+  margin-left:3%;
+}
+#header .search{
+  position: absolute;
+  width:18%;
+  height: 1.2rem;
+  right:10%;
+  top:15%;
+}
+#header .search input{
+  width:60%;
+  height: 95%;
+}
+#header .search input:focus{
+  color: #710E24;
+}
+.search_btn{
+  display: inline-block;
+  vertical-align:-30%;
+  width:8%;
+  height: 100%;
+  background: url("../img/search.jpg") no-repeat;
+  background-size: 100% 100%;
+}

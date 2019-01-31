@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <title>校园预约</title>
+    <style type="text/css">
+    
+	    .container {
+	    	width: 80%;
+    	}
+
+
+		/**
+		 * footer固定底部
+		 */
+		html,body {
+			 height: 40%;
+		}
+		.body-main {
+			position: relative;
+		    min-height: 100%;
+		    margin-top: 250px;
+		    padding-bottom: 80px;
+		    box-sizing: border-box;
+		}
+		footer {
+			position: absolute;
+			top: 0;
+		    height: 80px;
+			width: 100%;
+			padding-top: 15px;
+			color:#99c;
+			background-color: #eee;
+			font-size: 12px;
+			font-family:Sans-serif;
+		}
+		
+		/**
+		* 去掉下划线
+		*/
+		a:link { 
+			text-decoration: none;
+		}
+	　　a:active { 
+			text-decoration:blink;
+		}
+	　　 a:hover { 
+			text-decoration:underline;
+		} 
+	　　 a:visited { 
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body class="container">
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+	<div class="navbar-header">
+		<a class="navbar-brand" th:href="@{/}">校园预约系统</a>
+	</div>
+	<div class="navbar-header">
+		<img src="/img/logo.jpg" class="img-rounded" width="150" height="50"></img>
+	</div>
+	<div>
+		<ul class="nav navbar-nav">
+			<li>
+				<a th:href="@{/}">主页</a>
+			</li>
+			<li th:if="${nowUser==null}">
+				<a th:href="@{/user/login}">登录</a>
+			</li>
+			<li th:if="${nowUser==null}">
+				<a th:href="@{/user/signup}">注册</a>
+			</li>
+			<li>
+				<a th:href="@{/myspace}" >我的中心</a>
+			</li>
+			<li th:if="${nowUser==null}">
+				<a th:href="@{/user/login}">管理登录</a>
+			</li>
+		</ul>
+	</div>
+	</div>
+</nav>
+
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+	<div>
+		<ul class="nav navbar-nav">
+		<li class="active">
+				<a th:href="@{/freetime/add}">个人中心</a>
+			</li>
+
+			<li >
+				<a th:href="@{/freetime/add}">添加空闲时间</a>
+			</li>
+			<li >
+				<a th:href="@{/freetime/my-add}">我的发布</a>
+			</li>
+			<li >
+				<a th:href="@{/freetime/my-reserve}">我的预约</a>
+			</li>
+		</ul>
+		</div>
+	</div>
+</nav>
+
+
+<div id="alert" class="form-group input-group" style="color: red" th:text="${errmsg} ">
+</div>
+
+
+<div class="body-main">
+<footer>
+	<ul class="text-left">
+		<li>
+			<span class="glyphicon glyphicon-envelope"></span> E-mail : WebTree@126.com
+		</li>
+		<li>
+			<span class="glyphicon glyphicon-copyright-mark"></span> 2018 <a href="https://github.com/NineSeg/CampusDate">@九段 </a>
+		</li>
+		<li>
+			<span class="glyphicon glyphicon-ok-circle"></span>  <a href="http://www.hitwh.edu.cn/">哈尔滨工业大学(威海)</a>
+		</li>
+	</ul>
+</footer>
+</div>
+
+</body>
+</html>

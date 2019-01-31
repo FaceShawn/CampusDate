@@ -1,0 +1,98 @@
+﻿#information{
+	width: 20%;
+	height: 5rem;
+	position: absolute;
+	background-size: 100% 100%;
+	left:5%;
+	font-size:0.7rem
+}
+#information #address{
+	margin: 0 auto;
+	width:100%;
+	height:1rem%;
+}
+#information #phonenumber{
+	margin: 0 auto;
+	width:100%;
+	height:1rem;
+}
+#information #copyright{
+	margin: 0 auto;
+	width:100%;
+	height:1rem;	
+}
+#partner{
+	width: 20%;
+	height: 5rem;
+	position: absolute;
+	background-size: 100% 100%;
+	left:35%;
+	top:0;
+	font-size:0.7rem;
+}
+#partner thePartner{
+	width:25%;
+	height:1rem;
+	position:absolute;
+	left:37.5%;
+}
+#partner ul{
+	width:100%;
+	height:40%;
+	position: absolute;
+	bottom: 0;
+}
+#partner ul li{
+	position: absolute;	
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.partner1{
+	width:25%;
+	height:2rem;
+	position:absolute;
+	left:7.5%;
+	top:-40%;
+	background: url("../img/18.png");
+	margin:1px;
+}
+.partner2{
+	width:25%;
+	height:2rem;
+	position:absolute;
+	left:37.5%;
+	top:-40%;
+	background: url("../img/19.png");
+	margin:1px;
+}
+.partner3{
+	width:25%;
+	height:2rem;
+	position:absolute;
+	left:67.5%;
+	top:-40%;
+	background: url("../img/20.png");
+	margin:1px;
+}
+#contact{
+	width: 20%;
+	height: 5rem;
+	position: absolute;
+	background-size: 100% 100%;
+	left:75%;
+}
+#contact span{
+	position: absolute;
+	width: 3rem;
+	height:3rem;
+	top:30%;
+	background-size: 100% 100%;
+}
+#contact .contact1{
+	left:10%;
+	background: url("../img/weibo.png") no-repeat;
+}
+#contact .contact2{
+	left:60%;
+	background: url("../img/weixin.png") no-repeat;
+}

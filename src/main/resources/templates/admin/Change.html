@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- 一个常用的针对移动网页优化过的页面的 viewport meta 标签 -->
+    <title>密码修改页面</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Manage.css}" />
+</head>
+
+<body>
+
+	<div id="header"><!-- div标签定义一个块级元素，
+div标签可以把文档分割为独立的、不同的部分。它可以用作严格的组织工具，并且不使用任何格式与其关联。 -->
+	<p>欢迎访问校园预约系统---密码修改页面</p>
+	<!-- p标签定义段落,span标签被用来组合文档中的行内元素,a标签指向超链接地址。 -->
+</div>
+
+<div id="content">
+
+	<div id="left">
+		<h1>管理员菜单</h1>
+		<!-- h1到h6标签代表标签字体的由大到小 -->
+		<div id="menu">
+			<a th:href="@{/admin/ShowState}">系统状态</a><br/>
+			<a th:href="@{/admin/Maintence}">管理员维护</a><br/>
+			<a th:href="@{/admin/Change}">修改密码</a><br/>
+			<a th:href="@{/}">返回主页面</a>
+			<!-- 采用了thymeleaf这套模板 -->
+		</div>
+	</div>
+
+
+	<div id="right">
+
+		<div id="hmenu">
+			<ul>
+			<li><a th:href="@{/}">返回主页面</a></li>
+			<li><a th:href="@{/admin/Change}">修改密码(学生/老师)</a></li>
+			<li><a th:href="@{/admin/Maintence}">管理员维护</a></li>
+			<li>重要岗位  谨慎操作</li>
+			</ul>
+			<!-- ul标签定义无序列表,li标签定义列表项目 -->
+		</div>
+	
+		<div class="operation">已存在的学生用户列表↓：
+		</div>
+	
+	<table  class="dt" border="0" cellspacing="1">
+		<tr>
+			<th>ID</th>
+			<th>学生用户名</th>
+			<th>学生邮箱</th>
+			<th>学生密码清零</th>
+			<th>删除学生用户</th>
+		</tr>
+		<!-- tr标签定义 HTML 表格中的行。tr 元素包含一个或多个 th 或 td 元素。
+		     td标签定义 HTML 表格中的标准单元格。
+		     th标签定义 HTML 表格内的表头单元格 -->
+		 <tr th:each="user:${users}" >
+		 	<tr th:if="${user.userGroup} eq 'student'">	
+                <td th:text="${user.id} "></td>
+                <td th:text="${user.userName} "></td>
+                <td th:text="${user.email}"></td>
+				<td><a th:href="'/SAT/changeSAT?id='+${user.id}">密码清零</a></td>
+                <td><a th:href="'/SAT/deleteSAT?id='+${user.id}">deletea</a></td>
+                </tr>
+            </tr>
+	</table>
+	
+	<div class="operation">已存在的教师用户列表↓：
+		</div>
+	
+	<table  class="dt" border="0" cellspacing="1">
+		<tr>
+			<th>ID</th>
+			<th>教师用户名</th>
+			<th>教师邮箱</th>
+			<th>教师密码清零</th>
+			<th>删除教师用户</th>
+		</tr>
+		<!-- tr标签定义 HTML 表格中的行。tr 元素包含一个或多个 th 或 td 元素。
+		     td标签定义 HTML 表格中的标准单元格。
+		     th标签定义 HTML 表格内的表头单元格 -->
+		 <tr th:each="user:${users}" >
+		 	<tr th:if="${user.userGroup} eq 'teacher'">	
+                <td th:text="${user.id} "></td>
+                <td th:text="${user.userName} "></td>
+                <td th:text="${user.email}"></td>
+				<td><a th:href="'/SAT/changeSAT?id='+${user.id}">密码清零</a></td>
+                <td><a th:href="'/SAT/deleteSAT?id='+${user.id}">delete</a></td>
+                </tr>
+            </tr>
+	</table>
+
+
+
+
+
+
+
+</div><!-- id=right -->
+
+	<div class="clearf"></div>
+
+</div><!-- id=content -->
+
+<div id="footer">
+	<p>
+		版权所有：哈尔滨工业大学(威海) &nbsp;&nbsp;
+		邮编：264209 &nbsp;&nbsp;
+		地址：山东省威海市文化西路2号
+	</p>
+</div><!-- id="footer" -->
+
+</body>
+</html>
+

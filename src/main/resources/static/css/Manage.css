@@ -1,0 +1,244 @@
+@CHARSET "UTF-8";
+/*页面基本样式*/
+*{					/*选择页面所有元素*/
+	margin: 0px;	/*设置所有元素外边距为0*/
+	padding: 0px;	/*设置所有元素内边距为0*/
+}
+body{					/*设置页面基本样式*/
+	background: #fff;	/*设置页面背景颜色为白色*/
+	width: 1000px;		/*设置页面宽度为1000px*/
+	margin: 0 auto;		/*设置页面居中显示*/
+	text-align: center;	/*设置文本对齐方式为居中对齐*/
+}
+img{					/*图片基本样式*/
+	border: none;		/*设置页面中图片无边框*/
+}
+h1{						/*选择一级标题元素*/
+	height: 34px;		/*设置一级标题高度为34px*/
+	line-height: 34px;	/*设置一级标题行高为34px*/
+	text-indent: 28px;	/*设置一级标题缩进28px*/
+	font-size: 16px;	/*设置一级标题字体大小为16px*/
+	font-family: "微软雅黑";/*设置一级标题字体为微软雅黑*/
+	font-weight: bold;	/*设置一级标题加粗显示*/
+	text-align: left;	/*设置一级标题文本居中方式为靠左对齐*/
+	color: #EEE;		/*设置一级标题字体颜色*/
+	background: #2a91d3 url(../images/arrow.jpg)no-repeat 10px 7px;
+											/*设置一级标题背景*/
+	border-bottom: 1px solid #C0C0C0; 		/*设置一级标题底部边框线*/
+}
+
+/*页面整体布局*/
+#header{			/*页面头部分div*/
+	width: 1000px;	/*设置页面头部宽度为1000px*/
+	height:150px;	/*设置页面头部高度为150px*/
+	background: url(../images/header.jpg)no-repeat;/*设置页面头部背景图片*/
+}
+#header p{			/*页面头部分中段落*/
+	font-family: "微软雅黑";	/*设置页面头部段落文本字体*/
+	font-size: 36px;		/*设置页面头部段落文本字体大小为36px*/	
+	height: 150px;			/*设置页面头部段落高度为150px*/
+	line-height: 150px		/*设置页面头部段落行高为150px*/
+	text-align: center;		/*设置页面头部段落文本居中对齐方式为居中对齐*/
+	color: #FED;			/*设置页面头部段落文本颜色*/
+}
+#header p span{			/*页面头部段落中内联元素*/
+	color: #EFC;		/*设置颜色*/
+	font-size: 30px;	/*设置字体大小为30px*/
+	font-weight: bold;	/*设置字体加粗*/
+}
+#content{				/*页面主体部分div*/
+	width: 1000px;		/*设置页面主体部分宽度为1000px*/
+	margin: 5px auto;	/*设置页面主体部分上下外边距为5px，左右自动*/
+	background: #EAEAEA;/*设置页面主体部分背景颜色*/
+}
+#left{		/*页面主体部分左侧div*/
+	margin: 10px 3px 10px 10px;	/*设置页面左侧div外边距*/
+	width: 200px;				/*设置页面左侧div宽度为200px*/
+	float: left;				/*设置页面左侧div向左浮动*/
+	background: #F9F8F4;		/*设置页面左侧div背景颜色*/
+	border: 1px solid #C0C0C0;	/*设置页面左侧div的边框*/
+}
+#right{		/*页面主体部分右侧div*/
+	margin: 10px 10px 10px 3px;	/*设置页面右侧div外边距*/
+	padding-bottom: 20px;		/*设置页面右侧div内边距*/
+	width: 770px;				/*设置页面右侧div宽度为770px*/
+	background: #FFF;			/*设置页面右侧div背景颜色*/
+	float: right;				/*设置页面右侧div向右浮动*/
+	border: 1px solid #c0c0c0;	/*设置页面右侧div的边框*/
+}
+.clearf{		/*清除浮动div*/
+	clear: both;/*清除页面主体部分左右两列div浮动产生的影响*/
+}
+#footer{	/*页面底部*/
+	width: 1000px;	/*设置页面底部的宽度为1000px*/
+	heigth: 76px;	/*设置页面底部的宽度为76px*/
+	background: url(../images/footer.jpg);	/*设置页面底部的背景图片*/
+}
+#footer p{	/*页面底部段落*/
+	height: 76px;	/*设置页面底部段落高度为76px*/
+	line-height: 76px;	/*设置页面底部段落行高为76px*/
+	text-align: center;	/*设置页面底部段落文本对齐方式为居中对齐*/
+	font-family: "微软雅黑";/*设置页面底部段落字体*/
+	font-size: 12px;	/*设置页面底部段落字体大小为12px*/
+	font-weight: bold;	/*设置页面底部段落字体加粗显示*/
+	color: #DDD;	/*设置页面底部段落字体颜色*/
+}
+/*左侧菜单样式*/
+#menu{		/*左侧功能菜单div*/
+	margin: 20px auto;	/*设置左侧功能菜单div的外边距*/
+}
+#menu a{	/*左侧功能菜单超链接*/
+	display: block;			/*将超链接转换为区块*/
+	height: 34px;			/*设置超链接区块高度为34px*/
+	line-height: 34px;		/*设置超链接区块行高为34px*/
+	text-indent: 45px;		/*设置超链接文本缩进45px*/
+	font-family: "微软雅黑";	/*设置超链接文本字体*/
+	font-size: 14px;		/**/
+	font-weight: bold;		/**/
+	color: #00C;			/**/
+	text-decoration: none;	/**/
+	border-bottom: 2px solid #dee;	/**/
+	background: url(../images/smallarrow.png) no-repeat 10% 50%;	/**/
+}
+#menu a.checked,#menu a:hover{	/**/
+	color: #EEE;		/**/
+	background: #046DF7 url(../images/smallarrow_hover.png) no-repeat 10% 50%;
+																	/**/
+	border: 1px solid #F91;	/*设置超链接文本边框*/
+}
+
+/*右侧快捷菜单样式*/
+#hmenu{
+	width: 98%;
+	margin: 0 auto;
+	height: 28px;
+	line-height: 28px;
+	border-bottom: 1px solid #E0C21D;
+}
+#hmenu ul{
+	list-style-type: none;
+	font-size: 12px;
+}
+#hmenu ul li{
+	float: right;
+	padding: 0px 12px;
+	color: #333;
+	background: url(../images/fgx.png) no -repeat center right;
+}
+#hmenu li a{		/*列表项中的超链接*/
+	text-decoration: none;/*设置超链接下划线*/
+}
+#hmenu li a:hover{	/*鼠标经过超链接*/
+	color: #F4A;	/*设置超链接颜色*/
+}
+/*操作说明样式*/
+.operation{
+	width: 98%;
+	text-align: left;
+	margin: 0 auto;
+	padding: 8px 0px;
+	border-bottom: 1px solid #B1648A;
+	font-size: 12px;
+	font-weight: bold;
+	color:#42F;
+}
+.operation span.mess{
+	color: red;
+}
+/*操作表单和信息显示样式*/
+.ft{
+	width: 98%;
+	text-align:left;
+	margin: 0px auto;
+	padding: 8px 0;
+	border-bottom: 1px solid #B1648A;
+	font-size: 12px;
+}
+.ft fieldset{
+	margin: 5px 0px;
+	padding: 5px 0px;
+	background: #F9F8F4;
+	font-weight: bold;	
+}
+.ft table td{
+	font-size: 12px;
+	padding: 3px 5px;
+	color: #333;
+	line-height: 200%;
+	text-align: justify;
+}
+.ft table td.label{
+	text-align:right;
+}
+.ft table td.hint{
+	color: #F04A00;
+}
+.ft input.text,.ft select{
+	font-size: 12px;
+	color: #333;
+}
+.ft input.long{
+	width: 400px;
+}
+.ft input.button{
+	border: none;
+	height: 20px;
+	line-height: 20px;
+	width: 100px;
+	background: url(../images/bt02.gif) no-repeat center center;
+	color: #242;
+	font-weight: bold;
+}
+.ft input.button:hover{
+	cursor:pointer;
+	color:#262;
+}
+.ft textarea{
+	font-size:12px;
+	color: #333;
+}
+/*数据表格式样*/
+.dt{		/*数据表格类*/
+	margin: 5px auto;	/*设置表格上下外边距为5px，表格居中显示*/
+	width: 98%;			/*设置表格宽度为父层容器的98%*/
+	background: #CCC;	/*设置表格背景颜色*/
+}
+.dt tr th,.dt tr td{	/*数据表格中标题单元格和单元格*/
+	background: #FFF;	/*设置单元格背景颜色*/
+	font-size: 12px;	/*设置单元格字体大小*/
+	color: #333;		/*设置单元格字体颜色*/
+	height: 22px;		/*设置单元格高度为22px*/
+	line-height: 22px;	/*设置单元格行高为22px*/
+	text-align: center;	/*设置单元格文本对齐方式为居中对齐*/
+}
+.dt tr th{				/*标题单元格*/
+	color: #4A71BE;		/*设置标题单元格字体颜色*/
+	background: url(../images/th_bg.png) repeat-x center center;
+										/*设置标题单元格背景图片*/
+}
+.dt tr td:hover{		/*鼠标经过单元格*/
+	background: #E8EEF7;/*设置鼠标经过单元格时的背景颜色*/
+}
+/*数据表格分页导航样式*/
+.pagenav{			/*数据表格分页导航div*/
+	font-family: "微软雅黑";	/*设置字体*/
+	font-size: 12px;		/*设置字体大小为12px*/
+	font-weight: bold;		/*设置字体加粗*/
+	color: #E63;			/*设置字体颜色*/
+	width: 98%;				/*设置导航div宽度为父层容器的98%*/
+	margin: 10px auto;		/*设置导航div上下外边距为10px，并居中显示*/
+	text-align: right;		/*设置单元格文本对齐方式为右对齐*/
+}
+.pagenav a:hover{	/*鼠标经过超链接*/
+	color: #F711EA;	/*设置超链接颜色*/
+}
+.pagenva select{	/*导航中的下拉列表*/
+	font-weight: bold;	/*设置字体加粗*/
+	font-size: 11px;	/*设置字体大小为11px*/
+	color: #558;		/*设置字体颜色*/
+}
+.pagenva select option{	/*导航中的下拉列表中的列表项*/
+	background: #F9F8F4;/*设置列表项背景颜色*/
+}
+
+

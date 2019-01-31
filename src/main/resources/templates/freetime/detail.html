@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <title>校园预约</title>
+    <style type="text/css">
+    
+	    .container {
+	    	width: 80%;
+    	}
+
+		/**
+		 * 列表卡片
+		 */
+		@media (min-width: 768px) {
+			.container-list {
+				width: 80%;
+				margin-top: 20px;
+				padding-left: 20%;
+				padding-right: 20%;
+			}
+		}
+		.container-list {
+			padding-top: 80px;
+			padding-left: 8%;
+			padding-right: 8%;
+		}
+		.panel-list {
+			/*clear: both;*/
+		    /*line-height: 1.5;*/
+		    /*overflow: hidden;*/
+		    position: relative;
+		    border-bottom: 1px solid #e2e2e2;
+		    margin-top: 15px;
+		    padding-bottom: 15px;
+		}
+		.panel-list-date {
+			float:left;
+			width:100%;
+			color: #5780BA;
+			font-family:
+		}
+		.panel-list-day {
+			width: 60px;
+			height: 60px;
+			/*padding-left: auto;*/
+			/*padding-right: auto;*/
+			display: inline;
+			background-color: #eee;
+			border-radius: 500px;
+			font-size: 240%;
+			border-style: none;
+		}
+		.panel-list-month {
+			position: relative;
+			width:100px;
+			display: inline;
+		}
+		.panel-list-content {
+			text-indent: 40px;
+			color: #666;
+			font-family: Sans-serif,Serif;
+			font-size: 16px;
+		}
+
+		/**
+		 * footer固定底部
+		 */
+		html,body {
+			 height: 40%;
+		}
+		.body-main {
+			margin-top: 300px;
+			position: relative;
+		    min-height: 100%;
+		    padding-bottom: 80px;
+		    box-sizing: border-box;
+		}
+		footer {
+			position: absolute;
+			top: 0;
+		    height: 80px;
+			width: 100%;
+			padding-top: 15px;
+			color:#99c;
+			background-color: #eee;
+			font-size: 12px;
+			font-family:Sans-serif;
+		}
+		
+		/**
+		* 去掉下划线
+		*/
+		a:link { 
+			text-decoration: none;
+		}
+	　　a:active { 
+			text-decoration:blink;
+		}
+	　　 a:hover { 
+			text-decoration:underline;
+		} 
+	　　 a:visited { 
+			text-decoration: none;
+		}
+	</style>
+</head>
+
+<body class="container">
+
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+	<div class="navbar-header">
+		<a class="navbar-brand" th:href="@{/}">校园预约系统</a>
+	</div>
+	<div class="navbar-header">
+		<img src="/img/logo.jpg" class="img-rounded" width="150" height="50"></img>
+	</div>
+	<div>
+		<ul class="nav navbar-nav">
+			<li >
+				<a th:href="@{/}">主页</a>
+			</li>
+			<li th:if="${nowUser==null}">
+				<a th:href="@{/user/login}">登录</a>
+				</li>
+			<li th:if="${nowUser==null}">
+				<a th:href="@{/user/signup}">注册</a>
+			</li>
+			<li class="active">
+				<a th:href="@{/}">空闲时间详情</a>
+			</li>
+			<li th:if="${nowUser!=null}" class="dropdown">
+				<a th:href="@{/myspace}" class="dropdown-toggle" data-toggle="dropdown">
+					个人中心
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a th:href="@{/myspace}">我的中心</a><br/></li>
+					<li><a th:href="@{/user/logout}">注销</a></li>
+				</ul>
+			</li>
+			<li th:if="${nowUser==null}">
+				<a th:href="@{/user/login}">管理登录</a>
+			</li>
+		</ul>
+	</div>
+	</div>
+</nav>
+
+<div id="alert" class="form-group input-group" style="color: red" th:text="${errmsg} ">
+</div>
+
+<div >
+    <table  class="table table-striped">
+        <tr>
+           	<th>编号</th>
+            <th>日期</th>
+            <th>节次</th>
+            <th>发布者</th>
+            <th>上限人数</th>
+            <th>已预约人数</th>
+            <th>备注</th>
+            <th>预约</th>
+        </tr>
+        <tr>
+             <td th:text="${freetime.id} "></td>
+            <td th:text="${freetime.freeDate} "></td>
+			<td th:text="${freetime.sectionName} "></td>
+            <td th:text="${freetime.ownerName}"></td>
+           	<td th:text="${freetime.allowNum} "></td>
+			<td th:text="${freetime.reservedNum} "></td>
+			<td th:text="${freetime.freeNote} "></td>
+			<td>
+	            <form  id="reserveForm" class="form form-signup" role="form" action="" onsubmit="javascript:return false;">
+	            	<div class="form-group input-group">
+			        	<span  class="input-group-addon">留言:</span>
+				        <input name="reserverMsg" type="text" class="form-control"/>
+			        </div>
+			        <div class="form-group input-group">
+			        	<input name="freetimId" type="hidden" th:value="${freetime.id}"/>
+			        </div>
+			        <div th:if="${freetime.freeState=='free'}">
+	        			<button id="reserveBtn" class="btn btn-success" type="submit" >预约</button>
+	        		</div>
+	        		<div th:if="${freetime.freeState=='busy'}">
+	        			<button class="btn btn-success" type="submit" >已满</button>
+	        		</div>
+	        	</form>
+        	</td>
+        </tr>
+    </table>
+</div>
+
+<div class="body-main">
+<footer>
+	<ul class="text-left">
+		<li>
+			<span class="glyphicon glyphicon-envelope"></span> E-mail : WebTree@126.com
+		</li>
+		<li>
+			<span class="glyphicon glyphicon-copyright-mark"></span> 2018 <a href="https://github.com/NineSeg/CampusDate">@九段 </a>
+		</li>
+		<li>
+			<span class="glyphicon glyphicon-ok-circle"></span>  <a href="http://www.hitwh.edu.cn/">哈尔滨工业大学(威海)</a>
+		</li>
+	</ul>
+</footer>
+</div>
+
+
+<script th:src="@{/js/jquery-1.11.3.min.js}" type="text/javascript" ></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#reserveBtn").click(function(){
+        var formValue = $("#reserveForm").serialize();
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url:"/freetime/reserve",
+            data:formValue,
+            success: function(msg){
+            	if( "200" == msg.errcode )  {
+                    //alert(msg.errmsg);
+                    $("#alert").html(msg.result+"errcode = "+msg.errcode+", errmsg = "+msg.errmsg);
+                    // window.location.href = "/user/login";
+                }else{
+                	$("#alert").html("errcode = "+msg.errcode+", errmsg = "+msg.errmsg);
+                }
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
+
+
+
+
