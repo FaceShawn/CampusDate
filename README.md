@@ -1,8 +1,5 @@
 # 校园空闲时间预约
 
-Tags： 开发
-
----
 ## 测试账号
 
 管理员：admin	密码：admin
@@ -54,6 +51,7 @@ gantt
 ### 1.1 下载JDK
 
 [SE JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)，选择`Java Platform (JDK) 10`，下载到`\Java\JDK`
+
 >[EE JDK](http://www.oracle.com/technetwork/java/javaee/downloads/index.html)下载下来是`glassfish`格式，弄不太懂，发现安装`SE JDK`也是一样的
 
 ### 1.2 设置环境变量
@@ -64,8 +62,10 @@ gantt
     `;%JAVA_HOME%\bin;%JAVA_HOME%\jre;`
 
 ### 1.3 下载 Eclipse 安装包
+
 [eclipse-inst-win64.exe](https://www.eclipse.org/downloads/)
 ### 1.4 运行安装软件，选择`Eclipse for Java Web Developer`并安装
+
 >推荐所有Java相关软件全部都安装到非系统盘同一目录`\Java`下，如：
 >`D:\Develop\Java`
 
@@ -165,6 +165,7 @@ default-storage-engine=INNODB
 > `Install/Remove of the Service Denied!`
 
 ### [4.6 `cd`到安装目录`\bin`下](#4.6)
+
 ```
 d:
 cd 安装目录\Java\mysql-5.7.21-winx64\bin
@@ -175,6 +176,7 @@ cd D:\Develop\Java\mysql-5.7.21-winx64\bin
 ```
 
 ### [4.7 安装](#4.7)
+
 ```
 mysqld -install
 ```
@@ -264,7 +266,7 @@ while (rs.next()) {
 ## 6. 安装 Spring Boot框架
 
 ### 1. [SpringBoot工程从创建到执行](http://rensanning.iteye.com/blog/2355933)
-![SpringBoot工程从创建到执行](assets/b33a58aa-08a0-3503-9d1d-af6c34189917.jpg)
+![SpringBoot工程从创建到执行](src/main/resources/static/img/b33a58aa-08a0-3503-9d1d-af6c34189917.jpg)
 
 ### 2. [Spring Boot 简明教程](https://www.kancloud.cn/boshu/springboot/215857)
 ### 3. 安装 [STS插件](https://spring.io/tools/sts)
@@ -324,8 +326,10 @@ web.xml中有三个方面的重要信息：
 ---
 ## 8. [Spring Boot 用 JPA 连接 MySQL 数据库示例](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
 
-### 1. 下载[项目](https://github.com/aidansu/spring-boot-jpa)
+### 1. 下载[JPA项目](https://github.com/aidansu/spring-boot-jpa)
+
 ### 2. 用Eclipse打开项目
+
 ### 3. 下载jar依赖
         1. 右键项目 -> run as -> Maven install
         2. 等待好几分钟
@@ -367,32 +371,50 @@ web.xml中有三个方面的重要信息：
 ---
 ## 11. 项目分层结构
 
-## [工程结构和主要包说明](https://www.cnblogs.com/jeffwongishandsome/archive/2018/03/26/quick-develop-rest-api-by-using-spring-boot.html)
-## [SSH框架总结分析](https://blog.csdn.net/shan9liang/article/details/8803989)
-## [关于SSH架构中Entity/Dao/Service/Controller的理解](https://www.zybuluo.com/Beeder/note/1053661)
-## [简化版工程结构](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
-### 1. src/main/java/com.aidansu.springboot 目录
+### [工程结构和主要包说明](https://www.cnblogs.com/jeffwongishandsome/archive/2018/03/26/quick-develop-rest-api-by-using-spring-boot.html)
+
+### [SSH框架总结分析](https://blog.csdn.net/shan9liang/article/details/8803989)
+
+### [关于SSH架构中Entity/Dao/Service/Controller的理解](https://www.zybuluo.com/Beeder/note/1053661)
+
+### [简化版工程结构](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
+
+#### 1. src/main/java/com.campus 目录
+
 common：公共文件，用于存放一些常量，工具类
 controller：控制层，处理用户输入请求
 model：模型层，存放对象
 repository：持久化层，提供数据表存取机制，主要是 ORM 框架实现以对象-关系数据库的映射
 service：服务层，由表现层直接调用，用于处理事务
 App：启动程序
-### 2. resources 目录
+
+#### 2. resources 目录
+
 static：存放静态文件，如图片，CSS 样式，js 文件
 templates：模板文件，主要是 html 文件
 application.properties：Spring Boot 自动加载的文件配置
 application-dev.properties：开发环境的配置文件
 
-## SSH 集成框架
-SSH 是 struts + spring + hibernate 的一个集成框架,从职责上分为四层: 表示层、业务逻辑层、数据持久层和域模块层（实体层）
-### 1. src/main/java  程序开发以及主程序入口
+## 12. 程序结构
+
+**SSH 集成框架**是 struts + spring + hibernate 的一个集成框架,从职责上分为四层: 表示层、业务逻辑层、数据持久层和域模块层（实体层）
+
+### Spring Element
+
+@Autowired 注解与自动装配，自定义 bean 
+
+### DB 存放数据库文件 
+
+### 1. src/main/java 目录 程序开发以及主程序入口
+
 #### 0. 应用根目录
+
 com.campus: 应用程序入口,包括一个静态main方法,可以做一些框架配置,比如mybatis、swagger等
 #### 1. 基础设施层
     提供公共功能组件,供其它层调用。
-com.campus.common: 公共类,如枚举、常量、业务无关的通用公共实体等
+com.campus.common: 公共文件类,如枚举、常量、业务无关的通用公共实体等
 com.campus.common.utils: 工具类,常用帮助类
+
 #### 2. 表示层
     实现交互界面（即以下src/main/resources 静态文件、模板及配置文件），负责接收请求(Request)和传送响应(Response),将接收到的Request委派给相应的Action处理。负责具体的业务模块流程的控制,调用业务逻辑层的接口来控制业务流程。
 com.campus.controller: 与用户直接交互的对象,处理用户输入请求,通过处理请求调用service来响应用户操作，同时给出响应和处理视图层。对外暴露 Rest API 接口。
@@ -404,22 +426,46 @@ com.campus.model: 实体模型类,与数据库中的表严格地一一对应,用
 com.campus.repository : 对数据操作的一层封装，XxxxRepository接口继承JpaRepository，因此具备通用的数据访问控制层的能力。
 [Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226)
 #### 5. 业务逻辑层
+
     通过逻辑判断处理用户输入等比如判断输入是否合法，对于合法的数据和操作通过调用Dao类的方法来进行数据库访问和持久化，属于控制层或者说业务层，同时也直接连接着持久层。
 com.campus.service : 数据服务层，由表示层直接调用，用于处理事务
 com.campus.service.impl 数据服务层对应的实现接口
-### 2. src/main/resources 静态文件、模板及配置文件
-static : 存放静态文件
-static/css : 存放CSS 样式，比如 bootstraps 的 css 引用文件
-static/img : 存放图片
-static/js : 存放js 文件
-templates : html 模板文件
-template/..
-application.properties : Spring Boot 自动加载的文件配置
-application-dev.properties 开发环境的配置文件
-application-prod.properties 生产环境的配置文件
-application-test.properties 测试环境的配置文件
+### 2. src/main/resources 目录 静态文件、模板及配置文件
+
+#### 1. static : 静态文件
+
+static/css : CSS 样式
+static/img : 图片
+static/js : js 文件
+
+#### 2. templates : 模板文件，主要是 html 文件
+
+admin：后台管理页面
+
+freetime：预约相关页面
+
+myspace：个人中心
+
+user：用户页面
+
+index.html：主页
+
+#### 3.配置文件
+
+application.properties : Spring Boot 自动加载的配置文件，默认为开发环境，可切换以下多环境
+application-dev.properties 开发环境
+application-prod.properties 生产环境
+application-test.properties 测试环境
+
 ### 3. src/test/java  测试程序
-### 4. DB 存放数据库文件 
+
+### target：注解
+
+### pom.xml：添加项目所需要的依赖
+
+### README.md：项目说明
+
+### spring-boot-jpa.iml：
 
 ---
 ## 12. 杂七杂八
