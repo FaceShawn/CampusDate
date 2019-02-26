@@ -8,7 +8,7 @@
 
 教师：222		密码：2222
 
-## 0. 项目管理甘特图
+## 甘特图
 
 ```mermaid
 gantt
@@ -80,7 +80,7 @@ index.html：主页
 
 #### 配置文件
 
-application.properties : Spring Boot 自动加载的配置文件，默认为开发环境，可切换以下多环境
+application.properties : Spring Boot 自动加载的配置文件，默认为开发环境，可切换以下多环境 [HTML5日期和时间选择输入](https://www.imooc.com/article/11915)
 application-dev.properties 开发环境
 application-prod.properties 生产环境
 application-test.properties 测试环境
@@ -97,7 +97,7 @@ DB：存放数据库文件
 
 target：注解
 
-pom.xml：添加项目所需要的依赖
+pom.xml：添加项目所需要的依赖 [Maven pom.xml 配置详解](https://blog.csdn.net/ithomer/article/details/9332071)
 
 README.md：项目说明
 
@@ -105,30 +105,34 @@ spring-boot-jpa.iml：
 
 --------------------
 
-## 1. 安装Eclipse for Java Web Developer
+## 准备
 
-### 1.1 下载JDK
+### 安装Eclipse for Java Web Developer
+
+#### 下载JDK
 
 [SE JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)，选择`Java Platform (JDK) 10`，下载到`\Java\JDK`
 
 >[EE JDK](http://www.oracle.com/technetwork/java/javaee/downloads/index.html)下载下来是`glassfish`格式，弄不太懂，发现安装`SE JDK`也是一样的
 
-### 1.2 设置环境变量
+#### 设置环境变量
+
 1. `我的电脑`->右键`属性`->`高级系统设置`->`环境变量`，下同
 2. 新建***系统变量*** `JAVA_HOME`，并赋值JDK的安装路径，如：
     `D:\Develop\Java\jdk1.8.0_161`
 3. 在***系统变量*** `PATH`后***追加***
     `;%JAVA_HOME%\bin;%JAVA_HOME%\jre;`
 
-### 1.3 下载 Eclipse 安装包
+#### 下载 Eclipse 安装包
 
 [eclipse-inst-win64.exe](https://www.eclipse.org/downloads/)
-### 1.4 运行安装软件，选择`Eclipse for Java Web Developer`并安装
+#### 运行安装软件，选择`Eclipse for Java Web Developer`并安装
 
 >推荐所有Java相关软件全部都安装到非系统盘同一目录`\Java`下，如：
 >`D:\Develop\Java`
 
-### 1.5 汉化
+#### 汉化
+
 1. [Eclipse Babel Project Downloads](http://www.eclipse.org/babel/downloads.php) 
     ->Babel Language Pack Zips
     ->对应版本（如Oxygen）
@@ -138,26 +142,29 @@ spring-boot-jpa.iml：
 3. 重启Eclipse
 
 ---
-## 2. 安装 Tomcat
+### 安装 Tomcat
 
-### 2.1 下载安装包
+#### 下载安装包
 
 [Tomcat 9](https://tomcat.apache.org/download-90.cgi)，选择`core`下的`32/64-bit Windows zip (pgp, sha1, sha512)`，解压到`\Java\Tomcat`
 
-### 2.2 设置 Tomcat
+#### 设置 Tomcat
+
 1. 在 Eclipse 中，点击菜单栏 `Window->Preferences`，点击 `Server / Runtime Environments`
 2. 点击 `Add`按钮， 新建一个服务器，选择`Tomcat 9.0`->`Next`
 3. 在`Tomcat installation directory`->`Browse`选择Tomcat的安装目录，点击`finish`完成配置。
 
 ---
-## 3. 新建第一个 Java Web 项目并部署在Tomcat服务器
+### 新建第一个 Java Web 项目并部署在Tomcat服务器
 
-### 3.1 新建 Java Web 项目
+#### 新建 Java Web 项目
+
 1. 新建->`Dynamic Web Project`
 2. `Target runtime`选择安装的服务器（如：`Apache Tomcat v9.0`）
 3. `module version`选择默认`3.1`，其他保持默认，`finish`。
 
-### 3.2 新建第一个 html 页面
+#### 新建第一个 html 页面
+
 在`\WebContent`目录下新建`Index.html`
 ```
 <!DOCTYPE html>
@@ -172,10 +179,86 @@ This is CampusDate/WebContent/Index.html!
 </body>
 </html>
 ```
-### 3.3 部署在Tomcat服务器
+#### 部署在Tomcat服务器
+
 在Index.html上右键->`Run as`->`Run on Server`.
 
 ---
+## Spring Boot
+
+### 安装 Spring Boot框架
+
+#### [SpringBoot工程从创建到执行](http://rensanning.iteye.com/blog/2355933)
+
+![SpringBoot工程从创建到执行](src/main/resources/static/img/b33a58aa-08a0-3503-9d1d-af6c34189917.jpg)
+
+#### [Spring Boot 简明教程](https://www.kancloud.cn/boshu/springboot/215857)
+
+#### 安装 [STS插件](https://spring.io/tools/sts)
+
+- 1. 在线or离线安装
+- 2. 重启
+
+#### 端口占用错误
+
+> The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connector may be misconfigured.
+
+> 在控制台 stop project
+
+#### 传统的spring web项目创建过程
+
+步骤1：配置web.xml
+
+步骤2：配置springMVC
+
+步骤3：配置业务bean
+
+步骤4：配置数据访问bean
+
+运行原理分析：web容器启动后，通过web.xml实例化web项目。
+web.xml中有三个方面的重要信息：
+
+1. 第一，servlet信息；
+   servelt配置信息指明了servlet类以及该servlet拦截的url模式。
+2. 第二，spring的配置信息；
+   spring配置信息指明了spring容器启动时需要加载的功能bean。根据web应用现阶段的分层方式，我们可以将spring中的功能bean分为三类，并对应三种功能bean，产生三个配置文件来定义每一层的功能的组装信息：
+   1. 第一，控制bean；spring mvc配置文件；
+   2. 第二，业务bean；业务层配置文件；
+   3. 第三，数据访问bean；数据访问层配置文件；
+3. 第三，web容器监听器信息。web监听器能够监听web容器启动和关闭情况，当监听器监听到web容器启动后，将根据spring的配置文件启动spring容器。spring容器启动后，加载各种功能bean，之后完成整个应用的启动工作，等待客户端的请求。
+
+#### [spring boot创建web项目](https://www.jianshu.com/p/4e4db2876544)
+
+特点：省略了spring配置文件以及web.xml配置文件。仅通过application.properties文件向应用程序传递特性化的配置信息，比如：数据源信息、日志信息等。
+
+创建过程：
+步骤1：创建maven工程，pom文件中pom文件中引入spring boot启动器
+步骤2：在主包跟目录下创建主类
+步骤3：分别编写控制bean、业务bean以及数据访问bean
+步骤4：在pom文件中添加步骤3功能bean中的依赖
+步骤5：创建application.properties文件，向应用程序传递配置信息
+步骤6：通过maven编译、打包、部署、运行spring boot项目
+
+一些细节：
+
+1. spring boot中可以通过两种方式配置数据库连接：自定义连接和通过jndi获取。自定连接我们必须指明数据源地址、驱动器、用户名、密码，还可以手动指明数据连接池。
+2. 我们可以在application.properties配置文件中配置数据库初始化信息
+3. 我们可以在主类中自定义事务管理器
+
+------
+
+### bootstraps教程
+
+#### [Bootstraps 快速入门](https://bootstrap.ninghao.net/getting-started.html)
+
+#### [Bootstrap 教程1](http://www.shouce.ren/api/view/a/779)
+
+#### [Bootstrap 教程2](http://www.ibootstrap.cn/)
+
+### [Bootstrap 教程3](http://www.runoob.com/bootstrap/bootstrap-forms.html)
+
+---
+
 ## 数据库
 
 [连接数据库](https://blog.csdn.net/JinbaoSite/article/details/77587600)
@@ -277,19 +360,21 @@ mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到�
 #### 用 navicat 可视化操作 MySQL
 
 ---
-## 5. Eclipse用JDBC连接MySQL数据库
+### Eclipse用JDBC连接MySQL数据库
 
 > 前提：已经安装 MySQL 和新建测试数据库
 
+#### 下载mysql-connector并解压
 
-### 5.1 下载mysql-connector并解压
 [mysql-connector-java-5.1.6.zip](https://dev.mysql.com/downloads/connector/j)
 
-### 5.2 添加扩展jar文件到项目库
+#### 添加扩展jar文件到项目库
+
 1. 在项目上右键->`Build Path`->`Configure Build Path`->`Libraries`->`Add External JARS`
 2. 选择`mysql-connector-java`安装目录，并选中`mysql-connector-java-5.1.46-bin.jar`
 
-### 5.3 编写java代码来测试连接数据库
+#### 编写java代码来测试连接数据库
+
 - 在`Java Resources`->`src`下新建类`test\SQLTest.Java`,填入如下代码，并修改数据库名、端口、用户名、密码、表名
 ```
 package test;
@@ -331,115 +416,57 @@ while (rs.next()) {
   方法二：。。。
 
 ---
-## 8. [Spring Boot 用 JPA 连接 MySQL 数据库示例](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
+### [Spring Boot 用 JPA 连接 MySQL 数据库示例](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
 
-### 1. 下载[JPA项目](https://github.com/aidansu/spring-boot-jpa)
+#### 下载[JPA项目](https://github.com/aidansu/spring-boot-jpa)
 
-### 2. 用Eclipse打开项目
+#### 用Eclipse打开项目
 
-### 3. 下载jar依赖
+#### 下载jar依赖
+
         1. 右键项目 -> run as -> Maven install
         2. 等待好几分钟
-### 4. 运行项目
+#### 运行项目
+
         右键项目 -> run as -> Spring Boot APP
 
 ---
 
-## 10. Eclipse  用 JPA 连接 MySQL 数据库
+###  Eclipse  用 JPA 连接 MySQL 数据库
 
-### [基于Spring boot的Spring data jpa连接MySQL数据库](https://blog.csdn.net/JinbaoSite/article/details/77587600)
+[基于Spring boot的Spring data jpa连接MySQL数据库](https://blog.csdn.net/JinbaoSite/article/details/77587600)
 
-### [使用JPA Tools 根据数据库表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
+[使用JPA Tools 根据数据库表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
 
-### [spring boot 无法自动注入bean问题解决方案](https://blog.csdn.net/ztx114/article/details/77934454)
+[spring boot 无法自动注入bean问题解决方案](https://blog.csdn.net/ztx114/article/details/77934454)
 
-### [Show required a bean of type 'com.campus.dao.UserRepository' that could not be found.](https://blog.yoodb.com/yoodb/article/detail/1416)
+[Show required a bean of type 'com.campus.dao.UserRepository' that could not be found.](https://blog.yoodb.com/yoodb/article/detail/1416)
 
 ### [Spring Beans和依赖注入 main类放到包的最上层](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/III.%20Using%20Spring%20Boot/17.%20Spring%20Beans%20and%20dependency%20injection.html)
 
-### [Spring Boot自动装配Bean](http://zhangguoyu.org/2017/11/14/beans-injection/)
+[Spring Boot自动装配Bean](http://zhangguoyu.org/2017/11/14/beans-injection/)
 
-### [mysql使用Navicat 导出导入数据库](https://blog.csdn.net/davidchengx/article/details/75912013)
+[mysql使用Navicat 导出导入数据库](https://blog.csdn.net/davidchengx/article/details/75912013)
 
-### [解决Perhaps you are running on a JRE rather than a JDK?问题](https://blog.csdn.net/hjwang1/article/details/50085839)
+[解决Perhaps you are running on a JRE rather than a JDK?问题](https://blog.csdn.net/hjwang1/article/details/50085839)
 
-### [Spring@Autowired注解与自动装配](https://blog.csdn.net/heyutao007/article/details/5981555)
+[Spring@Autowired注解与自动装配](https://blog.csdn.net/heyutao007/article/details/5981555)
 
-### [Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
+[Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
 
-### [使用 Timestamp向MySQL插入当前格式化时间日期](http://hovertree.com/h/bjaf/p36d25hy.htm)
+[使用 Timestamp向MySQL插入当前格式化时间日期](http://hovertree.com/h/bjaf/p36d25hy.htm)
 
-### [InvalidDataAccessResourceUsageException：mysql保留字`group`引发的血案](https://hk.saowen.com/a/2eb7cba1e7304e5c4f701d77f9339845604aafc52f32adb5b93d5f90874988ff)
+[InvalidDataAccessResourceUsageException：mysql保留字`group`引发的血案](https://hk.saowen.com/a/2eb7cba1e7304e5c4f701d77f9339845604aafc52f32adb5b93d5f90874988ff)
 
-### [Jpa、ORM、JDBC、Hibernate、的关系](https://blog.csdn.net/u010837612/article/details/47610823)
+[Jpa、ORM、JDBC、Hibernate、的关系](https://blog.csdn.net/u010837612/article/details/47610823)
 
-### [SpringBoot中发送QQ邮件](https://blog.csdn.net/u012702547/article/details/79494474)
+[SpringBoot中发送QQ邮件](https://blog.csdn.net/u012702547/article/details/79494474)
 
-### [Spring Data JPA 高效便捷的 Repository 解决方案](http://perfy315.iteye.com/blog/1460226)
+[Spring Data JPA 高效便捷的 Repository 解决方案](http://perfy315.iteye.com/blog/1460226)
 
-### [Spring Data JPA 常用注解 @Query、@NamedQuery](https://blog.csdn.net/offbye/article/details/47978369)
+[Spring Data JPA 常用注解 @Query、@NamedQuery](https://blog.csdn.net/offbye/article/details/47978369)
 
-### [JPA 注解（一） id table entity ](http://conkeyn.iteye.com/blog/602463)
-
-## 6. 安装 Spring Boot框架
-
-### 1. [SpringBoot工程从创建到执行](http://rensanning.iteye.com/blog/2355933)
-![SpringBoot工程从创建到执行](src/main/resources/static/img/b33a58aa-08a0-3503-9d1d-af6c34189917.jpg)
-
-### 2. [Spring Boot 简明教程](https://www.kancloud.cn/boshu/springboot/215857)
-### 3. 安装 [STS插件](https://spring.io/tools/sts)
-- 1.  在线or离线安装
-- 2.  重启
-
-### 4. 端口占用错误
-> The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connector may be misconfigured.
-
-> 在控制台 stop project
-
-### 5. 传统的spring web项目创建过程
-步骤1：配置web.xml
-
-步骤2：配置springMVC
-
-步骤3：配置业务bean
-
-步骤4：配置数据访问bean
-
-运行原理分析：web容器启动后，通过web.xml实例化web项目。
-web.xml中有三个方面的重要信息：
-
-1. 第一，servlet信息；
-    servelt配置信息指明了servlet类以及该servlet拦截的url模式。
-2. 第二，spring的配置信息；
-    spring配置信息指明了spring容器启动时需要加载的功能bean。根据web应用现阶段的分层方式，我们可以将spring中的功能bean分为三类，并对应三种功能bean，产生三个配置文件来定义每一层的功能的组装信息：
-      1. 第一，控制bean；spring mvc配置文件；
-      2. 第二，业务bean；业务层配置文件；
-      3. 第三，数据访问bean；数据访问层配置文件；
-3. 第三，web容器监听器信息。web监听器能够监听web容器启动和关闭情况，当监听器监听到web容器启动后，将根据spring的配置文件启动spring容器。spring容器启动后，加载各种功能bean，之后完成整个应用的启动工作，等待客户端的请求。
-
-### 6. [spring boot创建web项目](https://www.jianshu.com/p/4e4db2876544)
-特点：省略了spring配置文件以及web.xml配置文件。仅通过application.properties文件向应用程序传递特性化的配置信息，比如：数据源信息、日志信息等。
-
-创建过程：
-步骤1：创建maven工程，pom文件中pom文件中引入spring boot启动器
-步骤2：在主包跟目录下创建主类
-步骤3：分别编写控制bean、业务bean以及数据访问bean
-步骤4：在pom文件中添加步骤3功能bean中的依赖
-步骤5：创建application.properties文件，向应用程序传递配置信息
-步骤6：通过maven编译、打包、部署、运行spring boot项目
-
-一些细节：
-1. spring boot中可以通过两种方式配置数据库连接：自定义连接和通过jndi获取。自定连接我们必须指明数据源地址、驱动器、用户名、密码，还可以手动指明数据连接池。
-2. 我们可以在application.properties配置文件中配置数据库初始化信息
-3. 我们可以在主类中自定义事务管理器
-
----
-## 7. bootstraps教程
-
-### [Bootstraps 快速入门](https://bootstrap.ninghao.net/getting-started.html)
-### [Bootstrap 教程1](http://www.shouce.ren/api/view/a/779)
-### [Bootstrap 教程2](http://www.ibootstrap.cn/)
-### [Bootstrap 教程3](http://www.runoob.com/bootstrap/bootstrap-forms.html)
+[JPA 注解（一） id table entity ](http://conkeyn.iteye.com/blog/602463)
 
 ---
 ## 9. AJAX 和 Spring Boot 通信
@@ -453,16 +480,6 @@ web.xml中有三个方面的重要信息：
 ### [ModelAndView 构造函数](https://www.cnblogs.com/xuange306/p/6627388.html)
 ### [Spring Boot干货系列：（四）开发Web应用之用Thymeleaf将userlist加载到表格](http://tengj.top/2017/03/13/springboot4/)
 ### [spring boot+前端ajax请求通讯](https://blog.csdn.net/yiwait/article/details/55288814)
-
----
-
-
----
-## 12. 杂七杂八
-
-### [Maven pom.xml 配置详解](https://blog.csdn.net/ithomer/article/details/9332071)
-
-### [HTML5日期和时间选择输入](https://www.imooc.com/article/11915)
 
 ---
 ## 99. 错误解决
