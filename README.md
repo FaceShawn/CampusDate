@@ -263,6 +263,56 @@ while (rs.next()) {
   方法二：。。。
 
 ---
+## 8. [Spring Boot 用 JPA 连接 MySQL 数据库示例](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
+
+### 1. 下载[JPA项目](https://github.com/aidansu/spring-boot-jpa)
+
+### 2. 用Eclipse打开项目
+
+### 3. 下载jar依赖
+        1. 右键项目 -> run as -> Maven install
+        2. 等待好几分钟
+### 4. 运行项目
+        右键项目 -> run as -> Spring Boot APP
+
+---
+
+## 10. Eclipse  用 JPA 连接 MySQL 数据库
+
+### [基于Spring boot的Spring data jpa连接MySQL数据库](https://blog.csdn.net/JinbaoSite/article/details/77587600)
+
+### [使用JPA Tools 根据数据库表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
+
+### [spring boot 无法自动注入bean问题解决方案](https://blog.csdn.net/ztx114/article/details/77934454)
+
+### [Show required a bean of type 'com.campus.dao.UserRepository' that could not be found.](https://blog.yoodb.com/yoodb/article/detail/1416)
+
+### [Spring Beans和依赖注入 main类放到包的最上层](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/III.%20Using%20Spring%20Boot/17.%20Spring%20Beans%20and%20dependency%20injection.html)
+
+### [Spring Boot自动装配Bean](http://zhangguoyu.org/2017/11/14/beans-injection/)
+
+### [mysql使用Navicat 导出导入数据库](https://blog.csdn.net/davidchengx/article/details/75912013)
+
+### [解决Perhaps you are running on a JRE rather than a JDK?问题](https://blog.csdn.net/hjwang1/article/details/50085839)
+
+### [Spring@Autowired注解与自动装配](https://blog.csdn.net/heyutao007/article/details/5981555)
+
+### [Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
+
+### [使用 Timestamp向MySQL插入当前格式化时间日期](http://hovertree.com/h/bjaf/p36d25hy.htm)
+
+### [InvalidDataAccessResourceUsageException：mysql保留字`group`引发的血案](https://hk.saowen.com/a/2eb7cba1e7304e5c4f701d77f9339845604aafc52f32adb5b93d5f90874988ff)
+
+### [Jpa、ORM、JDBC、Hibernate、的关系](https://blog.csdn.net/u010837612/article/details/47610823)
+
+### [SpringBoot中发送QQ邮件](https://blog.csdn.net/u012702547/article/details/79494474)
+
+### [Spring Data JPA 高效便捷的 Repository 解决方案](http://perfy315.iteye.com/blog/1460226)
+
+### [Spring Data JPA 常用注解 @Query、@NamedQuery](https://blog.csdn.net/offbye/article/details/47978369)
+
+### [JPA 注解（一） id table entity ](http://conkeyn.iteye.com/blog/602463)
+
 ## 6. 安装 Spring Boot框架
 
 ### 1. [SpringBoot工程从创建到执行](http://rensanning.iteye.com/blog/2355933)
@@ -324,19 +374,6 @@ web.xml中有三个方面的重要信息：
 ### [Bootstrap 教程3](http://www.runoob.com/bootstrap/bootstrap-forms.html)
 
 ---
-## 8. [Spring Boot 用 JPA 连接 MySQL 数据库示例](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
-
-### 1. 下载[JPA项目](https://github.com/aidansu/spring-boot-jpa)
-
-### 2. 用Eclipse打开项目
-
-### 3. 下载jar依赖
-        1. 右键项目 -> run as -> Maven install
-        2. 等待好几分钟
-### 4. 运行项目
-        右键项目 -> run as -> Spring Boot APP
-
----
 ## 9. AJAX 和 Spring Boot 通信
 
 ### 1. JavaScript基本知识
@@ -349,88 +386,27 @@ web.xml中有三个方面的重要信息：
 ### [Spring Boot干货系列：（四）开发Web应用之用Thymeleaf将userlist加载到表格](http://tengj.top/2017/03/13/springboot4/)
 ### [spring boot+前端ajax请求通讯](https://blog.csdn.net/yiwait/article/details/55288814)
 
-## 10. Eclipse  用 JPA 连接 MySQL 数据库
-
-### [基于Spring boot的Spring data jpa连接MySQL数据库](https://blog.csdn.net/JinbaoSite/article/details/77587600)
-### [使用JPA Tools 根据数据库表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
-### [spring boot 无法自动注入bean问题解决方案](https://blog.csdn.net/ztx114/article/details/77934454)
-### [Show required a bean of type 'com.campus.dao.UserRepository' that could not be found.](https://blog.yoodb.com/yoodb/article/detail/1416)
-### [Spring Beans和依赖注入 main类放到包的最上层](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/III.%20Using%20Spring%20Boot/17.%20Spring%20Beans%20and%20dependency%20injection.html)
-### [Spring Boot自动装配Bean](http://zhangguoyu.org/2017/11/14/beans-injection/)
-### [mysql使用Navicat 导出导入数据库](https://blog.csdn.net/davidchengx/article/details/75912013)
-### [解决Perhaps you are running on a JRE rather than a JDK?问题](https://blog.csdn.net/hjwang1/article/details/50085839)
-### [Spring@Autowired注解与自动装配](https://blog.csdn.net/heyutao007/article/details/5981555)
-### [Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
-### [使用 Timestamp向MySQL插入当前格式化时间日期](http://hovertree.com/h/bjaf/p36d25hy.htm)
-### [InvalidDataAccessResourceUsageException：mysql保留字`group`引发的血案](https://hk.saowen.com/a/2eb7cba1e7304e5c4f701d77f9339845604aafc52f32adb5b93d5f90874988ff)
-### [Jpa、ORM、JDBC、Hibernate、的关系](https://blog.csdn.net/u010837612/article/details/47610823)
-### [SpringBoot中发送QQ邮件](https://blog.csdn.net/u012702547/article/details/79494474)
-### [Spring Data JPA 高效便捷的 Repository 解决方案](http://perfy315.iteye.com/blog/1460226)
-### [Spring Data JPA 常用注解 @Query、@NamedQuery](https://blog.csdn.net/offbye/article/details/47978369)
-### [JPA 注解（一） id table entity ](http://conkeyn.iteye.com/blog/602463)
 ---
-## 11. 项目分层结构
+## 11 程序结构
 
-### [工程结构和主要包说明](https://www.cnblogs.com/jeffwongishandsome/archive/2018/03/26/quick-develop-rest-api-by-using-spring-boot.html)
+[Spring Boot 连接 MySQL 数据库 JPA](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
 
-### [SSH框架总结分析](https://blog.csdn.net/shan9liang/article/details/8803989)
+### 1. src/main/java/com.campus 目录：后台
 
-### [关于SSH架构中Entity/Dao/Service/Controller的理解](https://www.zybuluo.com/Beeder/note/1053661)
+common：公共文件，用于存放一些常量等
+common.utils：工具类
 
-### [简化版工程结构](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
+controller：控制层，处理用户输入请求，并调用服务层响应用户操作。==对外暴露 Rest API 接口==
 
-#### 1. src/main/java/com.campus 目录
+model：实体层，本质是数据表的对象化，用对象来映射数据库表，
+repository：持久化层，负责与数据库交互，提供数据表存取机制，以 ORM 框架映射对象-关系数据库。定义访问底层数据模型的接口。对数据操作的一层封装，XxxxRepository接口继承JpaRepository，因此具备通用的数据访问控制层的能力。[Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226)
 
-common：公共文件，用于存放一些常量，工具类
-controller：控制层，处理用户输入请求
-model：模型层，存放对象
-repository：持久化层，提供数据表存取机制，主要是 ORM 框架实现以对象-关系数据库的映射
 service：服务层，由表现层直接调用，用于处理事务
-App：启动程序
+service.impl 数据服务层对应的实现接口
 
-#### 2. resources 目录
+Application.java：程序入口，包括一个静态main方法，可以做一些框架配置，比如==mybatis、swagger==等
 
-static：存放静态文件，如图片，CSS 样式，js 文件
-templates：模板文件，主要是 html 文件
-application.properties：Spring Boot 自动加载的文件配置
-application-dev.properties：开发环境的配置文件
-
-## 12. 程序结构
-
-**SSH 集成框架**是 struts + spring + hibernate 的一个集成框架,从职责上分为四层: 表示层、业务逻辑层、数据持久层和域模块层（实体层）
-
-### Spring Element
-
-@Autowired 注解与自动装配，自定义 bean 
-
-### DB 存放数据库文件 
-
-### 1. src/main/java 目录 程序开发以及主程序入口
-
-#### 0. 应用根目录
-
-com.campus: 应用程序入口,包括一个静态main方法,可以做一些框架配置,比如mybatis、swagger等
-#### 1. 基础设施层
-    提供公共功能组件,供其它层调用。
-com.campus.common: 公共文件类,如枚举、常量、业务无关的通用公共实体等
-com.campus.common.utils: 工具类,常用帮助类
-
-#### 2. 表示层
-    实现交互界面（即以下src/main/resources 静态文件、模板及配置文件），负责接收请求(Request)和传送响应(Response),将接收到的Request委派给相应的Action处理。负责具体的业务模块流程的控制,调用业务逻辑层的接口来控制业务流程。
-com.campus.controller: 与用户直接交互的对象,处理用户输入请求,通过处理请求调用service来响应用户操作，同时给出响应和处理视图层。对外暴露 Rest API 接口。
-#### 3. 域模块层（实体层）
-    负责业务模块的逻辑应用设计，本质是数据表的对象化，用对象来映射数据库表，主要包含对象的参数（即数据表的表项）以及所对应的set和get方法。
-com.campus.model: 实体模型类,与数据库中的表严格地一一对应,用于在各层之间传递数据
-#### 4. 数据持久层
-    负责与数据库交互,处理请求的数据，并返回处理结果。定义访问底层数据模型的接口,提供数据表存取机制,主要是 ORM 框架实现以对象-关系数据库的映射,主要是CRUD增删改查。
-com.campus.repository : 对数据操作的一层封装，XxxxRepository接口继承JpaRepository，因此具备通用的数据访问控制层的能力。
-[Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226)
-#### 5. 业务逻辑层
-
-    通过逻辑判断处理用户输入等比如判断输入是否合法，对于合法的数据和操作通过调用Dao类的方法来进行数据库访问和持久化，属于控制层或者说业务层，同时也直接连接着持久层。
-com.campus.service : 数据服务层，由表示层直接调用，用于处理事务
-com.campus.service.impl 数据服务层对应的实现接口
-### 2. src/main/resources 目录 静态文件、模板及配置文件
+### 2. resources 目录：==表示层==，与用户直接交互的前端页面
 
 #### 1. static : 静态文件
 
@@ -441,13 +417,9 @@ static/js : js 文件
 #### 2. templates : 模板文件，主要是 html 文件
 
 admin：后台管理页面
-
 freetime：预约相关页面
-
 myspace：个人中心
-
 user：用户页面
-
 index.html：主页
 
 #### 3.配置文件
@@ -459,13 +431,42 @@ application-test.properties 测试环境
 
 ### 3. src/test/java  测试程序
 
-### target：注解
+### 4. 其它文件
 
-### pom.xml：添加项目所需要的依赖
+Spring Element
 
-### README.md：项目说明
+@Autowired 注解与自动装配，自定义 bean
 
-### spring-boot-jpa.iml：
+DB：存放数据库文件
+
+target：注解
+
+pom.xml：添加项目所需要的依赖
+
+README.md：项目说明
+
+spring-boot-jpa.iml：
+
+## 12. 框架结构
+
+**SSH 集成框架**是 struts + spring + hibernate 的一个集成框架,从职责上分为四层: 表示层、业务逻辑层、数据持久层和域模块层（实体层）
+
+### [工程结构和主要包说明](https://www.cnblogs.com/jeffwongishandsome/archive/2018/03/26/quick-develop-rest-api-by-using-spring-boot.html)
+
+### [SSH框架总结分析](https://blog.csdn.net/shan9liang/article/details/8803989)
+
+### [关于SSH架构中Entity/Dao/Service/Controller的理解](https://www.zybuluo.com/Beeder/note/1053661)
+
+#### 0. com.campus 应用根目录
+
+#### 1. 基础设施层
+
+#### 2. 表示层
+
+#### 3. 域模块层（实体层）
+
+#### 4. 数据持久层
+#### 5. 业务逻辑层
 
 ---
 ## 12. 杂七杂八
