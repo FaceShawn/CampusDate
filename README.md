@@ -24,28 +24,87 @@ gantt
         banner                  :        c2, after c1,   1d
 ```
 
-- [ ] 具体任务
-    - [ ] 浏览 [JavaWeb学习总结](http://www.cnblogs.com/xdp-gacl/tag/JavaWeb学习总结/)，大致了解开发流程和基本语法
-        - [x] JavaBean
-        - [x] 两种开发模式
-        - [x] 标签
-        - [x] JDBC
-        - [x] MySQL
-        - [x] Spring MVC
-    - [x] 框架选择
-        - [x] 用 Eclipse通过 Maven创建Spring Boot框架
-    - [x] 展示可预约时间
-        - [x] 理解Thymeleaf
-        - [x] 学习JS & Ajax前后端传值
-        - [x] 在controller中实例化预约时间，并在前端展示
-        - [x] 在controller中实例化模型，实现逻辑关系，组合成预约时间表
-    - [ ] 从数据库取出数据展示可预约时间
-        - [x] navicat for mysql 管理工具
-        - [ ] [连接数据库](https://blog.csdn.net/JinbaoSite/article/details/77587600)
-        - [ ] 取出模型，并在controller中实例化，实现逻辑关系，组合成预约时间表
-    - [ ] 发布可预约时间
-
 ---
+## 程序结构
+
+**SSH 集成框架**是 struts + spring + hibernate 的一个集成框架,从职责上分为四层: 表示层、业务逻辑层、数据持久层和==域模块层（实体层）==
+
+[Spring Boot 连接 MySQL 数据库 JPA](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
+
+ [Spring Boot快速开发REST服务最佳实践](https://www.cnblogs.com/jeffwongishandsome/p/quick-develop-rest-api-by-using-spring-boot.html)
+
+[SSH框架总结分析](https://blog.csdn.net/shan9liang/article/details/8803989)
+
+[关于SSH架构中Entity/Dao/Service/Controller的理解](https://www.zybuluo.com/Beeder/note/1053661)
+
+### src/main/java/com.campus 目录：后台
+
+#### 公共模块
+
+common：公共类，如枚举、常量、业务无关的通用公共实体等
+common.utils：常用实用的帮助类，如反射、字符串、集合、枚举、正则、缓存、队列等
+
+#### 控制层/表现层
+
+controller：负责页面访问控制，处理用户输入请求，并调用服务层响应用户操作。==对外暴露 Rest API 接口==
+
+#### 数据持久层
+
+model：实体层，本质是数据表的对象化，用对象来映射数据库表，
+repository：持久化层，负责与数据库交互，提供数据表存取机制，以 ORM 框架映射对象-关系数据库。定义访问底层数据模型的接口。对数据操作的一层封装，XxxxRepository接口继承JpaRepository，因此具备通用的数据访问控制层的能力。[Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226)
+
+#### 业务逻辑层
+
+service：用于业务逻辑相关的服务
+service.impl ==服务对应的实现接口==，由控制层直接调用
+
+#### 程序入口
+
+Application.java：包括一个静态main方法，可以做一些框架配置，比如==mybatis、swagger==等
+
+### resources 目录：前端页面，与用户直接交互的表示层
+
+#### static : 静态文件
+
+static/css : CSS 样式
+static/img : 图片
+static/js : js 文件
+
+#### templates : 模板文件，主要是 html 文件
+
+admin：后台管理页面
+freetime：预约相关页面
+myspace：个人中心
+user：用户页面
+index.html：主页
+
+#### 配置文件
+
+application.properties : Spring Boot 自动加载的配置文件，默认为开发环境，可切换以下多环境
+application-dev.properties 开发环境
+application-prod.properties 生产环境
+application-test.properties 测试环境
+
+### src/test/java  测试程序
+
+### 其它文件
+
+Spring Element
+
+@Autowired 注解与自动装配，自定义 bean
+
+DB：存放数据库文件
+
+target：注解
+
+pom.xml：添加项目所需要的依赖
+
+README.md：项目说明
+
+spring-boot-jpa.iml：
+
+--------------------
+
 ## 1. 安装Eclipse for Java Web Developer
 
 ### 1.1 下载JDK
@@ -117,15 +176,24 @@ This is CampusDate/WebContent/Index.html!
 在Index.html上右键->`Run as`->`Run on Server`.
 
 ---
-## 4. 安装 MySQL
+## 数据库
 
-### [4.1 下载MySQL](#4.1)
+[连接数据库](https://blog.csdn.net/JinbaoSite/article/details/77587600)
+
+
+
+### 安装 MySQL
+
+#### 下载MySQL
+
 到 [MySQL官网](https://dev.mysql.com/downloads/mysql/)下载对应操作系统32/64位的.zip压缩包到`\Java\MyMSQL`
 > .msi格式的安装包直接点击安装即可，不用再配置配置文件
 
-### [4.2 解压](#4.2)
+#### 解压
+
     解压到目标安装目录（比如统一安装到同一文件夹下`\Java`）
-### [4.3 设置环境变量](#4.3)
+#### 设置环境变量
+
     在->系统变量->`PATH` ***追加***
 ```
 ;安装目录\Java\mysql-5.7.21-winx64\bin;
@@ -134,7 +202,8 @@ This is CampusDate/WebContent/Index.html!
 ;D:\Develop\Java\mysql-5.7.21-winx64\bin;
 ```
 
-### [4.4 配置配置文件](#4.4)
+#### 配置配置文件
+
 在安装目录`\Java\mysql-5.7.21-winx64`新建`my.ini`配置文件如下：
 ```
 [mysql]
@@ -157,14 +226,15 @@ character-set-server=utf8
 default-storage-engine=INNODB
 ```
 
-### [4.5 以管理员身份运行cmd](#4.5)
+#### 以管理员身份运行cmd
+
     - 进入`C:\Windows\System32`
     - 右键单击cmd.exe
     - 选择“以管理员身份运行”
 > 如果不用管理员身份运行，将会因为权限不够而出现错误：
 > `Install/Remove of the Service Denied!`
 
-### [4.6 `cd`到安装目录`\bin`下](#4.6)
+#### `cd`到安装目录`\bin`下]
 
 ```
 d:
@@ -175,26 +245,28 @@ d:
 cd D:\Develop\Java\mysql-5.7.21-winx64\bin
 ```
 
-### [4.7 安装](#4.7)
+#### 安装
 
 ```
 mysqld -install
 ```
 显示`Service successfully installed.`即为安装成功
 
-### [4.8 启动MySQL](#4.8)
+#### 启动MySQL
+
 ```
 net start mysql
 ```
 
-### [4.9 登陆](#4.9)
+#### 登陆
+
 ```
 mysql -u root -p
 Enter password:
 ```
 > 注意密码为空（直接回车）
 
-### [4.10 新建测试数据库](#4.10)
+#### 新建测试数据库
 
 ```
 mysql>CREATE DATABASE CampusDate;   //创建一个数据库
@@ -202,11 +274,7 @@ mysql>use CampusDate;  //指定test为当前要操作的数据库
 mysql>CREATE TABLE user (UseID VARCHAR(20),PassWord VARCHAR(20));   //创建一个表user，设置两个字段。
 mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到表中
 ```
-###[ 4.11 另外可用可视化工具操作 MySQL](#4.11)
-比如 `MySQL Workbench`
-1. 下载
-    [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
-2. 安装使用
+#### 用 navicat 可视化操作 MySQL
 
 ---
 ## 5. Eclipse用JDBC连接MySQL数据库
@@ -387,91 +455,13 @@ web.xml中有三个方面的重要信息：
 ### [spring boot+前端ajax请求通讯](https://blog.csdn.net/yiwait/article/details/55288814)
 
 ---
-## 11 程序结构
 
-[Spring Boot 连接 MySQL 数据库 JPA](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
-
-### 1. src/main/java/com.campus 目录：后台
-
-common：公共文件，用于存放一些常量等
-common.utils：工具类
-
-controller：控制层，处理用户输入请求，并调用服务层响应用户操作。==对外暴露 Rest API 接口==
-
-model：实体层，本质是数据表的对象化，用对象来映射数据库表，
-repository：持久化层，负责与数据库交互，提供数据表存取机制，以 ORM 框架映射对象-关系数据库。定义访问底层数据模型的接口。对数据操作的一层封装，XxxxRepository接口继承JpaRepository，因此具备通用的数据访问控制层的能力。[Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226)
-
-service：服务层，由表现层直接调用，用于处理事务
-service.impl 数据服务层对应的实现接口
-
-Application.java：程序入口，包括一个静态main方法，可以做一些框架配置，比如==mybatis、swagger==等
-
-### 2. resources 目录：==表示层==，与用户直接交互的前端页面
-
-#### 1. static : 静态文件
-
-static/css : CSS 样式
-static/img : 图片
-static/js : js 文件
-
-#### 2. templates : 模板文件，主要是 html 文件
-
-admin：后台管理页面
-freetime：预约相关页面
-myspace：个人中心
-user：用户页面
-index.html：主页
-
-#### 3.配置文件
-
-application.properties : Spring Boot 自动加载的配置文件，默认为开发环境，可切换以下多环境
-application-dev.properties 开发环境
-application-prod.properties 生产环境
-application-test.properties 测试环境
-
-### 3. src/test/java  测试程序
-
-### 4. 其它文件
-
-Spring Element
-
-@Autowired 注解与自动装配，自定义 bean
-
-DB：存放数据库文件
-
-target：注解
-
-pom.xml：添加项目所需要的依赖
-
-README.md：项目说明
-
-spring-boot-jpa.iml：
-
-## 12. 框架结构
-
-**SSH 集成框架**是 struts + spring + hibernate 的一个集成框架,从职责上分为四层: 表示层、业务逻辑层、数据持久层和域模块层（实体层）
-
-### [工程结构和主要包说明](https://www.cnblogs.com/jeffwongishandsome/archive/2018/03/26/quick-develop-rest-api-by-using-spring-boot.html)
-
-### [SSH框架总结分析](https://blog.csdn.net/shan9liang/article/details/8803989)
-
-### [关于SSH架构中Entity/Dao/Service/Controller的理解](https://www.zybuluo.com/Beeder/note/1053661)
-
-#### 0. com.campus 应用根目录
-
-#### 1. 基础设施层
-
-#### 2. 表示层
-
-#### 3. 域模块层（实体层）
-
-#### 4. 数据持久层
-#### 5. 业务逻辑层
 
 ---
 ## 12. 杂七杂八
 
 ### [Maven pom.xml 配置详解](https://blog.csdn.net/ithomer/article/details/9332071)
+
 ### [HTML5日期和时间选择输入](https://www.imooc.com/article/11915)
 
 ---
