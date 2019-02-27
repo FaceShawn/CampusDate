@@ -107,13 +107,13 @@ spring-boot-jpa.iml：
 
 ## 准备
 
-### 安装Eclipse for Java Web Developer
+### 安装 Eclipse for Java Web Developer
 
-#### 下载JDK
+#### 下载 JDK（Java Development Kit）
 
-[SE JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)，选择`Java Platform (JDK) 10`，下载到`\Java\JDK`
+[SE JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)，选择`Java Platform (JDK) 10`（包含 Java Runtime Envirment），下载到`\Java\JDK`
 
->[EE JDK](http://www.oracle.com/technetwork/java/javaee/downloads/index.html)下载下来是`glassfish`格式，弄不太懂，发现安装`SE JDK`也是一样的
+>[EE JDK](http://www.oracle.com/technetwork/java/javaee/downloads/index.html)下载下来是`glassfish`格式，==弄不太懂==，发现安装`SE JDK`也是一样的
 
 #### 设置环境变量
 
@@ -140,6 +140,34 @@ spring-boot-jpa.iml：
     ->[BabelLanguagePack-eclipse-zh_4.7.0.v20171231020002.zip (85.5%)](http://www.eclipse.org/downloads/download.php?file=/technology/babel/babel_language_packs/R0.15.1/oxygen/BabelLanguagePack-eclipse-zh_4.7.0.v20171231020002.zip)
 2. 将`features`和`plugins`解压到`\Eclipse\dropins\`下。
 3. 重启Eclipse
+
+---
+
+### Eclipse 快捷键
+
+| 快捷键         | 功能 |
+| -------------- | ---- |
+| ---编辑相关--- |      |
+
+|自动补全	| `alt + /`
+
+|注释               | `Ctrl + /`
+|快速修复           | `Ctrl + 1`
+|删除当前行         | `Ctrl + d`
+|格式化文档         | `Ctrl + Shift + f`
+|插入空行           | `Shift + Enter`
+|自动生成 get set 方法  |  `alt + shift + S`
+|显示大纲           | `Ctrl + o`
+|---窗口相关---     |
+|编辑窗口最大化     | `Ctrl + m`
+|切换编辑器/控制台/资源管理器/Servers| `ctrl + F7`
+|---查看，定位---|
+|查找替换           | `ctrl + F`
+|重构、重命名       | `Alt+Shift+R`
+|查找 Java 类文件     | `Ctrl + Shift + T `
+|查找引用           | `Ctrl+Shift+G`
+|后退历史记录       | `Alt+ ←、Alt+ →`
+|快速查找选定的内容 | `Ctrl+K`
 
 ---
 ### 安装 Tomcat
@@ -179,105 +207,32 @@ This is CampusDate/WebContent/Index.html!
 </body>
 </html>
 ```
-#### 部署在Tomcat服务器
+#### 部署在 Tomcat 服务器
 
-在Index.html上右键->`Run as`->`Run on Server`.
-
----
-## Spring Boot
-
-### 安装 Spring Boot框架
-
-#### [SpringBoot工程从创建到执行](http://rensanning.iteye.com/blog/2355933)
-
-![SpringBoot工程从创建到执行](src/main/resources/static/img/b33a58aa-08a0-3503-9d1d-af6c34189917.jpg)
-
-#### [Spring Boot 简明教程](https://www.kancloud.cn/boshu/springboot/215857)
-
-#### 安装 [STS插件](https://spring.io/tools/sts)
-
-- 1. 在线or离线安装
-- 2. 重启
-
-#### 端口占用错误
-
-> The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connector may be misconfigured.
-
-> 在控制台 stop project
-
-#### 传统的spring web项目创建过程
-
-步骤1：配置web.xml
-
-步骤2：配置springMVC
-
-步骤3：配置业务bean
-
-步骤4：配置数据访问bean
-
-运行原理分析：web容器启动后，通过web.xml实例化web项目。
-web.xml中有三个方面的重要信息：
-
-1. 第一，servlet信息；
-   servelt配置信息指明了servlet类以及该servlet拦截的url模式。
-2. 第二，spring的配置信息；
-   spring配置信息指明了spring容器启动时需要加载的功能bean。根据web应用现阶段的分层方式，我们可以将spring中的功能bean分为三类，并对应三种功能bean，产生三个配置文件来定义每一层的功能的组装信息：
-   1. 第一，控制bean；spring mvc配置文件；
-   2. 第二，业务bean；业务层配置文件；
-   3. 第三，数据访问bean；数据访问层配置文件；
-3. 第三，web容器监听器信息。web监听器能够监听web容器启动和关闭情况，当监听器监听到web容器启动后，将根据spring的配置文件启动spring容器。spring容器启动后，加载各种功能bean，之后完成整个应用的启动工作，等待客户端的请求。
-
-#### [spring boot创建web项目](https://www.jianshu.com/p/4e4db2876544)
-
-特点：省略了spring配置文件以及web.xml配置文件。仅通过application.properties文件向应用程序传递特性化的配置信息，比如：数据源信息、日志信息等。
-
-创建过程：
-步骤1：创建maven工程，pom文件中pom文件中引入spring boot启动器
-步骤2：在主包跟目录下创建主类
-步骤3：分别编写控制bean、业务bean以及数据访问bean
-步骤4：在pom文件中添加步骤3功能bean中的依赖
-步骤5：创建application.properties文件，向应用程序传递配置信息
-步骤6：通过maven编译、打包、部署、运行spring boot项目
-
-一些细节：
-
-1. spring boot中可以通过两种方式配置数据库连接：自定义连接和通过jndi获取。自定连接我们必须指明数据源地址、驱动器、用户名、密码，还可以手动指明数据连接池。
-2. 我们可以在application.properties配置文件中配置数据库初始化信息
-3. 我们可以在主类中自定义事务管理器
-
-------
-
-### bootstraps教程
-
-#### [Bootstraps 快速入门](https://bootstrap.ninghao.net/getting-started.html)
-
-#### [Bootstrap 教程1](http://www.shouce.ren/api/view/a/779)
-
-#### [Bootstrap 教程2](http://www.ibootstrap.cn/)
-
-### [Bootstrap 教程3](http://www.runoob.com/bootstrap/bootstrap-forms.html)
+在 Index.html 上右键->`Run as`->`Run on Server`.
 
 ---
-
-## 数据库
-
-[连接数据库](https://blog.csdn.net/JinbaoSite/article/details/77587600)
-
-
 
 ### 安装 MySQL
 
 #### 下载MySQL
 
 到 [MySQL官网](https://dev.mysql.com/downloads/mysql/)下载对应操作系统32/64位的.zip压缩包到`\Java\MyMSQL`
+
 > .msi格式的安装包直接点击安装即可，不用再配置配置文件
 
 #### 解压
 
-    解压到目标安装目录（比如统一安装到同一文件夹下`\Java`）
+```
+解压到目标安装目录（比如统一安装到同一文件夹下`\Java`）
+```
+
 #### 设置环境变量
 
-    在->系统变量->`PATH` ***追加***
+```
+在->系统变量->`PATH` ***追加***
+```
+
 ```
 ;安装目录\Java\mysql-5.7.21-winx64\bin;
 
@@ -288,6 +243,7 @@ web.xml中有三个方面的重要信息：
 #### 配置配置文件
 
 在安装目录`\Java\mysql-5.7.21-winx64`新建`my.ini`配置文件如下：
+
 ```
 [mysql]
 # 设置mysql客户端默认字符集
@@ -311,9 +267,12 @@ default-storage-engine=INNODB
 
 #### 以管理员身份运行cmd
 
-    - 进入`C:\Windows\System32`
-    - 右键单击cmd.exe
-    - 选择“以管理员身份运行”
+```
+- 进入`C:\Windows\System32`
+- 右键单击cmd.exe
+- 选择“以管理员身份运行”
+```
+
 > 如果不用管理员身份运行，将会因为权限不够而出现错误：
 > `Install/Remove of the Service Denied!`
 
@@ -333,6 +292,7 @@ cd D:\Develop\Java\mysql-5.7.21-winx64\bin
 ```
 mysqld -install
 ```
+
 显示`Service successfully installed.`即为安装成功
 
 #### 启动MySQL
@@ -347,6 +307,7 @@ net start mysql
 mysql -u root -p
 Enter password:
 ```
+
 > 注意密码为空（直接回车）
 
 #### 新建测试数据库
@@ -357,7 +318,35 @@ mysql>use CampusDate;  //指定test为当前要操作的数据库
 mysql>CREATE TABLE user (UseID VARCHAR(20),PassWord VARCHAR(20));   //创建一个表user，设置两个字段。
 mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到表中
 ```
+
 #### 用 navicat 可视化操作 MySQL
+
+---
+
+## 新建 Spring Boot 项目
+
+### 安装 [STS 插件](https://spring.io/tools/sts)
+
+> 要在 eclipse 使用 spring boot 创建项目，必须先安装 Spring Tool Suite (STS) for Eclipse。耗时较长。
+
+1. 在线or离线安装
+2. 重启
+
+### [用 Eclipse 创建 Spring Boot 工程并运行](http://rensanning.iteye.com/blog/2355933)
+
+![SpringBoot工程从创建到执行](src/main/resources/static/img/b33a58aa-08a0-3503-9d1d-af6c34189917.jpg)
+
+### 端口占用错误
+
+> The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connector may be misconfigured.
+
+> 解决：在控制台 stop project
+
+---
+
+## 数据库
+
+[基于 Spring boot 的 Spring data jpa 连接 MySQL ](https://blog.csdn.net/JinbaoSite/article/details/77587600)
 
 ---
 ### Eclipse用JDBC连接MySQL数据库
@@ -471,15 +460,31 @@ while (rs.next()) {
 ---
 ## 9. AJAX 和 Spring Boot 通信
 
-### 1. JavaScript基本知识
-### 2. [jQuery AJAX中\$.get、\$.post、\$.getJSON、$.ajax 方法详解](https://blog.csdn.net/huileiforever/article/details/12163385)
-### 3. [SpringBoot中常用注解@Controller/@RestController/@RequestMapping](https://blog.csdn.net/u010412719/article/details/69710480) 
-### 4. [HTML中id、name、class区别](https://blog.csdn.net/ithomer/article/details/8080912)
-### 5. [FormData Ajax表单提交](https://blog.csdn.net/csdn2193714269/article/details/76269656)
-### [SpringMVC Model、ModelMap 和ModelAndView 的区别和用法](https://blog.csdn.net/qq_20282263/article/details/52831398)
-### [ModelAndView 构造函数](https://www.cnblogs.com/xuange306/p/6627388.html)
-### [Spring Boot干货系列：（四）开发Web应用之用Thymeleaf将userlist加载到表格](http://tengj.top/2017/03/13/springboot4/)
-### [spring boot+前端ajax请求通讯](https://blog.csdn.net/yiwait/article/details/55288814)
+### bootstraps 教程
+
+[Bootstraps 快速入门](https://bootstrap.ninghao.net/getting-started.html)
+
+[Bootstrap 教程1](http://www.shouce.ren/api/view/a/779)
+
+[Bootstrap 教程2](http://www.ibootstrap.cn/)
+
+[Bootstrap 教程3](http://www.runoob.com/bootstrap/bootstrap-forms.html)
+
+2. [jQuery AJAX中\$.get、\$.post、\$.getJSON、$.ajax 方法详解](https://blog.csdn.net/huileiforever/article/details/12163385)
+
+3. [SpringBoot中常用注解@Controller/@RestController/@RequestMapping](https://blog.csdn.net/u010412719/article/details/69710480)
+
+4. [HTML中id、name、class区别](https://blog.csdn.net/ithomer/article/details/8080912)
+
+5. [FormData Ajax表单提交](https://blog.csdn.net/csdn2193714269/article/details/76269656)
+
+[SpringMVC Model、ModelMap 和ModelAndView 的区别和用法](https://blog.csdn.net/qq_20282263/article/details/52831398)
+
+[ModelAndView 构造函数](https://www.cnblogs.com/xuange306/p/6627388.html)
+
+[Spring Boot干货系列：（四）开发Web应用之用Thymeleaf将userlist加载到表格](http://tengj.top/2017/03/13/springboot4/)
+
+[spring boot+前端ajax请求通讯](https://blog.csdn.net/yiwait/article/details/55288814)
 
 ---
 ## 99. 错误解决
@@ -487,29 +492,7 @@ while (rs.next()) {
 ### [Maven 项目 jar 包出现: invalid LOC header (bad signature)](https://blog.csdn.net/m0_37681914/article/details/76064054)
 ### [搭建spring-boot项目报错Error parsing lifecycle processing instructions](https://blog.csdn.net/u012810317/article/details/53302592)
 
----
-## END Eclipse 快捷键
 
-| 快捷键         | 功能 |
-| -------------- | ---- |
-| ---编辑相关--- |      |
-|注释               | `Ctrl + /`
-|快速修复           | `Ctrl + 1`
-|删除当前行         | `Ctrl + d`
-|格式化文档         | `Ctrl + Shift + f`
-|插入空行           | `Shift + Enter`
-|自动生成geset方法  |  `alt + shift + S`
-|显示大纲           | `Ctrl + o`
-|---窗口相关---     |
-|编辑窗口最大化     | `Ctrl + m`
-|切换编辑器/控制台/资源管理器/Servers| `ctrl + F7`
-|---查看，定位---|
-|查找替换           | `ctrl + F`
-|重构、重命名       | `Alt+Shift+R`
-|查找Java类文件     | `Ctrl + Shift + T `
-|查找引用           | `Ctrl+Shift+G`
-|后退历史记录       | `Alt+ ←、Alt+ →`
-|快速查找选定的内容 | `Ctrl+K`
 
 
 
