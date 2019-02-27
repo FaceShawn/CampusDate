@@ -148,26 +148,24 @@ spring-boot-jpa.iml：
 | 快捷键         | 功能 |
 | -------------- | ---- |
 | ---编辑相关--- |      |
-
-|自动补全	| `alt + /`
-
-|注释               | `Ctrl + /`
-|快速修复           | `Ctrl + 1`
-|删除当前行         | `Ctrl + d`
-|格式化文档         | `Ctrl + Shift + f`
-|插入空行           | `Shift + Enter`
-|自动生成 get set 方法  |  `alt + shift + S`
-|显示大纲           | `Ctrl + o`
-|---窗口相关---     |
-|编辑窗口最大化     | `Ctrl + m`
-|切换编辑器/控制台/资源管理器/Servers| `ctrl + F7`
-|---查看，定位---|
-|查找替换           | `ctrl + F`
-|重构、重命名       | `Alt+Shift+R`
-|查找 Java 类文件     | `Ctrl + Shift + T `
-|查找引用           | `Ctrl+Shift+G`
-|后退历史记录       | `Alt+ ←、Alt+ →`
-|快速查找选定的内容 | `Ctrl+K`
+|自动补全	| `alt + /`	|
+|注释               | `Ctrl + /`	|
+|快速修复           | `Ctrl + 1`	|
+|删除当前行         | `Ctrl + d`|
+|格式化文档         | `Ctrl + Shift + f`|
+|插入空行           | `Shift + Enter`|
+|自动生成 get set 方法  |  `alt + shift + S`|
+|显示大纲           | `Ctrl + o`|
+|---窗口相关---     | |
+|编辑窗口最大化     | `Ctrl + m`|
+|切换编辑器/控制台/资源管理器/Servers| `ctrl + F7`|
+|---查看，定位---| |
+|查找替换           | `ctrl + F`|
+|重构、重命名       | `Alt+Shift+R`|
+|查找 Java 类文件     | `Ctrl + Shift + T `|
+|查找引用           | `Ctrl+Shift+G`|
+|后退历史记录       | `Alt+ ←、Alt+ →`|
+|快速查找选定的内容 | `Ctrl+K`|
 
 ---
 ### 安装 Tomcat
