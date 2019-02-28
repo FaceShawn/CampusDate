@@ -31,7 +31,11 @@ gantt
 - 开发/结构视图
 - 用户动作/反馈视图
 
-在 MVC 中 Controller 和 Model 间插入一个业务逻辑层，可分为四层：前端页面（View）、控制层（Controller）、业务逻辑层、数据持久层（Model）。
+### MVC 模式
+
+将 MVC 模式中的 Model 分为业务逻辑层和数据持久层：前端页面（View）、控制层（Controller）、业务逻辑层、数据持久层。==service+serviceImpl、dao+daoImpl== 
+
+==Model 中数据的变化一般会通过一种刷新机制被公布。为了实现这种机制，那些用于监视此 Model 的 View 必须事先在此 Model 上注册，从而，View 可以了解在数据 Model 上发生的改变。==
 
 [Spring Boot 通过 JPA 连接 MySQL](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
 
@@ -41,9 +45,9 @@ gantt
 
 ### src/main/java/com.campus 根目录：后台
 
-> ==错误：==
+> ==错误：== 
 >
-> 解决：不应将 Appication.java 和其它所有文件放在 src/main/java 下，要将它放在src/main/java下的根包里（例如 src/main/java/com.campus 下）
+> 解决：不应将 Appication.java 和其它所有文件放在 src/main/java 下，要将它放在src/main/java下的根包里（例如 src/main/java/com.campus 下）。
 
 #### 公共模块
 
@@ -52,17 +56,16 @@ common.utils：常用实用的帮助类，如反射、字符串、集合、枚�
 
 #### 控制层
 
-controller：负责页面访问控制，与用户直接交互（处理用户输入请求，并调用 service 层响应用户操作，同时给出==响应和处理前端页面==）。==并对外暴露 Rest API 接口。==
+controller：起到不同层面间的组织作用，用于控制应用程序的流程。调用 service 层处理事件并作出响应，“事件”包括用户的行为和数据的改变。负责页面访问控制，==对外暴露 Rest API 接口（路径解析）==  。
 
 #### 数据持久层
 
-model：实体层，本质是数据表的对象化，用对象映射数据表，通过操作对象的属性间接操作数据表的表项
-repository：通过对 model 层的封装提供 CURD 接口。==负责与数据库交互，提供数据表存取机制，以 ORM 框架映射对象-关系数据库。==XxxxRepository 接口继承 JpaRepository，因此具备通用的数据访问控制层的能力。[Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226)
+Entity：实体层，用对象映射数据表，二者一一对应，本质是数据表的对象化。是一种 ORM 对象关系映射。
+==repository==：==通过对 Entity 层的封装提供 CURD 接口== 。封装对象操作逻辑。XxxxRepository 接口继承 JpaRepository，因此具备==通用的数据访问控制层==能力，如最基本的CRUD操作、分页、排序、查询列表、批量删除、强制同步等。[Spring Boot 中 Repository 的使用](https://segmentfault.com/a/1190000012346333) [Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226) 
 
 #### 业务逻辑层
 
-service：用于业务逻辑相关的服务。通过逻辑判断处理用户输入等比如判断输入是否合法，对于合法的数据和操作通过调用Dao类的方法来进行数据库访问和持久化？
-service.impl ==服务对应的实现接口==，由控制层直接调用
+service：用于处理事件，实现具体的业务逻辑。
 
 #### 程序入口
 
@@ -323,7 +326,7 @@ mysql>CREATE TABLE user (UseID VARCHAR(20),PassWord VARCHAR(20));   //创建一�
 mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到表中
 ```
 
-#### 用 navicat 可视化操作 MySQL
+### [用 Navicat 导出导入 MySQL](https://blog.csdn.net/davidchengx/article/details/75912013)
 
 ---
 
@@ -331,12 +334,14 @@ mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到�
 
 ### 安装 [STS 插件](https://spring.io/tools/sts)
 
-> 要在 eclipse 使用 spring boot 创建项目，必须先安装 Spring Tool Suite (STS) for Eclipse。耗时较长。
+> 要在 eclipse 使用 spring boot 创建项目，==必须== 先安装 Spring Tool Suite (STS) for Eclipse，耗时较长。
 
 1. 在线or离线安装
 2. 重启
 
 ### [用 Eclipse 创建 Spring Boot 工程并运行](http://rensanning.iteye.com/blog/2355933)
+
+> 勾选 Web
 
 ![SpringBoot工程从创建到执行](src/main/resources/static/img/b33a58aa-08a0-3503-9d1d-af6c34189917.jpg)
 
@@ -404,7 +409,7 @@ while (rs.next()) {
   方法二：。。。
 
 ---
-## Spring Boot 用 JPA 连接 MySQL
+## ==用 Spring-Data-JPA 操作 MySQL==
 
 ### 下载 JPA 项目
 
@@ -414,39 +419,27 @@ while (rs.next()) {
 
 #### 下载 jar 依赖
 
-        1. 右键项目 -> run as -> Maven install
-        2. 等待好几分钟
+> 右键项目 -> run as -> Maven install
+> 等待好几分钟
 #### 运行项目
 
-        右键项目 -> run as -> Spring Boot APP
-
-## 
-
----
-
-
-
-[使用JPA Tools 根据数据库表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
-
-[spring boot 无法自动注入bean问题解决方案](https://blog.csdn.net/ztx114/article/details/77934454)
-
-[Show required a bean of type 'com.campus.dao.UserRepository' that could not be found.](https://blog.yoodb.com/yoodb/article/detail/1416)
-
-[Spring Beans和依赖注入 main类放到包的最上层](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/III.%20Using%20Spring%20Boot/17.%20Spring%20Beans%20and%20dependency%20injection.html)
-
-[mysql使用Navicat 导出导入数据库](https://blog.csdn.net/davidchengx/article/details/75912013)
-
-[解决Perhaps you are running on a JRE rather than a JDK?问题](https://blog.csdn.net/hjwang1/article/details/50085839)
-
-[使用 Timestamp向MySQL插入当前格式化时间日期](http://hovertree.com/h/bjaf/p36d25hy.htm)
-
-[InvalidDataAccessResourceUsageException：mysql保留字`group`引发的血案](https://hk.saowen.com/a/2eb7cba1e7304e5c4f701d77f9339845604aafc52f32adb5b93d5f90874988ff)
+> 右键项目 -> run as -> Spring Boot APP
 
 [Jpa、ORM、JDBC、Hibernate 的关系](https://blog.csdn.net/u010837612/article/details/47610823)
 
-[Spring Data JPA 高效便捷的 Repository 解决方案](http://perfy315.iteye.com/blog/1460226)
+---
+
+## [用 JPA Tools 根据数据表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
+
+[InvalidDataAccessResourceUsageException：mysql保留字`group`引发的血案](https://hk.saowen.com/a/2eb7cba1e7304e5c4f701d77f9339845604aafc52f32adb5b93d5f90874988ff)
+
+## 根据实体类创建数据表
 
 ## 注解和自动装配
+
+~~[Spring Beans和依赖注入 main类放到包的最上层](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/III.%20Using%20Spring%20Boot/17.%20Spring%20Beans%20and%20dependency%20injection.html)~~
+
+[Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
 
 [Spring Data JPA 常用注解 @Query、@NamedQuery](https://blog.csdn.net/offbye/article/details/47978369)
 
@@ -454,16 +447,28 @@ while (rs.next()) {
 
 [Spring@Autowired注解与自动装配](https://blog.csdn.net/heyutao007/article/details/5981555)
 
-[Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
+~~[Spring Boot自动装配Bean](http://zhangguoyu.org/2017/11/14/beans-injection/)~~
 
-[Spring Boot自动装配Bean](http://zhangguoyu.org/2017/11/14/beans-injection/)
+[SpringBoot中常用注解@Controller/@RestController/@RequestMapping](https://blog.csdn.net/u010412719/article/details/69710480)
 
-## 其它
-
-[SpringBoot中发送QQ邮件](https://blog.csdn.net/u012702547/article/details/79494474)
+> 错误：
+> ```
+> Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+> Description:Field demoService in com.spring.web.DemoApplication required a bean of type that could not be found.
+> 
+> Consider defining a bean of type in your configuration
+> 
+> Show required a bean of type that could not be found.
+> ```
+>
+> 分析：`Spring Boot`项目的Bean装配默认规则是根据`Application`类所在的包位置从上往下扫描，只会扫描根目录及其所有子目录。
+>
+> 解决一：将接口与对应的实现类放在与application启动类的同一个目录或者其子目录下。[spring boot 无法自动注入bean问题解决方案](https://blog.csdn.net/ztx114/article/details/77934454)
+>
+> 解决二：使用注解`@ComponentScan(value="com.campus")`
 
 ---
-## 9. AJAX 和 Spring Boot 通信
+## AJAX 和 Spring Boot 通信
 
 ### bootstraps 教程
 
@@ -477,31 +482,38 @@ while (rs.next()) {
 
 2. [jQuery AJAX中\$.get、\$.post、\$.getJSON、$.ajax 方法详解](https://blog.csdn.net/huileiforever/article/details/12163385)
 
-3. [SpringBoot中常用注解@Controller/@RestController/@RequestMapping](https://blog.csdn.net/u010412719/article/details/69710480)
+3. [HTML中id、name、class区别](https://blog.csdn.net/ithomer/article/details/8080912)
 
-4. [HTML中id、name、class区别](https://blog.csdn.net/ithomer/article/details/8080912)
-
-5. [FormData Ajax表单提交](https://blog.csdn.net/csdn2193714269/article/details/76269656)
-
-[SpringMVC Model、ModelMap 和ModelAndView 的区别和用法](https://blog.csdn.net/qq_20282263/article/details/52831398)
-
-[ModelAndView 构造函数](https://www.cnblogs.com/xuange306/p/6627388.html)
+4. [FormData Ajax表单提交](https://blog.csdn.net/csdn2193714269/article/details/76269656)
 
 [Spring Boot干货系列：（四）开发Web应用之用Thymeleaf将userlist加载到表格](http://tengj.top/2017/03/13/springboot4/)
 
 [spring boot+前端ajax请求通讯](https://blog.csdn.net/yiwait/article/details/55288814)
 
+## ModelMap
+
+[SpringMVC Model、ModelMap 和ModelAndView 的区别和用法](https://blog.csdn.net/qq_20282263/article/details/52831398)
+
+[ModelAndView 构造函数](https://www.cnblogs.com/xuange306/p/6627388.html)
+
 ---
-## 99. 错误解决
+## 其它
 
-### [Maven 项目 jar 包出现: invalid LOC header (bad signature)](https://blog.csdn.net/m0_37681914/article/details/76064054)
-### [搭建spring-boot项目报错Error parsing lifecycle processing instructions](https://blog.csdn.net/u012810317/article/details/53302592)
+~~[使用 Timestamp向MySQL插入当前格式化时间日期](http://hovertree.com/h/bjaf/p36d25hy.htm)~~
 
+[SpringBoot中发送QQ邮件](https://blog.csdn.net/u012702547/article/details/79494474)
 
+---
 
+## 错误解决
 
+[Maven 项目 jar 包出现: invalid LOC header (bad signature)](https://blog.csdn.net/m0_37681914/article/details/76064054)
 
+[解决Perhaps you are running on a JRE rather than a JDK?问题](https://blog.csdn.net/hjwang1/article/details/50085839)
 
-### [spring-boot 热部署 devtools 更新时自动重启](https://www.jianshu.com/p/03a094641bc4)
-### [Could not create connection to database server. Attempted reconnect 3 times. Giving up.](https://blog.csdn.net/u012228009/article/details/54095421)
+[搭建spring-boot项目报错Error parsing lifecycle processing instructions](https://blog.csdn.net/u012810317/article/details/53302592)
+
+[spring-boot 热部署 devtools 更新时自动重启](https://www.jianshu.com/p/03a094641bc4)
+
+[Could not create connection to database server. Attempted reconnect 3 times. Giving up.](https://blog.csdn.net/u012228009/article/details/54095421)
 
