@@ -25,50 +25,56 @@ gantt
 ```
 
 ---
-## 程序结构
+## 工程目录结构
 
-**SSH 集成框架**是 struts + spring + hibernate 的一个集成框架,从职责上分为四层: 表示层、业务逻辑层、数据持久层和==域模块层（实体层）==
+- 功能/逻辑视图
+- 开发/结构视图
+- 用户动作/反馈视图
 
-[Spring Boot 连接 MySQL 数据库 JPA](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
+在 MVC 中 Controller 和 Model 间插入一个业务逻辑层，可分为四层：前端页面（View）、控制层（Controller）、业务逻辑层、数据持久层（Model）。
 
- [Spring Boot快速开发REST服务最佳实践](https://www.cnblogs.com/jeffwongishandsome/p/quick-develop-rest-api-by-using-spring-boot.html)
+[Spring Boot 通过 JPA 连接 MySQL](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
 
-[SSH框架总结分析](https://blog.csdn.net/shan9liang/article/details/8803989)
+ [Spring Boot 快速开发 REST 服务最佳实践](https://www.cnblogs.com/jeffwongishandsome/p/quick-develop-rest-api-by-using-spring-boot.html)
 
 [关于SSH架构中Entity/Dao/Service/Controller的理解](https://www.zybuluo.com/Beeder/note/1053661)
 
-### src/main/java/com.campus 目录：后台
+### src/main/java/com.campus 根目录：后台
+
+> ==错误：==
+>
+> 解决：不应将 Appication.java 和其它所有文件放在 src/main/java 下，要将它放在src/main/java下的根包里（例如 src/main/java/com.campus 下）
 
 #### 公共模块
 
 common：公共类，如枚举、常量、业务无关的通用公共实体等
 common.utils：常用实用的帮助类，如反射、字符串、集合、枚举、正则、缓存、队列等
 
-#### 控制层/表现层
+#### 控制层
 
-controller：负责页面访问控制，处理用户输入请求，并调用服务层响应用户操作。==对外暴露 Rest API 接口==
+controller：负责页面访问控制，与用户直接交互（处理用户输入请求，并调用 service 层响应用户操作，同时给出==响应和处理前端页面==）。==并对外暴露 Rest API 接口。==
 
 #### 数据持久层
 
-model：实体层，本质是数据表的对象化，用对象来映射数据库表，
-repository：持久化层，负责与数据库交互，提供数据表存取机制，以 ORM 框架映射对象-关系数据库。定义访问底层数据模型的接口。对数据操作的一层封装，XxxxRepository接口继承JpaRepository，因此具备通用的数据访问控制层的能力。[Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226)
+model：实体层，本质是数据表的对象化，用对象映射数据表，通过操作对象的属性间接操作数据表的表项
+repository：通过对 model 层的封装提供 CURD 接口。==负责与数据库交互，提供数据表存取机制，以 ORM 框架映射对象-关系数据库。==XxxxRepository 接口继承 JpaRepository，因此具备通用的数据访问控制层的能力。[Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226)
 
 #### 业务逻辑层
 
-service：用于业务逻辑相关的服务
+service：用于业务逻辑相关的服务。通过逻辑判断处理用户输入等比如判断输入是否合法，对于合法的数据和操作通过调用Dao类的方法来进行数据库访问和持久化？
 service.impl ==服务对应的实现接口==，由控制层直接调用
 
 #### 程序入口
 
 Application.java：包括一个静态main方法，可以做一些框架配置，比如==mybatis、swagger==等。作为 Spring boot 的启动配置
 
-### resources 目录：前端页面，与用户直接交互的表示层
+### resources 目录：前端页面
 
 #### static : 静态文件
 
-static/css : CSS 样式
-static/img : 图片
-static/js : js 文件
+css : CSS 样式
+img : 图片
+js : js 文件
 
 #### templates : 模板文件，主要是 html 文件
 
@@ -85,7 +91,7 @@ application-dev.properties 开发环境
 application-prod.properties 生产环境
 application-test.properties 测试环境
 
-### src/test/java  测试程序
+### ==src/test/java  测试程序==
 
 ### 其它文件
 
@@ -342,22 +348,20 @@ mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到�
 
 ---
 
-## 数据库
-
-### ~~Eclipse 用 JDBC 连接 MySQL 数据库~~
+## ~~用 JDBC 连接 MySQL~~
 
 > 前提：已经安装 MySQL 和新建测试数据库
 
-#### 下载mysql-connector并解压
+### 下载 mysql-connector 并解压
 
 [mysql-connector-java-5.1.6.zip](https://dev.mysql.com/downloads/connector/j)
 
-#### 添加扩展 jar 文件到项目库
+### 添加扩展 jar 文件到项目库
 
 1. 在项目上右键->`Build Path`->`Configure Build Path`->`Libraries`->`Add External JARS`
 2. 选择`mysql-connector-java`安装目录，并选中`mysql-connector-java-5.1.46-bin.jar`
 
-#### 编写java代码来测试连接数据库
+### 编写java代码来测试连接数据库
 
 - 在`Java Resources`->`src`下新建类`test\SQLTest.Java`,填入如下代码，并修改数据库名、端口、用户名、密码、表名
 ```
@@ -400,7 +404,9 @@ while (rs.next()) {
   方法二：。。。
 
 ---
-### Spring Boot 用 JPA 连接 MySQL
+## Spring Boot 用 JPA 连接 MySQL
+
+### 下载 JPA 项目
 
 #### 下载 [JPA项目](https://github.com/aidansu/spring-boot-jpa)
 
@@ -414,9 +420,11 @@ while (rs.next()) {
 
         右键项目 -> run as -> Spring Boot APP
 
+## 
+
 ---
 
-[基于 Spring boot 的 Spring data jpa 连接 MySQL ](https://blog.csdn.net/JinbaoSite/article/details/77587600)	
+
 
 [使用JPA Tools 根据数据库表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
 
@@ -434,13 +442,11 @@ while (rs.next()) {
 
 [InvalidDataAccessResourceUsageException：mysql保留字`group`引发的血案](https://hk.saowen.com/a/2eb7cba1e7304e5c4f701d77f9339845604aafc52f32adb5b93d5f90874988ff)
 
-[Jpa、ORM、JDBC、Hibernate、的关系](https://blog.csdn.net/u010837612/article/details/47610823)
+[Jpa、ORM、JDBC、Hibernate 的关系](https://blog.csdn.net/u010837612/article/details/47610823)
 
 [Spring Data JPA 高效便捷的 Repository 解决方案](http://perfy315.iteye.com/blog/1460226)
 
-## 这是啥
-
-### 注解和自动装配
+## 注解和自动装配
 
 [Spring Data JPA 常用注解 @Query、@NamedQuery](https://blog.csdn.net/offbye/article/details/47978369)
 
