@@ -60,7 +60,7 @@ service.impl ==服务对应的实现接口==，由控制层直接调用
 
 #### 程序入口
 
-Application.java：包括一个静态main方法，可以做一些框架配置，比如==mybatis、swagger==等
+Application.java：包括一个静态main方法，可以做一些框架配置，比如==mybatis、swagger==等。作为 Spring boot 的启动配置
 
 ### resources 目录：前端页面，与用户直接交互的表示层
 
@@ -97,7 +97,7 @@ DB：存放数据库文件
 
 target：注解
 
-pom.xml：添加项目所需要的依赖 [Maven pom.xml 配置详解](https://blog.csdn.net/ithomer/article/details/9332071)
+pom.xml：Maven [项目对象模型](https://zh.wikipedia.org/wiki/%E9%A1%B9%E7%9B%AE%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B)（Project Object Model，POM）。主要描述项目的配置文件、开发者需要遵循的规则、缺陷管理系统、组织和licenses、项目的url、项目的依赖性、以及其他所有的项目相关因素。 [Maven pom.xml 配置详解](https://blog.csdn.net/ithomer/article/details/9332071)
 
 README.md：项目说明
 
@@ -168,7 +168,7 @@ spring-boot-jpa.iml：
 |快速查找选定的内容 | `Ctrl+K`|
 
 ---
-### 安装 Tomcat
+### ~~安装 Tomcat~~
 
 #### 下载安装包
 
@@ -181,7 +181,7 @@ spring-boot-jpa.iml：
 3. 在`Tomcat installation directory`->`Browse`选择Tomcat的安装目录，点击`finish`完成配置。
 
 ---
-### 新建第一个 Java Web 项目并部署在Tomcat服务器
+### ~~新建第一个 Java Web 项目并部署在 Tomcat 服务器~~
 
 #### 新建 Java Web 项目
 
@@ -344,10 +344,7 @@ mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到�
 
 ## 数据库
 
-[基于 Spring boot 的 Spring data jpa 连接 MySQL ](https://blog.csdn.net/JinbaoSite/article/details/77587600)
-
----
-### Eclipse用JDBC连接MySQL数据库
+### ~~Eclipse 用 JDBC 连接 MySQL 数据库~~
 
 > 前提：已经安装 MySQL 和新建测试数据库
 
@@ -355,7 +352,7 @@ mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到�
 
 [mysql-connector-java-5.1.6.zip](https://dev.mysql.com/downloads/connector/j)
 
-#### 添加扩展jar文件到项目库
+#### 添加扩展 jar 文件到项目库
 
 1. 在项目上右键->`Build Path`->`Configure Build Path`->`Libraries`->`Add External JARS`
 2. 选择`mysql-connector-java`安装目录，并选中`mysql-connector-java-5.1.46-bin.jar`
@@ -403,13 +400,13 @@ while (rs.next()) {
   方法二：。。。
 
 ---
-### [Spring Boot 用 JPA 连接 MySQL 数据库示例](http://www.aidansu.com/2017/spring-boot-mysql-jpa/)
+### Spring Boot 用 JPA 连接 MySQL
 
-#### 下载[JPA项目](https://github.com/aidansu/spring-boot-jpa)
+#### 下载 [JPA项目](https://github.com/aidansu/spring-boot-jpa)
 
-#### 用Eclipse打开项目
+#### 用 Eclipse 打开项目
 
-#### 下载jar依赖
+#### 下载 jar 依赖
 
         1. 右键项目 -> run as -> Maven install
         2. 等待好几分钟
@@ -419,9 +416,7 @@ while (rs.next()) {
 
 ---
 
-###  Eclipse  用 JPA 连接 MySQL 数据库
-
-[基于Spring boot的Spring data jpa连接MySQL数据库](https://blog.csdn.net/JinbaoSite/article/details/77587600)
+[基于 Spring boot 的 Spring data jpa 连接 MySQL ](https://blog.csdn.net/JinbaoSite/article/details/77587600)	
 
 [使用JPA Tools 根据数据库表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
 
@@ -429,17 +424,11 @@ while (rs.next()) {
 
 [Show required a bean of type 'com.campus.dao.UserRepository' that could not be found.](https://blog.yoodb.com/yoodb/article/detail/1416)
 
-### [Spring Beans和依赖注入 main类放到包的最上层](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/III.%20Using%20Spring%20Boot/17.%20Spring%20Beans%20and%20dependency%20injection.html)
-
-[Spring Boot自动装配Bean](http://zhangguoyu.org/2017/11/14/beans-injection/)
+[Spring Beans和依赖注入 main类放到包的最上层](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/III.%20Using%20Spring%20Boot/17.%20Spring%20Beans%20and%20dependency%20injection.html)
 
 [mysql使用Navicat 导出导入数据库](https://blog.csdn.net/davidchengx/article/details/75912013)
 
 [解决Perhaps you are running on a JRE rather than a JDK?问题](https://blog.csdn.net/hjwang1/article/details/50085839)
-
-[Spring@Autowired注解与自动装配](https://blog.csdn.net/heyutao007/article/details/5981555)
-
-[Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
 
 [使用 Timestamp向MySQL插入当前格式化时间日期](http://hovertree.com/h/bjaf/p36d25hy.htm)
 
@@ -447,13 +436,25 @@ while (rs.next()) {
 
 [Jpa、ORM、JDBC、Hibernate、的关系](https://blog.csdn.net/u010837612/article/details/47610823)
 
-[SpringBoot中发送QQ邮件](https://blog.csdn.net/u012702547/article/details/79494474)
-
 [Spring Data JPA 高效便捷的 Repository 解决方案](http://perfy315.iteye.com/blog/1460226)
+
+## 这是啥
+
+### 注解和自动装配
 
 [Spring Data JPA 常用注解 @Query、@NamedQuery](https://blog.csdn.net/offbye/article/details/47978369)
 
 [JPA 注解（一） id table entity ](http://conkeyn.iteye.com/blog/602463)
+
+[Spring@Autowired注解与自动装配](https://blog.csdn.net/heyutao007/article/details/5981555)
+
+[Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
+
+[Spring Boot自动装配Bean](http://zhangguoyu.org/2017/11/14/beans-injection/)
+
+## 其它
+
+[SpringBoot中发送QQ邮件](https://blog.csdn.net/u012702547/article/details/79494474)
 
 ---
 ## 9. AJAX 和 Spring Boot 通信
