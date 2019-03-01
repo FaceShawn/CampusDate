@@ -27,13 +27,13 @@ gantt
 ---
 ## 工程目录结构
 
-- 功能/逻辑视图
-- 开发/结构视图
-- 用户动作/反馈视图
+- ~~功能/逻辑视图~~
+- ~~开发/结构视图~~
+- ~~用户动作/反馈视图~~
 
 ### MVC 模式
 
-将 MVC 模式中的 Model 分为业务逻辑层和数据持久层：前端页面（View）、控制层（Controller）、业务逻辑层、数据持久层。==service+serviceImpl、dao+daoImpl== 
+MVC 模式中业务逻辑相关的部分无法单独处理，但 service+serviceImpl、dao+daoImpl 又太冗余，于是将其单独列为业务逻辑层：前端页面（View）、控制层（Controller）、业务逻辑层（Service）、数据持久层（Model）。
 
 ==Model 中数据的变化一般会通过一种刷新机制被公布。为了实现这种机制，那些用于监视此 Model 的 View 必须事先在此 Model 上注册，从而，View 可以了解在数据 Model 上发生的改变。==
 
@@ -56,12 +56,12 @@ common.utils：常用实用的帮助类，如反射、字符串、集合、枚�
 
 #### 控制层
 
-controller：起到不同层面间的组织作用，用于控制应用程序的流程。调用 service 层处理事件并作出响应，“事件”包括用户的行为和数据的改变。负责页面访问控制，==对外暴露 Rest API 接口（路径解析）==  。
+controller：起到不同层面间的组织作用，用于控制应用程序的流程。负责页面访问控制和交互，==对外暴露 Rest API 接口==  。路由解析、页面跳转、展示表现层、接收并转发原始数据和请求、调用 service 层处理事件。处理请求和响应事件，“事件”包括用户的行为和数据的改变。
 
 #### 数据持久层
 
 Entity：实体层，用对象映射数据表，二者一一对应，本质是数据表的对象化。是一种 ORM 对象关系映射。
-==repository==：==通过对 Entity 层的封装提供 CURD 接口== 。封装对象操作逻辑。XxxxRepository 接口继承 JpaRepository，因此具备==通用的数据访问控制层==能力，如最基本的CRUD操作、分页、排序、查询列表、批量删除、强制同步等。[Spring Boot 中 Repository 的使用](https://segmentfault.com/a/1190000012346333) [Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226) 
+==repository==：==通过对 Entity 层的封装提供 CURD 接口== 。继承 JpaRepository。[Spring Boot 中 Repository 的使用](https://segmentfault.com/a/1190000012346333) [Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226) 
 
 #### 业务逻辑层
 
@@ -69,7 +69,7 @@ service：用于处理事件，实现具体的业务逻辑。
 
 #### 程序入口
 
-Application.java：包括一个静态main方法，可以做一些框架配置，比如==mybatis、swagger==等。作为 Spring boot 的启动配置
+Application.java：包括一个静态 main 方法，可以做一些框架配置，比如==mybatis、swagger==等。作为 Spring boot 的启动配置
 
 ### resources 目录：前端页面
 
@@ -89,7 +89,9 @@ index.html：主页
 
 #### 配置文件
 
-application.properties : Spring Boot 自动加载的配置文件，默认为开发环境，可切换以下多环境 [HTML5日期和时间选择输入](https://www.imooc.com/article/11915)
+> Spring Boot 支持 .properties 格式和 .yml 格式配置文件。yml 类型文件属性名后面冒号和值之间必须有一个空格。
+
+application.properties : Spring Boot 自动加载的配置文件，可在以下环境切换
 application-dev.properties 开发环境
 application-prod.properties 生产环境
 application-test.properties 测试环境
@@ -332,7 +334,7 @@ mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到�
 
 ## 新建 Spring Boot 项目
 
-### 安装 [STS 插件](https://spring.io/tools/sts)
+### 安装 [STS 插件 ](https://spring.io/tools/sts)搭建开发环境
 
 > 要在 eclipse 使用 spring boot 创建项目，==必须== 先安装 Spring Tool Suite (STS) for Eclipse，耗时较长。
 
@@ -341,9 +343,26 @@ mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到�
 
 ### [用 Eclipse 创建 Spring Boot 工程并运行](http://rensanning.iteye.com/blog/2355933)
 
-> 勾选 Web
+> 必选：Web
+>
+> 可选：JPA、mysql、dev、thymeleaf、devtools （热部署）
 
 ![SpringBoot工程从创建到执行](src/main/resources/static/img/b33a58aa-08a0-3503-9d1d-af6c34189917.jpg)
+
+### 热部署
+
+勾选依赖或添加依赖后，配置 pom.xml 文件。另外可结合 Liveroad 插件，使修改静态文件时浏览器自动刷新。
+
+```
+## 热部署
+# 此目录下修改文件自动重启
+spring.devtools.restart.additional-paths=./src/main/java
+#spring.devtools.restart.additional-paths=./src/main/java, ./src/main/resources/templates
+# 此目录下修改文件不自动重启
+spring.devtools.restart.exclude=static/**,public/**
+# 类文件修改后不会自动重启
+# spring.thymeleaf.cache=false
+```
 
 ### 端口占用错误
 
@@ -353,7 +372,7 @@ mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到�
 
 ---
 
-## ~~用 JDBC 连接 MySQL~~
+## ~~方法一：用 JDBC 连接 MySQL~~
 
 > 前提：已经安装 MySQL 和新建测试数据库
 
@@ -409,35 +428,90 @@ while (rs.next()) {
   方法二：。。。
 
 ---
-## ==用 Spring-Data-JPA 操作 MySQL==
-
-### 下载 JPA 项目
-
-#### 下载 [JPA项目](https://github.com/aidansu/spring-boot-jpa)
-
-#### 用 Eclipse 打开项目
-
-#### 下载 jar 依赖
-
-> 右键项目 -> run as -> Maven install
-> 等待好几分钟
-#### 运行项目
-
-> 右键项目 -> run as -> Spring Boot APP
+## 方法二：用 Spring-Data-JPA 操作 MySQL
 
 [Jpa、ORM、JDBC、Hibernate 的关系](https://blog.csdn.net/u010837612/article/details/47610823)
 
----
+> JPA（Java Persistence API）Java持久化API，是 Java 持久化的标准规范，Hibernate是持久化规范的技术实现，而 Spring Data JPA 是在 Hibernate 基础上封装的一款~~框架~~接口。
 
-## [用 JPA Tools 根据数据表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
+### 配置 pom.xml 
+
+> 添加 Spring Data JPA 和 MySQL Connector jar 包依赖
+
+```
+	<!-- Spring Data JPA -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    
+    <!-- MySQL -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+```
+
+### 设置配置文件
+
+> 在 application.properties 中配置数据源，连接池
+
+```
+## 数据库连接
+# useUnicode=true&characterEncoding=UTF-8 表示使用Unicode字符集，指定字符从数据库取出后和存入前的编码、解码格式
+# useSSL=false 表示在高版本禁用SSL
+# autoReconnect 和 failOverReadOnly 用来配置数据源连接池？控制重连特性
+# 其中，autoReconnect=true 表示当数据库连接异常中断时自动重连
+# failOverReadOnly=false 表示自动重连成功后，连接不设置为只读
+spring.datasource.url=jdbc:mysql://localhost:3306/campusdate?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+## 自动建表（实体类维护数据表）方式
+# create 表示每次加载  hibernate 时根据实体类重新生成新表
+# create-drop 表示每次加载  hibernate 时根据实体类生成新表，当 sessionFactory 关闭时自动删除表
+# update 表示第一次加载 hibernate 时根据实体类会自动建表；以后加载 hibernate 时，表结构随实体类自动更新
+# validate 表示每次加载  hibernate 时只验证实体类和数据表是否一致
+# none 表示啥都不做
+spring.jpa.properties.hibernate.hbm2ddl.auto=update
+# hibernate在操作的时候在控制台打印真实的sql语句，方便调试
+spring.jpa.show-sql=true
+# 表示格式化输出的json字符串（方言？）
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+```
+
+### [方法一：用 JPA Tools 根据数据表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
 
 [InvalidDataAccessResourceUsageException：mysql保留字`group`引发的血案](https://hk.saowen.com/a/2eb7cba1e7304e5c4f701d77f9339845604aafc52f32adb5b93d5f90874988ff)
 
-## 根据实体类创建数据表
+### 方法二：创建实体类自动新建数据表
+
+> ==为了解决<bean>标签下<property>标签过多的问题，在实体类中使用 @Autowired  注解实现自动装配注入。== 
+
+
+
+---
+
+## ~~方法三：用 jdbcTemplate 操作 MySQL~~
+
+[JPA， hibernate， jdbcTemplate（建议使用）区别](https://blog.csdn.net/abcd1101/article/details/64133126)
+
+---
+
+## 新建 XxxRepository 接口
+
+> 继承 JpaRepositoryt 接口，从而可以使用已封装好的方法操作实体类。
+>
+> 可自定义查找方法，如`findBy+属性名`可实现SQL查询。
+
+---
+
+## XxxService
+
+## XxxController
 
 ## 注解和自动装配
-
-~~[Spring Beans和依赖注入 main类放到包的最上层](https://qbgbook.gitbooks.io/spring-boot-reference-guide-zh/III.%20Using%20Spring%20Boot/17.%20Spring%20Beans%20and%20dependency%20injection.html)~~
 
 [Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
 
@@ -446,8 +520,6 @@ while (rs.next()) {
 [JPA 注解（一） id table entity ](http://conkeyn.iteye.com/blog/602463)
 
 [Spring@Autowired注解与自动装配](https://blog.csdn.net/heyutao007/article/details/5981555)
-
-~~[Spring Boot自动装配Bean](http://zhangguoyu.org/2017/11/14/beans-injection/)~~
 
 [SpringBoot中常用注解@Controller/@RestController/@RequestMapping](https://blog.csdn.net/u010412719/article/details/69710480)
 
@@ -490,6 +562,8 @@ while (rs.next()) {
 
 [spring boot+前端ajax请求通讯](https://blog.csdn.net/yiwait/article/details/55288814)
 
+ [HTML5日期和时间选择输入](https://www.imooc.com/article/11915)
+
 ## ModelMap
 
 [SpringMVC Model、ModelMap 和ModelAndView 的区别和用法](https://blog.csdn.net/qq_20282263/article/details/52831398)
@@ -513,7 +587,7 @@ while (rs.next()) {
 
 [搭建spring-boot项目报错Error parsing lifecycle processing instructions](https://blog.csdn.net/u012810317/article/details/53302592)
 
-[spring-boot 热部署 devtools 更新时自动重启](https://www.jianshu.com/p/03a094641bc4)
+~~[spring-boot 热部署 devtools 更新时自动重启](https://www.jianshu.com/p/03a094641bc4)~~
 
 [Could not create connection to database server. Attempted reconnect 3 times. Giving up.](https://blog.csdn.net/u012228009/article/details/54095421)
 
