@@ -69,7 +69,7 @@ service：用于处理事件，实现具体的业务逻辑。
 
 #### 程序入口
 
-Application.java：包括一个静态 main 方法，可以做一些框架配置，比如==mybatis、swagger==等。作为 Spring boot 的启动配置
+Application.java：包括一个静态 main 方法，可以做一些框架配置，比如==mybatis、swagger==等，作为 Spring boot 的启动配置。
 
 ### resources 目录：前端页面
 
@@ -489,7 +489,9 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 > ==为了解决<bean>标签下<property>标签过多的问题，在实体类中使用 @Autowired  注解实现自动装配注入。== 
 
+### 注解
 
+[Spring Data JPA 常用注解 @Query、@NamedQuery](https://blog.csdn.net/offbye/article/details/47978369)
 
 ---
 
@@ -499,7 +501,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 ---
 
-## 新建 XxxRepository 接口
+## XxxRepository 接口
 
 > 继承 JpaRepositoryt 接口，从而可以使用已封装好的方法操作实体类。
 >
@@ -514,8 +516,6 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 ## 注解和自动装配
 
 [Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
-
-[Spring Data JPA 常用注解 @Query、@NamedQuery](https://blog.csdn.net/offbye/article/details/47978369)
 
 [JPA 注解（一） id table entity ](http://conkeyn.iteye.com/blog/602463)
 
