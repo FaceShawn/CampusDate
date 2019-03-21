@@ -61,7 +61,7 @@ controller：用于组织不同层面，控制流程，页面访问控制和交�
 #### 数据持久层
 
 Entity：实体层，用对象映射数据表，二者一一对应，本质是数据表的对象化。是一种 ORM 对象关系映射。
-==repository==：==通过对 Entity 层的封装提供 CURD 接口== 。继承 JpaRepository。[Spring Boot 中 Repository 的使用](https://segmentfault.com/a/1190000012346333) [Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226) 
+==repository==：==通过对 Entity 层的封装提供 CURD 接口== 。继承 JpaRepositoryt 接口，从而可以使用已封装好的方法操作实体类。可自定义查找方法，如`findBy+属性名`可实现SQL查询。[Spring Boot 中 Repository 的使用](https://segmentfault.com/a/1190000012346333) [Repository（资源库）接口介绍](http://perfy315.iteye.com/blog/1460226) 
 
 #### 业务逻辑层
 
@@ -104,7 +104,7 @@ Spring Element
 
 @Autowired 注解与自动装配，自定义 bean
 
-DB：存放数据库文件
+DB：存放数据库文件，SQL文件
 
 target：注解
 
@@ -328,7 +328,11 @@ mysql>CREATE TABLE user (UseID VARCHAR(20),PassWord VARCHAR(20));   //创建一�
 mysql>INSERT INTO user VALUES('daixiaoke','shishazi'); //插入一条数据到表中
 ```
 
-### [用 Navicat 导出导入 MySQL](https://blog.csdn.net/davidchengx/article/details/75912013)
+### Navicat
+
+#### [导出导入 MySQL](https://blog.csdn.net/davidchengx/article/details/75912013)
+
+#### 批量写入测试数据
 
 ---
 
@@ -499,20 +503,6 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 [JPA， hibernate， jdbcTemplate（建议使用）区别](https://blog.csdn.net/abcd1101/article/details/64133126)
 
----
-
-## XxxRepository 接口
-
-> 继承 JpaRepositoryt 接口，从而可以使用已封装好的方法操作实体类。
->
-> 可自定义查找方法，如`findBy+属性名`可实现SQL查询。
-
----
-
-## XxxService
-
-## XxxController
-
 ## 注解和自动装配
 
 [Spring Boot 注解的意义以及作用](https://blog.csdn.net/m0_37995707/article/details/77447764)
@@ -540,9 +530,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 > 解决二：使用注解`@ComponentScan(value="com.campus")`
 
 ---
-## AJAX 和 Spring Boot 通信
-
-### bootstraps 教程
+## bootstraps 教程
 
 [Bootstraps 快速入门](https://bootstrap.ninghao.net/getting-started.html)
 
@@ -551,6 +539,8 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 [Bootstrap 教程2](http://www.ibootstrap.cn/)
 
 [Bootstrap 教程3](http://www.runoob.com/bootstrap/bootstrap-forms.html)
+
+## AJAX 和 Spring Boot 通信
 
 2. [jQuery AJAX中\$.get、\$.post、\$.getJSON、$.ajax 方法详解](https://blog.csdn.net/huileiforever/article/details/12163385)
 
