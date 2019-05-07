@@ -1,4 +1,4 @@
-# 校园空闲时间预约
+校园空闲时间预约
 
 ## 测试账号
 
@@ -45,7 +45,7 @@ MVC 模式中业务逻辑相关的部分无法单独处理，但 service+service
 
 ### src/main/java/com.campus 根目录：后台
 
-> ==错误：== 
+> ==错误：== 找不到主类
 >
 > 解决：不应将 Appication.java 和其它所有文件放在 src/main/java 下，要将它放在src/main/java下的根包里（例如 src/main/java/com.campus 下）。
 
@@ -434,7 +434,7 @@ while (rs.next()) {
 
 > JPA（Java Persistence API）Java持久化API，是 Java 持久化的标准规范，Hibernate是持久化规范的技术实现，而 Spring Data JPA 是在 Hibernate 基础上封装的一款~~框架~~接口。
 
-### 配置 pom.xml 
+### 配置 pom.xml
 
 > 添加 Spring Data JPA 和 MySQL Connector jar 包依赖
 
