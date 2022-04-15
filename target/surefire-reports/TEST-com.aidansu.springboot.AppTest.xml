@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.aidansu.springboot.AppTest" time="0" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="idea.version" value="2022.1"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="java.vm.version" value="11.0.14.1+10-LTS"/>
+    <property name="sun.boot.library.path" value="C:\Users\Cooper\.jdks\corretto-11.0.14.1\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="J:\CampusDate\CampusDate"/>
+    <property name="java.vm.vendor" value="Amazon.com Inc."/>
+    <property name="java.vendor.url" value="https://aws.amazon.com/corretto/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="J:\CampusDate\CampusDate"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.runtime.version" value="11.0.14.1+10-LTS"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\Cooper\AppData\Local\Temp\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="maven.ext.class.path" value="D:\Develop\Java\IntelliJ IDEA\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="D:\Develop\Java\apache-maven-3.8.5\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Users\Cooper\.jdks\corretto-11.0.14.1\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_92\bin;%Sys;emRoot%\system32;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;D:\Debug\htk\bin.win32;ogram Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\SQL Anywhere 16\bin64;C:\Program Files\SQL Anywhere 16\bin32;D:\Work-代码编辑器\Shared\PowerBuilder;C:\W;ndows\Microsoft.NET\Framework\v4.0.30319;D:\Develop\Git\cmd;C:\Program Files\Java\jdk1.8.0_92\bin;C:\Program Files\Java\jdk1.8.0_92\jre;D:\Develop\Java\mysql-5.7.21-winx64\bin;C:\Program Files\Microsoft VS Code\bin;D:\Develop\Pandoc\;D:\Develop\MiKTeX\miktex\bin\x64\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;H:\Code\PycharmProject\venv\Scripts;D:\Office\QuickTime\QTSystem\;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\;D:\Develop\Node\;D:\Develop\Java\apache-maven-3.8.5\bin;D:\Develop\Java\mysql-5.7.21-winx64\bin;J:\CampusDate\CampusDate;D:\Develop\Ruby25-x64\bin;C:\Users\Cooper\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\Cooper\AppData\Local\Programs\Python\Python37\;C:\Modeltech_6.2b\win32;D:\Develop\Java\jdk1.8.0_161\bin;D:\Develop\Java\jdk1.8.0_161\jre;C:\Users\Cooper\AppData\Local\GitHubDesktop\bin;D:\Develop\Node\Lib;D:\Develop\IntelliJ IDEA Educational Edition 2019.3.3\bin;;C:\Users\Cooper\AppData\Roaming\npm;D:\Develop\Java\jdk;C:\Program Files\Java\jdk1.8.0_92;C:\Program Files\Java\jre1.8.0_92;D:\Develop\Java\apache-maven-3.8.5\bin;D:\Develop\Java\IntelliJ IDEA\bin;;D:\Develop\Java\mysql-5.7.21-winx64\bin;J:\CampusDate\CampusDate;."/>
+    <property name="maven.conf" value="D:\Develop\Java\apache-maven-3.8.5/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="55.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="maven.repo.local" value="D:\Develop\Java\apache-maven-3.8.5\.m2\repository"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\Cooper"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="user.name" value="Cooper"/>
+    <property name="java.class.path" value="D:\Develop\Java\apache-maven-3.8.5\boot\plexus-classworlds-2.6.0.jar;D:\Develop\Java\apache-maven-3.8.5\boot\plexus-classworlds.license"/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2022.1 -Dmaven.repo.local=D:\Develop\Java\apache-maven-3.8.5\.m2\repository install --non-recursive"/>
+    <property name="java.home" value="C:\Users\Cooper\.jdks\corretto-11.0.14.1"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="11.0.14.1"/>
+    <property name="java.vendor" value="Amazon.com Inc."/>
+    <property name="maven.home" value="D:\Develop\Java\apache-maven-3.8.5"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2022-02-08"/>
+    <property name="java.vendor.url.bug" value="https://github.com/corretto/corretto-11/issues/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="java.vendor.version" value="Corretto-11.0.14.10.1"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase name="testApp" classname="com.aidansu.springboot.AppTest" time="0"/>
+</testsuite>

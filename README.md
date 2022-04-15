@@ -7,7 +7,7 @@
 学生：111		密码：1111
 
 教师：222		密码：2222
-
+    
 ## 甘特图
 
 ```mermaid
@@ -47,7 +47,7 @@ MVC 模式中业务逻辑相关的部分无法单独处理，但 service+service
 
 > ==错误：== 找不到主类
 >
-> 解决：不应将 Appication.java 和其它所有文件放在 src/main/java 下，要将它放在src/main/java下的根包里（例如 src/main/java/com.campus 下）。
+> 解决：不应将 Application.java 和其它所有文件放在 src/main/java 下，要将它放在src/main/java下的根包里（例如 src/main/java/com.campus 下）。
 
 #### 公共模块
 
@@ -106,6 +106,8 @@ Spring Element
 
 DB：存放数据库文件
 
+[Spring Boot在idea上集成MySQL数据库 以及在idea上配置MySQL](https://blog.csdn.net/cui_yonghua/article/details/92835824)
+
 target：注解
 
 pom.xml：Maven [项目对象模型](https://zh.wikipedia.org/wiki/%E9%A1%B9%E7%9B%AE%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B)（Project Object Model，POM）。主要描述项目的配置文件、开发者需要遵循的规则、缺陷管理系统、组织和licenses、项目的url、项目的依赖性、以及其他所有的项目相关因素。 [Maven pom.xml 配置详解](https://blog.csdn.net/ithomer/article/details/9332071)
@@ -122,7 +124,8 @@ spring-boot-jpa.iml：
 
 #### 下载 JDK（Java Development Kit）
 
-[SE JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)，选择`Java Platform (JDK) 10`（包含 Java Runtime Envirment），下载到`\Java\JDK`
+[SE JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html)，选择`Java Platform (JDK) 10`（包含 Java 
+Runtime Environment），下载到`\Java\JDK`
 
 >[EE JDK](http://www.oracle.com/technetwork/java/javaee/downloads/index.html)下载下来是`glassfish`格式，==弄不太懂==，发现安装`SE JDK`也是一样的
 
@@ -503,7 +506,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 ## XxxRepository 接口
 
-> 继承 JpaRepositoryt 接口，从而可以使用已封装好的方法操作实体类。
+> 继承 JpaRepository 接口，从而可以使用已封装好的方法操作实体类。
 >
 > 可自定义查找方法，如`findBy+属性名`可实现SQL查询。
 
@@ -589,5 +592,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 ~~[spring-boot 热部署 devtools 更新时自动重启](https://www.jianshu.com/p/03a094641bc4)~~
 
-[Could not create connection to database server. Attempted reconnect 3 times. Giving up.](https://blog.csdn.net/u012228009/article/details/54095421)
+[Could not create connection to database server. Attempted reconnect 3 times. Giving up.](https://blog.csdn.
+net/u012228009/article/details/54095421)
 
+[解决方案：java.lang.ClassNotFoundException: javax.xml.bind.JAXBException](https://blog.csdn.net/hadues/article/details/79188793)
