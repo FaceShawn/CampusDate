@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SATController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-campus-date</a> &gt; <a href="index.source.html" class="el_package">com.campus.controller</a> &gt; <span class="el_source">SATController.java</span></div><h1>SATController.java</h1><pre class="source lang-java linenums">package com.campus.controller;
+
+import java.security.NoSuchAlgorithmException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.campus.common.utils.EncryptUtil;
+import com.campus.common.utils.ErrorResponseUtil;
+import com.campus.model.User;
+import com.campus.service.UserService;
+
+@Controller
+@RequestMapping(value = &quot;/SAT&quot;)
+<span class="nc" id="L20">public class SATController {</span>
+	@Autowired
+    private UserService userService;
+	
+	  /**
+     * 根据id删除老师或者学生
+     */
+    @RequestMapping(value = &quot;/deleteSAT&quot;, method = RequestMethod.GET)
+    public void goDeleteSAT(HttpServletRequest request ,HttpServletResponse res) {
+//        int userid = Integer.valueOf(request.getParameter(&quot;userid&quot;));
+<span class="nc" id="L30">        String id = request.getParameter(&quot;id&quot;);</span>
+<span class="nc" id="L31">        userService.delete(id);</span>
+       // return &quot;login/man/Maintence&quot;;
+        try{
+<span class="nc" id="L34">	    	res.sendRedirect(&quot;http://localhost:8080/admin/Change&quot;);}catch(Exception e){</span>
+	    		
+<span class="nc" id="L36">	    	}</span>
+<span class="nc" id="L37">    }</span>
+    
+    /**
+     * 将学生或者老师密码置为6个零
+     */
+ 
+    @RequestMapping(value = &quot;/changeSAT&quot;, method = RequestMethod.GET)
+    public void goChangeSAT(HttpServletRequest request ,HttpServletResponse res) {
+//        int userid = Integer.valueOf(request.getParameter(&quot;userid&quot;));
+<span class="nc" id="L46">        String id = request.getParameter(&quot;id&quot;);</span>
+<span class="nc" id="L47">        User user=userService.findById(id);</span>
+       
+        // sha-1 加密
+<span class="nc" id="L50">        String shaPwd=null;</span>
+        try {
+<span class="nc" id="L52">            shaPwd = EncryptUtil.encryptSHA(&quot;000000&quot;) ;</span>
+<span class="nc" id="L53">        } catch (NoSuchAlgorithmException e) {</span>
+           
+<span class="nc" id="L55">        }</span>
+<span class="nc" id="L56">        user.setPassword(shaPwd);</span>
+<span class="nc" id="L57">        userService.insert(user);</span>
+       // return &quot;login/man/Maintence&quot;;
+        try{
+<span class="nc" id="L60">	    	res.sendRedirect(&quot;http://localhost:8080/admin/Change&quot;);}catch(Exception e){</span>
+	    		
+<span class="nc" id="L62">	    	}</span>
+<span class="nc" id="L63">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

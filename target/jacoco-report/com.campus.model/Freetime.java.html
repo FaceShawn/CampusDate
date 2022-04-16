@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Freetime.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-campus-date</a> &gt; <a href="index.source.html" class="el_package">com.campus.model</a> &gt; <span class="el_source">Freetime.java</span></div><h1>Freetime.java</h1><pre class="source lang-java linenums">package com.campus.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+
+
+/**
+ * The persistent class for the freetime database table.
+ * 
+ */
+@Entity
+@NamedQuery(name=&quot;Freetime.findAll&quot;, query=&quot;SELECT f FROM Freetime f&quot;)
+public class Freetime implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private String id;
+
+	@Column(name=&quot;allow_num&quot;)
+	private int allowNum;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name=&quot;create_time&quot;)
+	private Date createTime;
+
+	@Column(name=&quot;free_date&quot;)
+	private String freeDate;
+
+	@Column(name=&quot;free_note&quot;)
+	private String freeNote;
+
+	@Column(name=&quot;free_state&quot;)
+	private String freeState;
+
+	@Column(name=&quot;owner_id&quot;)
+	private String ownerId;
+
+	@Column(name=&quot;owner_name&quot;)
+	private String ownerName;
+
+	@Column(name=&quot;reserved_num&quot;)
+	private int reservedNum;
+
+	@Column(name=&quot;reserver_id&quot;)
+	private String reserverId;
+
+	@Column(name=&quot;reserver_msg&quot;)
+	private String reserverMsg;
+
+	@Column(name=&quot;reserver_name&quot;)
+	private String reserverName;
+
+	@Column(name=&quot;section_code&quot;)
+	private String sectionCode;
+
+	@Column(name=&quot;section_name&quot;)
+	private String sectionName;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name=&quot;update_time&quot;)
+	private Date updateTime;
+
+<span class="nc" id="L65">	public Freetime() {</span>
+<span class="nc" id="L66">	}</span>
+
+	public String getId() {
+<span class="nc" id="L69">		return this.id;</span>
+	}
+
+	public void setId(String id) {
+<span class="nc" id="L73">		this.id = id;</span>
+<span class="nc" id="L74">	}</span>
+
+	public int getAllowNum() {
+<span class="nc" id="L77">		return this.allowNum;</span>
+	}
+
+	public void setAllowNum(int allowNum) {
+<span class="nc" id="L81">		this.allowNum = allowNum;</span>
+<span class="nc" id="L82">	}</span>
+
+	public Date getCreateTime() {
+<span class="nc" id="L85">		return this.createTime;</span>
+	}
+
+	public void setCreateTime(Date createTime) {
+<span class="nc" id="L89">		this.createTime = createTime;</span>
+<span class="nc" id="L90">	}</span>
+
+	public String getFreeDate() {
+<span class="nc" id="L93">		return this.freeDate;</span>
+	}
+
+	public void setFreeDate(String freeDate) {
+<span class="nc" id="L97">		this.freeDate = freeDate;</span>
+<span class="nc" id="L98">	}</span>
+
+	public String getFreeNote() {
+<span class="nc" id="L101">		return this.freeNote;</span>
+	}
+
+	public void setFreeNote(String freeNote) {
+<span class="nc" id="L105">		this.freeNote = freeNote;</span>
+<span class="nc" id="L106">	}</span>
+
+	public String getFreeState() {
+<span class="nc" id="L109">		return this.freeState;</span>
+	}
+
+	public void setFreeState(String freeState) {
+<span class="nc" id="L113">		this.freeState = freeState;</span>
+<span class="nc" id="L114">	}</span>
+
+	public String getOwnerId() {
+<span class="nc" id="L117">		return this.ownerId;</span>
+	}
+
+	public void setOwnerId(String ownerId) {
+<span class="nc" id="L121">		this.ownerId = ownerId;</span>
+<span class="nc" id="L122">	}</span>
+
+	public String getOwnerName() {
+<span class="nc" id="L125">		return this.ownerName;</span>
+	}
+
+	public void setOwnerName(String ownerName) {
+<span class="nc" id="L129">		this.ownerName = ownerName;</span>
+<span class="nc" id="L130">	}</span>
+
+	public int getReservedNum() {
+<span class="nc" id="L133">		return this.reservedNum;</span>
+	}
+
+	public void setReservedNum(int reservedNum) {
+<span class="nc" id="L137">		this.reservedNum = reservedNum;</span>
+<span class="nc" id="L138">	}</span>
+
+	public String getReserverId() {
+<span class="nc" id="L141">		return this.reserverId;</span>
+	}
+
+	public void setReserverId(String reserverId) {
+<span class="nc" id="L145">		this.reserverId = reserverId;</span>
+<span class="nc" id="L146">	}</span>
+
+	public String getReserverMsg() {
+<span class="nc" id="L149">		return this.reserverMsg;</span>
+	}
+
+	public void setReserverMsg(String reserverMsg) {
+<span class="nc" id="L153">		this.reserverMsg = reserverMsg;</span>
+<span class="nc" id="L154">	}</span>
+
+	public String getReserverName() {
+<span class="nc" id="L157">		return this.reserverName;</span>
+	}
+
+	public void setReserverName(String reserverName) {
+<span class="nc" id="L161">		this.reserverName = reserverName;</span>
+<span class="nc" id="L162">	}</span>
+
+	public String getSectionCode() {
+<span class="nc" id="L165">		return this.sectionCode;</span>
+	}
+
+	public void setSectionCode(String sectionCode) {
+<span class="nc" id="L169">		this.sectionCode = sectionCode;</span>
+<span class="nc" id="L170">	}</span>
+
+	public String getSectionName() {
+<span class="nc" id="L173">		return this.sectionName;</span>
+	}
+
+	public void setSectionName(String sectionName) {
+<span class="nc" id="L177">		this.sectionName = sectionName;</span>
+<span class="nc" id="L178">	}</span>
+
+	public Date getUpdateTime() {
+<span class="nc" id="L181">		return this.updateTime;</span>
+	}
+
+	public void setUpdateTime(Date updateTime) {
+<span class="nc" id="L185">		this.updateTime = updateTime;</span>
+<span class="nc" id="L186">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

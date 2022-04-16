@@ -9,6 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application {
 
+    public static void printHello( String[] args) {
+        System.out.println("Hello");
+    }
+
     public static void main( String[] args ) {
         // 启动 Spring Boot
         SpringApplication.run(Application.class, args);

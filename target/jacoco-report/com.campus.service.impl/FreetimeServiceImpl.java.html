@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FreetimeServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-campus-date</a> &gt; <a href="index.source.html" class="el_package">com.campus.service.impl</a> &gt; <span class="el_source">FreetimeServiceImpl.java</span></div><h1>FreetimeServiceImpl.java</h1><pre class="source lang-java linenums">package com.campus.service.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.campus.model.Freetime;
+import com.campus.repository.FreetimeRepository;
+import com.campus.service.FreetimeService;
+
+
+/**
+ * 
+ */
+@Service(&quot;freetimeService&quot;)
+<span class="nc" id="L18">public class FreetimeServiceImpl implements FreetimeService {</span>
+
+    @Resource
+    private FreetimeRepository freetimeRepository;
+
+    @Override
+    public void insert(Freetime freetime) {
+<span class="nc" id="L25">    	freetimeRepository.save(freetime);</span>
+<span class="nc" id="L26">    }</span>
+
+    @Override
+    public void update(Freetime freetime) {
+<span class="nc" id="L30">    	freetimeRepository.save(freetime);</span>
+<span class="nc" id="L31">    }</span>
+
+    @Override
+    public void delete(String id) {
+<span class="nc" id="L35">    	Freetime freetime = freetimeRepository.findById(id);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (freetime != null){</span>
+<span class="nc" id="L37">        	freetimeRepository.delete(freetime);</span>
+        }
+<span class="nc" id="L39">    }</span>
+
+    @Override
+    public Freetime findById(String id) {
+<span class="nc" id="L43">        return freetimeRepository.findById(id);</span>
+    }
+
+    @Override
+    public List&lt;Freetime&gt; findAll() {
+<span class="nc" id="L48">        return freetimeRepository.findAll();</span>
+    }
+    
+    @Override
+    public List&lt;Freetime&gt; findAllByOwnerId(String ownerId) {
+<span class="nc" id="L53">    	return freetimeRepository.findAllByOwnerId(ownerId);</span>
+    }
+    
+    @Override
+    public List&lt;Freetime&gt; findAllByReserveId(String reserverId) {
+<span class="nc" id="L58">    	return freetimeRepository.findAllByReserveId(reserverId);</span>
+    }
+    
+    @Override
+    public List&lt;Freetime&gt; findByFreeDateAndSectionCode(String freeDate, String sectionCode) {
+<span class="nc" id="L63">    	return freetimeRepository.findByFreeDateAndSectionCode(freeDate, sectionCode);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Dept.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-campus-date</a> &gt; <a href="index.source.html" class="el_package">com.campus.model</a> &gt; <span class="el_source">Dept.java</span></div><h1>Dept.java</h1><pre class="source lang-java linenums">package com.campus.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the dept database table.
+ * 
+ */
+@Entity
+@NamedQuery(name=&quot;Dept.findAll&quot;, query=&quot;SELECT d FROM Dept d&quot;)
+public class Dept implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private String id;
+
+	@Column(name=&quot;dept_code&quot;)
+	private String deptCode;
+
+	@Column(name=&quot;dept_name&quot;)
+	private String deptName;
+
+	@Column(name=&quot;dept_note&quot;)
+	private String deptNote;
+
+<span class="nc" id="L29">	public Dept() {</span>
+<span class="nc" id="L30">	}</span>
+
+	public String getId() {
+<span class="nc" id="L33">		return this.id;</span>
+	}
+
+	public void setId(String id) {
+<span class="nc" id="L37">		this.id = id;</span>
+<span class="nc" id="L38">	}</span>
+
+	public String getDeptCode() {
+<span class="nc" id="L41">		return this.deptCode;</span>
+	}
+
+	public void setDeptCode(String deptCode) {
+<span class="nc" id="L45">		this.deptCode = deptCode;</span>
+<span class="nc" id="L46">	}</span>
+
+	public String getDeptName() {
+<span class="nc" id="L49">		return this.deptName;</span>
+	}
+
+	public void setDeptName(String deptName) {
+<span class="nc" id="L53">		this.deptName = deptName;</span>
+<span class="nc" id="L54">	}</span>
+
+	public String getDeptNote() {
+<span class="nc" id="L57">		return this.deptNote;</span>
+	}
+
+	public void setDeptNote(String deptNote) {
+<span class="nc" id="L61">		this.deptNote = deptNote;</span>
+<span class="nc" id="L62">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

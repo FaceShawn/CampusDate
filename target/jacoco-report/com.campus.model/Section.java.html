@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Section.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-campus-date</a> &gt; <a href="index.source.html" class="el_package">com.campus.model</a> &gt; <span class="el_source">Section.java</span></div><h1>Section.java</h1><pre class="source lang-java linenums">package com.campus.model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.sql.Time;
+
+
+/**
+ * The persistent class for the section database table.
+ * 
+ */
+@Entity
+@NamedQuery(name=&quot;Section.findAll&quot;, query=&quot;SELECT s FROM Section s&quot;)
+public class Section implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private String id;
+
+	@Column(name=&quot;section_code&quot;)
+	private String sectionCode;
+
+	@Column(name=&quot;section_end_time&quot;)
+	private Time sectionEndTime;
+
+	@Column(name=&quot;section_name&quot;)
+	private String sectionName;
+
+	@Column(name=&quot;section_note&quot;)
+	private String sectionNote;
+
+	@Column(name=&quot;section_start_time&quot;)
+	private Time sectionStartTime;
+
+<span class="nc" id="L36">	public Section() {</span>
+<span class="nc" id="L37">	}</span>
+
+	public String getId() {
+<span class="nc" id="L40">		return this.id;</span>
+	}
+
+	public void setId(String id) {
+<span class="nc" id="L44">		this.id = id;</span>
+<span class="nc" id="L45">	}</span>
+
+	public String getSectionCode() {
+<span class="nc" id="L48">		return this.sectionCode;</span>
+	}
+
+	public void setSectionCode(String sectionCode) {
+<span class="nc" id="L52">		this.sectionCode = sectionCode;</span>
+<span class="nc" id="L53">	}</span>
+
+	public Time getSectionEndTime() {
+<span class="nc" id="L56">		return this.sectionEndTime;</span>
+	}
+
+	public void setSectionEndTime(Time sectionEndTime) {
+<span class="nc" id="L60">		this.sectionEndTime = sectionEndTime;</span>
+<span class="nc" id="L61">	}</span>
+
+	public String getSectionName() {
+<span class="nc" id="L64">		return this.sectionName;</span>
+	}
+
+	public void setSectionName(String sectionName) {
+<span class="nc" id="L68">		this.sectionName = sectionName;</span>
+<span class="nc" id="L69">	}</span>
+
+	public String getSectionNote() {
+<span class="nc" id="L72">		return this.sectionNote;</span>
+	}
+
+	public void setSectionNote(String sectionNote) {
+<span class="nc" id="L76">		this.sectionNote = sectionNote;</span>
+<span class="nc" id="L77">	}</span>
+
+	public Time getSectionStartTime() {
+<span class="nc" id="L80">		return this.sectionStartTime;</span>
+	}
+
+	public void setSectionStartTime(Time sectionStartTime) {
+<span class="nc" id="L84">		this.sectionStartTime = sectionStartTime;</span>
+<span class="nc" id="L85">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

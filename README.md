@@ -252,7 +252,7 @@ This is CampusDate/WebContent/Index.html!
 ;D:\Develop\Java\mysql-5.7.21-winx64\bin;
 ```
 
-#### 配置配置文件
+#### 配置文件
 
 在安装目录`\Java\mysql-5.7.21-winx64`新建`my.ini`配置文件如下：
 
@@ -486,7 +486,9 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 ### [方法一：用 JPA Tools 根据数据表自动创建实体](https://blog.csdn.net/EightSwords/article/details/79022305)
 
-[InvalidDataAccessResourceUsageException：mysql保留字`group`引发的血案](https://hk.saowen.com/a/2eb7cba1e7304e5c4f701d77f9339845604aafc52f32adb5b93d5f90874988ff)
+因数据库表中一字段用的保留字`group`，用spring-boot-jpa新增记录时一直失败，报错InvalidDataAccessResourceUsageException。
+[InvalidDataAccessResourceUsageException：mysql保留字引发的血案](https://www.shuzhiduo.com/A/QW5Y4ebNJm/)
+[Mysql中的关键字和保留字](https://blog.csdn.net/hfut_wowo/article/details/81011952)
 
 ### 方法二：创建实体类自动新建数据表
 
@@ -506,7 +508,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 ## XxxRepository 接口
 
-> 继承 JpaRepository 接口，从而可以使用已封装好的方法操作实体类。
+> 继承 JpaRepository 接口，从而可用已封装好的方法操作实体类。
 >
 > 可自定义查找方法，如`findBy+属性名`可实现SQL查询。
 
@@ -592,7 +594,58 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 ~~[spring-boot 热部署 devtools 更新时自动重启](https://www.jianshu.com/p/03a094641bc4)~~
 
-[Could not create connection to database server. Attempted reconnect 3 times. Giving up.](https://blog.csdn.
-net/u012228009/article/details/54095421)
+[Could not create connection to database server. Attempted reconnect 3 times. Giving up.](https://blog.csdn.net/u012228009/article/details/54095421)
 
 [解决方案：java.lang.ClassNotFoundException: javax.xml.bind.JAXBException](https://blog.csdn.net/hadues/article/details/79188793)
+
+
+
+
+
+## 错误
+
+### [找不到或无法加载主类](https://my.oschina.net/u/3771868/blog/2088393)
+
+解决：新建项目时 spring boot 版本改为 1.5.19
+
+## 日志
+
+[用 JPA Tools 自动生成实体](<https://blog.csdn.net/BestandW1shEs_lsy/article/details/77893685>) <https://blog.csdn.net/EightSwords/article/details/79022305>
+
+[JPA 2.1 requires Java 1.5 or newer](<https://www.jianshu.com/p/92386734775c>)
+
+<https://blog.csdn.net/weixin_39220472/article/details/81429241>
+
+<https://www.cnblogs.com/panie2015/p/8330900.html>
+
+<https://segmentfault.com/a/1190000002797195>
+
+自动注入 A component required a bean of typethat could not be found. 解决
+
+<https://segmentfault.com/q/1010000014888748>
+
+<https://cloud.tencent.com/developer/article/1099877>
+
+<https://blog.csdn.net/Julycaka/article/details/80622754>
+
+端口占用
+
+<https://blog.csdn.net/LQM1991/article/details/77446777>
+
+杀掉该进程  taskkill /f /t /im javaw.exe 再次启动就OK
+
+Parameter value [10001] did not match expected type [java.lang.Integer (n/a)]
+
+mysql 改为 bigint
+
+ResponseEntity 用法 SpringBoot进阶之统一接口返回信息格式 <https://blog.csdn.net/tiegenZ/article/details/78231993>
+
+静态方法 <https://blog.csdn.net/wang1051477875/article/details/42422879>
+
+postman
+
+<https://segmentfault.com/q/1010000008308601>
+
+<https://www.520mwx.com/view/10842>
+
+<https://www.jianshu.com/p/5422811407e3>

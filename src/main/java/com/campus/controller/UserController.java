@@ -1,5 +1,14 @@
 package com.campus.controller;
 
+import com.campus.common.ConstantMsg;
+import com.campus.common.utils.EncryptUtil;
+import com.campus.common.utils.ErrorResponseUtil;
+import com.campus.common.utils.SessionUtil;
+import com.campus.common.utils.StringUtil;
+import com.campus.model.Dept;
+import com.campus.model.User;
+import com.campus.service.DeptService;
+import com.campus.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,27 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.campus.common.ConstantMsg;
-import com.campus.common.utils.EncryptUtil;
-import com.campus.common.utils.ErrorResponseUtil;
-import com.campus.common.utils.SessionUtil;
-import com.campus.common.utils.StringUtil;
-import com.campus.model.Dept;
-import com.campus.model.Freetime;
-import com.campus.model.Section;
-import com.campus.model.User;
-import com.campus.service.DeptService;
-import com.campus.service.UserService;
-import com.google.gson.Gson;
-
-import groovyjarjarcommonscli.ParseException;
-
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -43,7 +35,7 @@ public class UserController {
     @Autowired
 	private DeptService deptService;
 
-    
+
     /**
      * 跳转到用户登录页面
      */

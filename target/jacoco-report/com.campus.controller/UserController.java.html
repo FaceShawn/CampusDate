@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-campus-date</a> &gt; <a href="index.source.html" class="el_package">com.campus.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.campus.controller;
+
+import com.campus.common.ConstantMsg;
+import com.campus.common.utils.EncryptUtil;
+import com.campus.common.utils.ErrorResponseUtil;
+import com.campus.common.utils.SessionUtil;
+import com.campus.common.utils.StringUtil;
+import com.campus.model.Dept;
+import com.campus.model.User;
+import com.campus.service.DeptService;
+import com.campus.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * 
+ */
+@Controller
+@RequestMapping(value=&quot;/user&quot;)
+<span class="nc" id="L31">public class UserController {</span>
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+	private DeptService deptService;
+
+
+    /**
+     * 跳转到用户登录页面
+     */
+    @RequestMapping(value=&quot;/login&quot; ,method = RequestMethod.GET)
+    public String login(){
+<span class="nc" id="L44">        return &quot;user/login&quot;;</span>
+    }
+
+    
+    /**
+     * 跳转到用户注册页面
+     */
+    @RequestMapping(value=&quot;/signup&quot; ,method = RequestMethod.GET)
+    public String register(){
+<span class="nc" id="L53">        return &quot;user/signup&quot;;</span>
+    }
+    
+
+    /**
+     * 用户登录
+     */
+    @RequestMapping(value=&quot;/logining&quot;, method = RequestMethod.POST, produces = &quot;application/json; charset=utf-8&quot;)
+    @ResponseBody
+    public String logining(HttpServletRequest request){
+    	
+    	// 验证用户是否已登录
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if(SessionUtil.isLogin(request)) {</span>
+<span class="nc" id="L66">        	return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.USER_IS_ALREADY_LOGIN);</span>
+        }
+        
+        // 随机登陆用户
+        if(ConstantMsg.DEBUG) {
+        	Random random = new Random();
+        	int id = random.nextInt(58);
+        	List&lt;User&gt; userList = this.userService.findByUserGroup(ConstantMsg.DEBUG_GROUP);
+        	User user = userList.get(id % userList.size());
+        	SessionUtil.login(user, request);
+        	return ErrorResponseUtil.setResponse(&quot;200&quot;, ConstantMsg.LOGIN_SUCCESS);
+        }
+        
+        // 获取传递过来的参数
+<span class="nc" id="L80">        String email = request.getParameter(&quot;email&quot;);</span>
+<span class="nc" id="L81">        String password = request.getParameter(&quot;password&quot;);</span>
+
+        // 验证参数是否合法
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if(StringUtil.isEmpty(email)) {</span>
+<span class="nc" id="L85">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.EMAIL_IS_NULL);</span>
+        }
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if(StringUtil.isEmpty(password)) {</span>
+<span class="nc" id="L88">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.PASSWORD_IS_NULL);</span>
+        }
+        
+        User user;
+        // 验证用户是否已注册
+        try {
+        	// 根据邮箱在数据库中查找用户
+<span class="nc" id="L95">        	user = userService.findByEmail(email);</span>
+<span class="nc" id="L96">        }catch (Exception e){</span>
+        	// 用户未注册
+<span class="nc" id="L98">            user = null;</span>
+<span class="nc" id="L99">        }</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        if(null==user) {</span>
+<span class="nc" id="L101">        	return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.USER_IS_NOT_REGISTERED);</span>
+        }
+        
+        // 验证密码是否正确
+        String shaPwd ;
+        try {
+        	// 用sha-1为传递过来的密码加密
+<span class="nc" id="L108">            shaPwd = EncryptUtil.encryptSHA(password) ;</span>
+<span class="nc" id="L109">        } catch (NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L110">            shaPwd = &quot;&quot; ;</span>
+<span class="nc" id="L111">        }</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if( shaPwd.equals(user.getPassword()) ) {      </span>
+        	// 将登录后的用户信息写入session
+<span class="nc" id="L114">        	SessionUtil.login(user, request);</span>
+<span class="nc" id="L115">        	Date lastLoginTime = new Date();</span>
+<span class="nc" id="L116">            user.setLastLoginTime(lastLoginTime);</span>
+            try {
+<span class="nc" id="L118">                userService.update(user);</span>
+<span class="nc" id="L119">            }catch(Exception e){</span>
+<span class="nc" id="L120">                return ErrorResponseUtil.setResponse(&quot;400&quot;, e.getMessage());</span>
+<span class="nc" id="L121">            }</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            if(user.getUserGroup().equals(&quot;admin&quot;)) {</span>
+<span class="nc" id="L123">            	 return ErrorResponseUtil.setResponse(&quot;300&quot;,  user.getUserGroup()+&quot; / &quot;+ConstantMsg.LOGIN_SUCCESS);</span>
+            }
+            
+<span class="nc" id="L126">            return ErrorResponseUtil.setResponse(&quot;200&quot;,  user.getUserGroup()+&quot; / &quot;+ConstantMsg.LOGIN_SUCCESS);</span>
+        }else{
+<span class="nc" id="L128">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.PASSWORD_IS_ERROR);</span>
+        }
+    }
+    
+
+    /**
+     * 用户注册
+     *
+     * @param request
+     */
+    @RequestMapping(value=&quot;/signuping&quot;, method = RequestMethod.POST, produces = &quot;application/json; charset=utf-8&quot;)
+    @ResponseBody
+    public String registering(HttpServletRequest request){
+    	
+    	// 验证用户是否已登录
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if(SessionUtil.isLogin(request)) {</span>
+<span class="nc" id="L144">        	return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.USER_IS_ALREADY_LOGIN);</span>
+        }
+        
+        // 获取传递过来的参数
+<span class="nc" id="L148">        String email = request.getParameter(&quot;email&quot;);</span>
+<span class="nc" id="L149">        String password = request.getParameter(&quot;password&quot;);</span>
+<span class="nc" id="L150">        String confirmPassword = request.getParameter(&quot;confirmPassword&quot;);</span>
+<span class="nc" id="L151">        String userName	= request.getParameter(&quot;userName&quot;);</span>
+<span class="nc" id="L152">        String userGroup = request.getParameter(&quot;userGroup&quot;);</span>
+<span class="nc" id="L153">        String deptCode = request.getParameter(&quot;deptCode&quot;);</span>
+<span class="nc" id="L154">        String userIntro = request.getParameter(&quot;userIntro&quot;);</span>
+<span class="nc" id="L155">        String userSex = null;</span>
+<span class="nc" id="L156">        String userPhone = null;</span>
+        
+        // 调试时随机构造传递过来的参数
+        if(ConstantMsg.DEBUG) {
+        	System.out.println(&quot;\n\n前端提交：&quot;);
+        	System.out.println(&quot;email=&quot;+email+&quot;\n&quot;
+        			+&quot;password=&quot;+password+&quot;\n&quot;
+        			+&quot;confirmPassword=&quot;+confirmPassword+&quot;\n&quot;
+        			+&quot;username=&quot;+userName+&quot;\n&quot;
+        			+&quot;usergroup=&quot;+userGroup+&quot;\n&quot;
+        			+&quot;dept=&quot;+deptCode+&quot;\n&quot;
+        			+&quot;introduction=&quot;+userIntro);
+        	
+        	// 构造随机数
+        	Random random = new Random();
+        	int i = random.nextInt(200);
+        	int j = random.nextInt(25);
+        	
+        	// 随机取年级
+        	String[] gradeList = {&quot;14&quot;, &quot;15&quot;, &quot;16&quot;, &quot;17&quot;, &quot;18&quot;};
+        	String grade = gradeList[i % gradeList.length];
+        	
+        	// 随机取院系代码
+        	String[] deptList = {&quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;, &quot;06&quot;, &quot;07&quot;, &quot;08&quot;, &quot;09&quot;, &quot;10&quot;, &quot;11&quot;, &quot;12&quot;, &quot;13&quot;, &quot;14&quot;, &quot;99&quot;};
+        	deptCode = deptList[j % deptList.length];
+        	
+        	// 随机取专业代码
+        	String[] majorList = {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;};
+        	String major = majorList[i % majorList.length];
+        	
+        	// 随机取班级代码
+        	String[] classList = {&quot;01&quot;, &quot;02&quot;, &quot;03&quot;, &quot;04&quot;, &quot;05&quot;};
+        	String cla = classList[i % classList.length];
+        	
+        	// 随机取2位学号
+        	int num = i % 30;
+        	String nums;
+        	if(num == 0) {
+        		nums = &quot;30&quot;;
+        	}else if(num &lt; 10) {
+        		nums = &quot;0&quot;+i;
+        	} else {
+        		nums = &quot;&quot;+i;
+        	}
+        	
+        	// 构造学号
+        	String stunum = grade+deptCode+major+cla+nums;
+        	
+        	// 邮箱
+        	email = stunum+&quot;@stu.hit.edu.cn&quot;;
+        	
+        	// 密码同学号
+        	password = stunum;
+        	confirmPassword = stunum;
+        	
+        	// 从数组中随机取一个名字
+        	String[] userNameList = {&quot;魏无羡&quot;, &quot;蓝忘机&quot;, &quot;温宁&quot;, &quot;薛洋&quot;, &quot;晓星尘&quot;, &quot;蓝愿&quot;, &quot;金凌&quot;, &quot;蓝曦臣&quot;, 
+        			&quot;金光瑶&quot;, &quot;聂明玦&quot;, &quot;江厌离&quot;, &quot;温如冰&quot;, &quot;宋岚&quot;};
+        	userName = userNameList[i % userNameList.length];
+        	
+        	// 从数组中随机取一个用户组
+        	String[] userGroupList = {&quot;student&quot;, &quot;teacher&quot;, &quot;alu&quot;};
+        	userGroup = userGroupList[i % userGroupList.length];
+        	
+        	
+        	// 性别
+        	String[] userSexList = {&quot;男&quot;, &quot;女&quot;};
+        	userSex = userSexList[i % userSexList.length];
+        	
+        	// 电话
+        	int phoneLast = (int)((Math.random()*9+1)*10000);
+        	
+        	String[] phoneFirstList = {&quot;1786270&quot;, &quot;1786313&quot;, &quot;1786431&quot;, &quot;1786525&quot;};
+        	String phoneFirst = phoneFirstList[i % phoneFirstList.length];
+        	
+        	userPhone = phoneFirst + phoneLast;
+        	
+        	System.out.println(&quot;\ndebug自动赋值：&quot;);
+        	System.out.println(&quot;i=&quot;+i+&quot;\n&quot;
+        			+&quot;email=&quot;+email+&quot;\n&quot;
+        			+&quot;password=&quot;+password+&quot;\n&quot;
+        			+&quot;confirmPassword=&quot;+confirmPassword+&quot;\n&quot;
+        			+&quot;username=&quot;+userName+&quot;\n&quot;
+        			+&quot;usergroup=&quot;+userGroup+&quot;\n&quot;
+        			+&quot;dept=&quot;+deptCode+&quot;\n&quot;
+        			+&quot;introduction=&quot;+userIntro);
+        	System.out.println(&quot;-------------------------&quot;);
+        	
+        }
+
+        // 验证参数是否合法
+<span class="nc bnc" id="L247" title="All 2 branches missed.">        if(StringUtil.isEmpty(email)) {</span>
+<span class="nc" id="L248">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.EMAIL_IS_NULL);</span>
+        }
+<span class="nc bnc" id="L250" title="All 2 branches missed.">        if(StringUtil.isEmpty(password)) {</span>
+<span class="nc" id="L251">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.PASSWORD_IS_NULL);</span>
+        }
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        if(StringUtil.isEmpty(confirmPassword)) {</span>
+<span class="nc" id="L254">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.CONFIRMPASSWORD_IS_NULL);</span>
+        }
+<span class="nc bnc" id="L256" title="All 2 branches missed.">        if(!password.equals(confirmPassword)) {</span>
+<span class="nc" id="L257">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.TWO_PASSWORDS_ARE_NOT_SAME);</span>
+        }
+<span class="nc bnc" id="L259" title="All 2 branches missed.">        if(StringUtil.isEmpty(userName)) {</span>
+<span class="nc" id="L260">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.USERNAME_IS_NULL);</span>
+        }
+<span class="nc bnc" id="L262" title="All 2 branches missed.">        if(StringUtil.isEmpty(userGroup)) {</span>
+<span class="nc" id="L263">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.USERGROUP_IS_NULL);</span>
+        }
+<span class="nc bnc" id="L265" title="All 2 branches missed.">        if(StringUtil.isEmpty(deptCode)) {</span>
+<span class="nc" id="L266">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.DEPTCODE_IS_NULL);</span>
+        }
+        
+        // 验证用户是否已注册
+        User user;
+        try {
+<span class="nc" id="L272">            user = userService.findByEmail(email);</span>
+<span class="nc" id="L273">        }catch(Exception e){</span>
+<span class="nc" id="L274">            user = null;</span>
+<span class="nc" id="L275">        }</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        if(user != null){</span>
+<span class="nc" id="L277">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.USER_IS_ALREADY_REGISTERED);</span>
+        }
+        
+//        // md5 加密密码
+//        String md5Pwd = EncryptUtil.getMD5(password);
+        // sha-1 加密密码
+        String shaPwd;
+        try {
+<span class="nc" id="L285">            shaPwd = EncryptUtil.encryptSHA(password) ;</span>
+<span class="nc" id="L286">        } catch (NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L287">            return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.PASSWORD_CAN_NOT_BE_ENCRYPTED);</span>
+<span class="nc" id="L288">        }</span>
+        
+        // 节次名字
+<span class="nc" id="L291">        Dept dept = deptService.findByDeptCode(deptCode);</span>
+<span class="nc" id="L292">        String deptName = dept.getDeptName();</span>
+        if(ConstantMsg.DEBUG) {
+        	System.out.println(deptCode+deptName);
+        }
+        // 构造用户实例
+<span class="nc" id="L297">        Date date = new Date();</span>
+<span class="nc" id="L298">        User newUser = new User();</span>
+<span class="nc" id="L299">        newUser.setEmail(email);</span>
+<span class="nc" id="L300">        newUser.setPassword(shaPwd);</span>
+<span class="nc" id="L301">        newUser.setUserGroup(userGroup);</span>
+<span class="nc" id="L302">        newUser.setUserState(ConstantMsg.USER_STATE_UNCHECK);	// 用户状态为未验证</span>
+<span class="nc" id="L303">        newUser.setUserName(userName);</span>
+<span class="nc" id="L304">        newUser.setDeptCode(deptCode);</span>
+<span class="nc" id="L305">        newUser.setDeptName(deptName);</span>
+<span class="nc" id="L306">        newUser.setUserIntro(userIntro);</span>
+<span class="nc" id="L307">        newUser.setUserSex(userSex);</span>
+<span class="nc" id="L308">        newUser.setUserPhone(userPhone);</span>
+<span class="nc" id="L309">        newUser.setCreateTime(date);</span>
+<span class="nc" id="L310">        newUser.setUpdateTime(date);</span>
+<span class="nc" id="L311">        newUser.setLastLoginTime(date);</span>
+        
+        // 将新用户写入数据库
+        try {
+<span class="nc" id="L315">            userService.insert(newUser);</span>
+<span class="nc" id="L316">        }catch(Exception e){</span>
+<span class="nc" id="L317">            return ErrorResponseUtil.setResponse(&quot;400&quot;, e.getMessage());</span>
+<span class="nc" id="L318">        }</span>
+        
+        // 向用户邮箱发送验证链接
+        // 此功能需结合user表中state字段来标志是否已验证
+        // 后续待开发
+        
+        if(ConstantMsg.DEBUG) {
+        	return ErrorResponseUtil.setResponse(&quot;400&quot;, ConstantMsg.REGISTER_SUCCESS);
+        }else {
+<span class="nc" id="L327">        	SessionUtil.login(newUser, request);</span>
+<span class="nc" id="L328">        	return ErrorResponseUtil.setResponse(&quot;200&quot;, ConstantMsg.REGISTER_SUCCESS);</span>
+        }
+    }
+    
+
+//    /**
+//     * 跳转到用户列表
+//     */
+//    @RequestMapping(value=&quot;/user-list&quot; ,method = RequestMethod.GET)
+//    public String userList(HttpServletRequest request, Model model){
+////        if(!SessionUtil.isLogin(request))
+////            return &quot;redirect:login&quot;;
+////        // 获取当前用户信息
+////        User user = SessionUtil.getUserFromSession(request);
+////        model.addAttribute(&quot;user&quot;,user);
+////        List&lt;User&gt; userList = userService.findAll();
+////        model.addAttribute(&quot;users&quot;,userList);
+//
+//        return &quot;login/user-list&quot;;
+//    }
+  
+    
+//    /**
+//     * 根据id删除用户
+//     */
+//    @RequestMapping(value = &quot;/delete&quot;, method = RequestMethod.GET)
+//    public String goDelete(HttpServletRequest request) {
+//        int userid = Integer.valueOf(request.getParameter(&quot;userid&quot;));
+//        userService.delete(userid);
+//        return &quot;redirect:/user-list&quot;;
+//    }
+    
+    
+    
+    /**
+     * 根据院系搜索老师
+     */
+	@RequestMapping(value = &quot;/select/{deptCode}&quot;, method = RequestMethod.GET)
+	private String list(@PathVariable(&quot;deptCode&quot;) String deptCode, Model model){
+		List&lt;User&gt; userList;
+<span class="nc bnc" id="L368" title="All 2 branches missed.">		if(deptCode.equals(ConstantMsg.DEPT_ALL)) {</span>
+<span class="nc" id="L369">			userList = userService.findByUserGroup(ConstantMsg.USERGROUP_TEACHER);</span>
+		}else {
+<span class="nc" id="L371">			userList = userService.findByUserGroupAndDeptCode(ConstantMsg.USERGROUP_TEACHER, deptCode);</span>
+		}
+<span class="nc" id="L373">		model.addAttribute(&quot;users&quot;,userList);</span>
+<span class="nc" id="L374">		return &quot;index&quot;;</span>
+	}
+	
+	
+    
+    /**
+     * 登出
+     */
+    @RequestMapping(value=&quot;/logout&quot; ,method = RequestMethod.GET)
+    public String logout(HttpServletRequest request){
+    	
+    	// 验证用户是否已登录？
+<span class="nc" id="L386">        SessionUtil.logout(request);</span>
+<span class="nc" id="L387">        return &quot;redirect:/&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

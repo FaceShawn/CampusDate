@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StringUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-campus-date</a> &gt; <a href="index.source.html" class="el_package">com.campus.common.utils</a> &gt; <span class="el_source">StringUtil.java</span></div><h1>StringUtil.java</h1><pre class="source lang-java linenums">package com.campus.common.utils;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * @className StringUtil.java
+ * @classDescription 字符串工具类
+ *
+ */
+
+<span class="nc" id="L18">public final class StringUtil {</span>
+
+    /** 
+     * 空字符串
+     */
+    public static final String EMPTY_STRING = &quot;&quot;;
+
+    private final static String AS = &quot;abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;
+    
+    public static String convertEncode(String strIn, String encoding, String targetEncoding) {
+<span class="nc" id="L28">        String strOut = strIn;</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        if (strIn == null)</span>
+<span class="nc" id="L30">            return strOut;</span>
+
+        try {
+<span class="nc bnc" id="L33" title="All 4 branches missed.">            if (encoding != null &amp;&amp; targetEncoding != null) {</span>
+<span class="nc" id="L34">                strOut = new String(strIn.getBytes(encoding), targetEncoding);</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            } else if (encoding != null) {</span>
+<span class="nc" id="L36">                strOut = new String(strIn.getBytes(encoding));</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">            } else if (targetEncoding != null) {</span>
+<span class="nc" id="L38">                strOut = new String(strIn.getBytes(), targetEncoding);</span>
+            } else {
+<span class="nc" id="L40">                return strOut;</span>
+            }
+<span class="nc" id="L42">        } catch (UnsupportedEncodingException e) {</span>
+<span class="nc" id="L43">            e.printStackTrace();</span>
+<span class="nc" id="L44">            System.out.println(&quot;Unsupported Encoding: &quot; + encoding);</span>
+<span class="nc" id="L45">        }</span>
+<span class="nc" id="L46">        return strOut;</span>
+    }
+
+    /**
+     * 截取str中以startStr开头，endStr结束的字符串
+     * 
+     * @param str
+     * @param startStr 
+     * @param endStr
+     * @return 返回以以startStr开头，以endStr结束的字符串，如果startStr不存在，则有str为起始；如果endStr不存在，则以字符串结束为终结
+     */
+    public static String extractString(String str, String startStr, String endStr) {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if(isEmpty(str)) {</span>
+<span class="nc" id="L59">            return str;</span>
+        }
+        
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if(startStr == null) {</span>
+<span class="nc" id="L63">            startStr = &quot;&quot;;</span>
+        }
+        
+<span class="nc" id="L66">        int startIdx = 0;</span>
+        
+<span class="nc" id="L68">        startIdx = str.indexOf(startStr);</span>
+        
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if(startIdx == -1) {</span>
+<span class="nc" id="L71">            startIdx = 0;</span>
+        } else {
+<span class="nc" id="L73">            startIdx += startStr.length();</span>
+        }
+        
+<span class="nc" id="L76">        int endIdx = str.length();</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        if(endStr != null) {</span>
+<span class="nc" id="L78">            endIdx = str.indexOf(endStr, startIdx);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            if(endIdx == -1) {</span>
+<span class="nc" id="L80">                endIdx = str.length();</span>
+            }
+        }
+        
+<span class="nc" id="L84">        return str.substring(startIdx, endIdx);</span>
+    }
+    
+    /**
+     * 替换指定的子串，替换所有出现的子串。
+     * 
+     * &lt;p&gt;
+     * 如果字符串为&lt;code&gt;null&lt;/code&gt;则返回&lt;code&gt;null&lt;/code&gt;，如果指定子串为&lt;code&gt;null&lt;/code&gt;
+     * ，则返回原字符串。
+     * &lt;/p&gt;
+     * 
+     * @param text 要扫描的字符串
+     * @param repl 要搜索的子串
+     * @param with 替换字符串
+     * 
+     * @return 被替换后的字符串，如果原始字符串为&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;
+     */
+    public static String replace(String text, String repl, String with) {
+<span class="nc" id="L102">        return replace(text, repl, with, -1);</span>
+    }
+
+    /**
+     * 替换指定的子串，替换指定的次数。
+     * 
+     * &lt;p&gt;
+     * 如果字符串为&lt;code&gt;null&lt;/code&gt;则返回&lt;code&gt;null&lt;/code&gt;，如果指定子串为&lt;code&gt;null&lt;/code&gt;
+     * ，则返回原字符串。
+     * &lt;/p&gt;
+     * 
+     * @param text 要扫描的字符串
+     * @param repl 要搜索的子串
+     * @param with 替换字符串
+     * @param max maximum number of values to replace, or &lt;code&gt;-1&lt;/code&gt; if no
+     *            maximum
+     * 
+     * @return 被替换后的字符串，如果原始字符串为&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;
+     */
+    public static String replace(String text, String repl, String with, int max) {
+<span class="nc bnc" id="L122" title="All 10 branches missed.">        if ((text == null) || (repl == null) || (with == null) || (repl.length() == 0) || (max == 0)) {</span>
+<span class="nc" id="L123">            return text;</span>
+        }
+
+<span class="nc" id="L126">        StringBuffer buf = new StringBuffer(text.length());</span>
+<span class="nc" id="L127">        int start = 0;</span>
+<span class="nc" id="L128">        int end = 0;</span>
+
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        while ((end = text.indexOf(repl, start)) != -1) {</span>
+<span class="nc" id="L131">            buf.append(text.substring(start, end)).append(with);</span>
+<span class="nc" id="L132">            start = end + repl.length();</span>
+
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            if (--max == 0) {</span>
+<span class="nc" id="L135">                break;</span>
+            }
+        }
+
+<span class="nc" id="L139">        buf.append(text.substring(start));</span>
+<span class="nc" id="L140">        return buf.toString();</span>
+    }
+
+    /**
+     * 除去字符串头尾部的空白，如果字符串是&lt;code&gt;null&lt;/code&gt;，依然返回&lt;code&gt;null&lt;/code&gt;。
+     * 
+     * &lt;p&gt;
+     * 注意，和&lt;code&gt;String.trim&lt;/code&gt;不同，此方法使用&lt;code&gt;Character.isWhitespace&lt;/code&gt;
+     * 来判定空白， 因而可以除去英文字符集之外的其它空白，如中文空格。
+     * &lt;/p&gt;
+     * 
+     * @param str 要处理的字符串
+     * 
+     * @return 除去空白的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trim(String str) {
+<span class="nc" id="L156">        return trim(str, null, 0);</span>
+    }
+
+    /**
+     * 除去字符串头尾部的指定字符，如果字符串是&lt;code&gt;null&lt;/code&gt;，依然返回&lt;code&gt;null&lt;/code&gt;。
+     * 
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为&lt;code&gt;null&lt;/code&gt;表示除去空白字符
+     * 
+     * @return 除去指定字符后的的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trim(String str, String stripChars) {
+<span class="nc" id="L168">        return trim(str, stripChars, 0);</span>
+    }
+
+    /**
+     * 除去字符串头部的空白，如果字符串是&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;。
+     * 
+     * &lt;p&gt;
+     * 注意，和&lt;code&gt;String.trim&lt;/code&gt;不同，此方法使用&lt;code&gt;Character.isWhitespace&lt;/code&gt;
+     * 来判定空白， 因而可以除去英文字符集之外的其它空白，如中文空格。
+     * &lt;/p&gt;
+     * 
+     * @param str 要处理的字符串
+     * 
+     * @return 除去空白的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;或结果字符串为&lt;code&gt;&quot;&quot;&lt;/code&gt;，则返回
+     *         &lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trimStart(String str) {
+<span class="nc" id="L185">        return trim(str, null, -1);</span>
+    }
+
+    /**
+     * 除去字符串头部的指定字符，如果字符串是&lt;code&gt;null&lt;/code&gt;，依然返回&lt;code&gt;null&lt;/code&gt;。
+     * 
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为&lt;code&gt;null&lt;/code&gt;表示除去空白字符
+     * 
+     * @return 除去指定字符后的的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trimStart(String str, String stripChars) {
+<span class="nc" id="L197">        return trim(str, stripChars, -1);</span>
+    }
+
+    /**
+     * 除去字符串尾部的空白，如果字符串是&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;。
+     * &lt;/p&gt;
+     * 
+     * @param str 要处理的字符串
+     * 
+     * @return 除去空白的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;或结果字符串为&lt;code&gt;&quot;&quot;&lt;/code&gt;，则返回
+     *         &lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trimEnd(String str) {
+<span class="nc" id="L210">        return trim(str, null, 1);</span>
+    }
+
+    /**
+     * 除去字符串尾部的指定字符，如果字符串是&lt;code&gt;null&lt;/code&gt;，依然返回&lt;code&gt;null&lt;/code&gt;。
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为&lt;code&gt;null&lt;/code&gt;表示除去空白字符
+     * 
+     * @return 除去指定字符后的的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trimEnd(String str, String stripChars) {
+<span class="nc" id="L221">        return trim(str, stripChars, 1);</span>
+    }
+
+    /**
+     * 除去字符串头尾部的空白，如果结果字符串是空字符串&lt;code&gt;&quot;&quot;&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;。
+     * 
+     * &lt;p&gt;
+     * 注意，和&lt;code&gt;String.trim&lt;/code&gt;不同，此方法使用&lt;code&gt;Character.isWhitespace&lt;/code&gt;
+     * 来判定空白， 因而可以除去英文字符集之外的其它空白，如中文空格。
+     * &lt;/p&gt;
+     * 
+     * @param str 要处理的字符串
+     * 
+     * @return 除去空白的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;或结果字符串为&lt;code&gt;&quot;&quot;&lt;/code&gt;，则返回
+     *         &lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trimToNull(String str) {
+<span class="nc" id="L238">        return trimToNull(str, null);</span>
+    }
+
+    /**
+     * 除去字符串头尾部的空白，如果结果字符串是空字符串&lt;code&gt;&quot;&quot;&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;。
+     * 
+     * &lt;p&gt;
+     * 注意，和&lt;code&gt;String.trim&lt;/code&gt;不同，此方法使用&lt;code&gt;Character.isWhitespace&lt;/code&gt;
+     * 来判定空白， 因而可以除去英文字符集之外的其它空白，如中文空格。
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为&lt;code&gt;null&lt;/code&gt;表示除去空白字符
+     * 
+     * @return 除去空白的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;或结果字符串为&lt;code&gt;&quot;&quot;&lt;/code&gt;，则返回
+     *         &lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trimToNull(String str, String stripChars) {
+<span class="nc" id="L254">        String result = trim(str, stripChars);</span>
+
+<span class="nc bnc" id="L256" title="All 4 branches missed.">        if ((result == null) || (result.length() == 0)) {</span>
+<span class="nc" id="L257">            return null;</span>
+        }
+
+<span class="nc" id="L260">        return result;</span>
+    }
+
+    /**
+     * 除去字符串头尾部的空白，如果字符串是&lt;code&gt;null&lt;/code&gt;，则返回空字符串&lt;code&gt;&quot;&quot;&lt;/code&gt;。
+     * 
+     * &lt;p&gt;
+     * 注意，和&lt;code&gt;String.trim&lt;/code&gt;不同，此方法使用&lt;code&gt;Character.isWhitespace&lt;/code&gt;
+     * 来判定空白， 因而可以除去英文字符集之外的其它空白，如中文空格。
+     * &lt;/p&gt;
+     * 
+     * @param str 要处理的字符串
+     * 
+     * @return 除去空白的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;或结果字符串为&lt;code&gt;&quot;&quot;&lt;/code&gt;，则返回
+     *         &lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trimToEmpty(String str) {
+<span class="nc" id="L277">        return trimToEmpty(str, null);</span>
+    }
+
+    /**
+     * 除去字符串头尾部的空白，如果字符串是&lt;code&gt;null&lt;/code&gt;，则返回空字符串&lt;code&gt;&quot;&quot;&lt;/code&gt;。
+     * 
+     * &lt;p&gt;
+     * 注意，和&lt;code&gt;String.trim&lt;/code&gt;不同，此方法使用&lt;code&gt;Character.isWhitespace&lt;/code&gt;
+     * 来判定空白， 因而可以除去英文字符集之外的其它空白，如中文空格。
+     * &lt;/p&gt;
+     * 
+     * @param str 要处理的字符串
+     * 
+     * @return 除去空白的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;或结果字符串为&lt;code&gt;&quot;&quot;&lt;/code&gt;，则返回
+     *         &lt;code&gt;null&lt;/code&gt;
+     */
+    public static String trimToEmpty(String str, String stripChars) {
+<span class="nc" id="L294">        String result = trim(str, stripChars);</span>
+
+<span class="nc bnc" id="L296" title="All 2 branches missed.">        if (result == null) {</span>
+<span class="nc" id="L297">            return EMPTY_STRING;</span>
+        }
+
+<span class="nc" id="L300">        return result;</span>
+    }
+
+    /**
+     * 除去字符串头尾部的指定字符，如果字符串是&lt;code&gt;null&lt;/code&gt;，依然返回&lt;code&gt;null&lt;/code&gt;。
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为&lt;code&gt;null&lt;/code&gt;表示除去空白字符
+     * @param mode &lt;code&gt;-1&lt;/code&gt;表示trimStart，&lt;code&gt;0&lt;/code&gt;表示trim全部，
+     *            &lt;code&gt;1&lt;/code&gt;表示trimEnd
+     * 
+     * @return 除去指定字符后的的字符串，如果原字串为&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;
+     */
+    private static String trim(String str, String stripChars, int mode) {
+<span class="nc bnc" id="L313" title="All 2 branches missed.">        if (str == null) {</span>
+<span class="nc" id="L314">            return null;</span>
+        }
+
+<span class="nc" id="L317">        int length = str.length();</span>
+<span class="nc" id="L318">        int start = 0;</span>
+<span class="nc" id="L319">        int end = length;</span>
+
+        // 扫描字符串头部
+<span class="nc bnc" id="L322" title="All 2 branches missed.">        if (mode &lt;= 0) {</span>
+<span class="nc bnc" id="L323" title="All 2 branches missed.">            if (stripChars == null) {</span>
+<span class="nc bnc" id="L324" title="All 4 branches missed.">                while ((start &lt; end) &amp;&amp; (Character.isWhitespace(str.charAt(start)))) {</span>
+<span class="nc" id="L325">                    start++;</span>
+                }
+<span class="nc bnc" id="L327" title="All 2 branches missed.">            } else if (stripChars.length() == 0) {</span>
+<span class="nc" id="L328">                return str;</span>
+            } else {
+<span class="nc bnc" id="L330" title="All 4 branches missed.">                while ((start &lt; end) &amp;&amp; (stripChars.indexOf(str.charAt(start)) != -1)) {</span>
+<span class="nc" id="L331">                    start++;</span>
+                }
+            }
+        }
+
+        // 扫描字符串尾部
+<span class="nc bnc" id="L337" title="All 2 branches missed.">        if (mode &gt;= 0) {</span>
+<span class="nc bnc" id="L338" title="All 2 branches missed.">            if (stripChars == null) {</span>
+<span class="nc bnc" id="L339" title="All 4 branches missed.">                while ((start &lt; end) &amp;&amp; (Character.isWhitespace(str.charAt(end - 1)))) {</span>
+<span class="nc" id="L340">                    end--;</span>
+                }
+<span class="nc bnc" id="L342" title="All 2 branches missed.">            } else if (stripChars.length() == 0) {</span>
+<span class="nc" id="L343">                return str;</span>
+            } else {
+<span class="nc bnc" id="L345" title="All 4 branches missed.">                while ((start &lt; end) &amp;&amp; (stripChars.indexOf(str.charAt(end - 1)) != -1)) {</span>
+<span class="nc" id="L346">                    end--;</span>
+                }
+            }
+        }
+
+<span class="nc bnc" id="L351" title="All 4 branches missed.">        if ((start &gt; 0) || (end &lt; length)) {</span>
+<span class="nc" id="L352">            return str.substring(start, end);</span>
+        }
+
+<span class="nc" id="L355">        return str;</span>
+    }
+
+    /**
+     * Check if a String has length.
+     * &lt;p&gt;
+     * 
+     * @param str the String to check, may be &lt;code&gt;null&lt;/code&gt;
+     * @return &lt;code&gt;true&lt;/code&gt; if the String is not null and has length
+     */
+    public static boolean hasLength(String str) {
+<span class="nc bnc" id="L366" title="All 4 branches missed.">        return (str != null &amp;&amp; str.length() &gt; 0);</span>
+    }
+
+    /**
+     * Check if a String has text. More specifically, returns &lt;code&gt;true&lt;/code&gt;
+     * if the string not &lt;code&gt;null&lt;code&gt;, it's &lt;code&gt;length is &gt; 0&lt;/code&gt;, and it has at least one
+     * non-whitespace character.
+     * &lt;p&gt;
+     * @param str the String to check, may be &lt;code&gt;null&lt;/code&gt;
+     * @return &lt;code&gt;true&lt;/code&gt; if the String is not null, length &gt; 0, and not
+     *         whitespace only
+     * @see Character#isWhitespace
+     */
+    public static boolean hasText(String str) {
+        int strLen;
+<span class="nc bnc" id="L381" title="All 4 branches missed.">        if (str == null || (strLen = str.length()) == 0) {</span>
+<span class="nc" id="L382">            return false;</span>
+        }
+<span class="nc bnc" id="L384" title="All 2 branches missed.">        for (int i = 0; i &lt; strLen; i++) {</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">            if (!Character.isWhitespace(str.charAt(i))) {</span>
+<span class="nc" id="L386">                return true;</span>
+            }
+        }
+<span class="nc" id="L389">        return false;</span>
+    }
+
+    /**
+     * Check if a String has text. More specifically, returns &lt;code&gt;true&lt;/code&gt;
+     * if the string not &lt;code&gt;null&lt;code&gt;, it's &lt;code&gt;length is &gt; 0&lt;/code&gt;, and it has at least one
+     * non-whitespace character.
+     * &lt;p&gt;
+     * @param str the String to check, may be &lt;code&gt;null&lt;/code&gt;
+     * @return &lt;code&gt;true&lt;/code&gt; if the String is not null, length &gt; 0, and not
+     *         whitespace only
+     * @see Character#isWhitespace
+     */
+    public static boolean hasText(StringBuffer str) {
+        int strLen;
+<span class="nc bnc" id="L404" title="All 4 branches missed.">        if (str == null || (strLen = str.length()) == 0) {</span>
+<span class="nc" id="L405">            return false;</span>
+        }
+<span class="nc bnc" id="L407" title="All 2 branches missed.">        for (int i = 0; i &lt; strLen; i++) {</span>
+<span class="nc bnc" id="L408" title="All 2 branches missed.">            if (!Character.isWhitespace(str.charAt(i))) {</span>
+<span class="nc" id="L409">                return true;</span>
+            }
+        }
+<span class="nc" id="L412">        return false;</span>
+    }
+
+    /**
+     * Convert a CSV list into an array of Strings.
+     * 
+     * @param str CSV list
+     * @return an array of Strings, or the empty array if s is null
+     */
+    public static String[] commaDelimitedListToStringArray(String str) {
+<span class="nc" id="L422">        return delimitedListToStringArray(str, &quot;,&quot;);</span>
+    }
+
+    /**
+     * Take a String which is a delimited list and convert it to a String array.
+     * &lt;p&gt;
+     * A single delimiter can consists of more than one character: It will still
+     * be considered as single delimiter string, rather than as bunch of
+     * potential delimiter characters - in contrast to
+     * &lt;code&gt;tokenizeToStringArray&lt;/code&gt;.
+     * 
+     * @param str the input String
+     * @param delimiter the delimiter between elements (this is a single
+     *            delimiter, rather than a bunch individual delimiter
+     *            characters)
+     * @return an array of the tokens in the list
+     * @see #tokenizeToStringArray
+     */
+    public static String[] delimitedListToStringArray(String str, String delimiter) {
+<span class="nc bnc" id="L441" title="All 2 branches missed.">        if (str == null) {</span>
+<span class="nc" id="L442">            return new String[0];</span>
+        }
+<span class="nc bnc" id="L444" title="All 2 branches missed.">        if (delimiter == null) {</span>
+<span class="nc" id="L445">            return new String[] { str };</span>
+        }
+
+<span class="nc" id="L448">        List&lt;String&gt; result = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">        if (&quot;&quot;.equals(delimiter)) {</span>
+<span class="nc bnc" id="L450" title="All 2 branches missed.">            for (int i = 0; i &lt; str.length(); i++) {</span>
+<span class="nc" id="L451">                result.add(str.substring(i, i + 1));</span>
+            }
+        } else {
+<span class="nc" id="L454">            int pos = 0;</span>
+<span class="nc" id="L455">            int delPos = 0;</span>
+<span class="nc bnc" id="L456" title="All 2 branches missed.">            while ((delPos = str.indexOf(delimiter, pos)) != -1) {</span>
+<span class="nc" id="L457">                result.add(str.substring(pos, delPos));</span>
+<span class="nc" id="L458">                pos = delPos + delimiter.length();</span>
+            }
+<span class="nc bnc" id="L460" title="All 4 branches missed.">            if (str.length() &gt; 0 &amp;&amp; pos &lt;= str.length()) {</span>
+                // Add rest of String, but not in case of empty input.
+<span class="nc" id="L462">                result.add(str.substring(pos));</span>
+            }
+        }
+<span class="nc" id="L465">        return toStringArray(result);</span>
+    }
+
+    /**
+     * Copy the given Collection into a String array. The Collection must
+     * contain String elements only.
+     * 
+     * @param collection the Collection to copy
+     * @return the String array (&lt;code&gt;null&lt;/code&gt; if the Collection was
+     *         &lt;code&gt;null&lt;/code&gt; as well)
+     */
+    public static String[] toStringArray(Collection&lt;String&gt; collection) {
+<span class="nc bnc" id="L477" title="All 2 branches missed.">        if (collection == null) {</span>
+<span class="nc" id="L478">            return null;</span>
+        }
+<span class="nc" id="L480">        return (String[]) collection.toArray(new String[collection.size()]);</span>
+    }
+
+    /**
+     * 判断字符串是否为空
+     * 
+     * @param s
+     * @return
+     */
+    public static boolean isEmpty(String s) {
+<span class="nc bnc" id="L490" title="All 4 branches missed.">        return s == null || s.trim().length() == 0;</span>
+    }
+
+    /**
+     * 判断字符串是否为不为空
+     * 
+     * @param s
+     * @return
+     */
+    public static boolean isNotEmpty(String s) {
+<span class="nc bnc" id="L500" title="All 4 branches missed.">        return s != null &amp;&amp; s.trim().length() != 0;</span>
+    }
+    
+    /**
+     * 判断所给字符串是否有一个为空
+     * @param s
+     * @return ture: 至少一个为空, false: 没有一个为空
+     */
+    public static boolean isAnyEmpty(String... s){
+<span class="nc bnc" id="L509" title="All 2 branches missed.">        for(String item : s){</span>
+<span class="nc bnc" id="L510" title="All 2 branches missed.">            if(isEmpty(item)){</span>
+<span class="nc" id="L511">                return true;</span>
+            }
+        }
+<span class="nc" id="L514">        return false;</span>
+    }
+    
+    /**
+     * 判断所给字符串是否全部为空
+     * @param s
+     * @return true:全部为空, false:至少一个不为空
+     */
+    public static boolean isAllEmpty(String... s){
+<span class="nc bnc" id="L523" title="All 2 branches missed.">        for(String item : s){</span>
+<span class="nc bnc" id="L524" title="All 2 branches missed.">            if(isNotEmpty(item)){</span>
+<span class="nc" id="L525">                return false;</span>
+            }
+        }
+<span class="nc" id="L528">        return true;</span>
+    }
+
+    /**
+     * 转义所有&quot;&lt;&quot;和&quot;&gt;&quot;符号
+     * 
+     * @param str
+     * @return
+     */
+    public static String escapeHtml(String str) {
+<span class="nc bnc" id="L538" title="All 2 branches missed.">        if (str == null) {</span>
+<span class="nc" id="L539">            return &quot;&quot;;</span>
+        }
+<span class="nc" id="L541">        str = str.replace(&quot;&gt;&quot;, &quot;&amp;gt;&quot;);</span>
+<span class="nc" id="L542">        str = str.replace(&quot;&lt;&quot;, &quot;&amp;lt;&quot;);</span>
+<span class="nc" id="L543">        return str;</span>
+    }
+
+    /**
+     * 将字符串截取一定的长度,末尾用...补全
+     * 
+     * @param s
+     * @param byteLength
+     * @return
+     */
+    public static String limitString(String s, int byteLength) {
+<span class="nc" id="L554">        return limitString(s, byteLength, &quot;...&quot;);</span>
+    }
+
+    /**
+     * 将字符串截取一定的长度,末尾用omit补全
+     * @param s
+     * @param byteLength
+     * @param omit
+     * @return
+     */
+    public static String limitString(String s, int byteLength, String omit) {
+<span class="nc bnc" id="L565" title="All 2 branches missed.">        if (s == null) {</span>
+<span class="nc" id="L566">            return null;</span>
+        }
+<span class="nc bnc" id="L568" title="All 2 branches missed.">        if (byteLength &lt;= 0) {</span>
+<span class="nc" id="L569">            return &quot;&quot;;</span>
+        }
+<span class="nc bnc" id="L571" title="All 2 branches missed.">        if (s.getBytes().length &lt;= byteLength) {</span>
+<span class="nc" id="L572">            return s;</span>
+        }
+<span class="nc" id="L574">        String r = &quot;&quot;;</span>
+<span class="nc bnc" id="L575" title="All 2 branches missed.">        for (int i = 0; i &lt; s.length(); i++) {</span>
+<span class="nc" id="L576">            String tmp = s.substring(i, i + 1);</span>
+<span class="nc bnc" id="L577" title="All 2 branches missed.">            if (r.getBytes().length + tmp.getBytes().length &gt; byteLength) {</span>
+<span class="nc" id="L578">                break;</span>
+            }
+<span class="nc" id="L580">            r += tmp;</span>
+        }
+<span class="nc bnc" id="L582" title="All 2 branches missed.">        if (omit != null) {</span>
+<span class="nc" id="L583">            r += omit;</span>
+        }
+<span class="nc" id="L585">        return r;</span>
+    }
+
+    public static String getPatternMatchStr(String src, String pattern) {
+<span class="nc bnc" id="L589" title="All 2 branches missed.">        if(src == null) {</span>
+<span class="nc" id="L590">            return null;</span>
+        }
+        try {
+<span class="nc" id="L593">            Pattern p = Pattern.compile(pattern);</span>
+<span class="nc" id="L594">            Matcher matcher = p.matcher(src);</span>
+<span class="nc bnc" id="L595" title="All 2 branches missed.">            if(matcher.find()) {</span>
+<span class="nc" id="L596">                return matcher.group();</span>
+            }
+<span class="nc" id="L598">        } catch (Exception e) {</span>
+<span class="nc" id="L599">            e.printStackTrace();</span>
+<span class="nc" id="L600">        }</span>
+<span class="nc" id="L601">        return null;</span>
+        
+    }
+    
+    /**
+     * 获取固定长度的随机字符串
+     * @param length
+     * @return
+     */
+    public static String getRandomString(int length) {
+<span class="nc" id="L611">        StringBuffer sb = new StringBuffer();</span>
+<span class="nc bnc" id="L612" title="All 2 branches missed.">        for (int i = 0; i &lt; length; i++) {</span>
+<span class="nc" id="L613">            char c = AS.charAt((int) (Math.random() * (AS.length())));</span>
+<span class="nc" id="L614">            sb.append(c);</span>
+        }
+<span class="nc" id="L616">        return sb.toString().toUpperCase();</span>
+    }
+
+    /**
+     * 将字符串补齐至一定长度,不足部分用omit补齐
+     * 
+     * @param s
+     * @param byteLength
+     * @param omit
+     * @return
+     */
+    public static String toSize(String s, int byteLength, String omit) {
+<span class="nc bnc" id="L628" title="All 2 branches missed.">        if (byteLength &lt;= 0) {</span>
+<span class="nc" id="L629">            return &quot;&quot;;</span>
+        }
+<span class="nc bnc" id="L631" title="All 2 branches missed.">        if (s == null) {</span>
+<span class="nc" id="L632">            s = &quot;&quot;;</span>
+        }
+<span class="nc bnc" id="L634" title="All 2 branches missed.">        if (omit == null) {</span>
+<span class="nc" id="L635">            omit = &quot;...&quot;;</span>
+        }
+<span class="nc" id="L637">        int omitSize = omit.getBytes().length;</span>
+
+<span class="nc bnc" id="L639" title="All 2 branches missed.">        if (s.getBytes().length &gt; byteLength) {</span>
+<span class="nc bnc" id="L640" title="All 2 branches missed.">            if (byteLength &lt; omitSize) {</span>
+<span class="nc" id="L641">                s = limitString(s, byteLength);</span>
+            } else {
+<span class="nc" id="L643">                s = limitString(s, byteLength - omitSize, omit);</span>
+            }
+        }
+<span class="nc bnc" id="L646" title="All 2 branches missed.">        while (s.getBytes().length + omitSize &lt;= byteLength) {</span>
+<span class="nc" id="L647">            s += omit;</span>
+        }
+<span class="nc" id="L649">        return s;</span>
+    }
+
+    /**
+     * 将字符串的首字母大写.
+     * 
+     * @param str
+     * @return
+     */
+    public static String capitalizeFirstLetter(String str) {
+<span class="nc bnc" id="L659" title="All 2 branches missed.">        if (StringUtil.isEmpty(str)) {</span>
+<span class="nc" id="L660">            return null;</span>
+        }
+<span class="nc" id="L662">        String firstLetter = str.substring(0, 1);</span>
+<span class="nc" id="L663">        String result = firstLetter.toUpperCase() + str.substring(1);</span>
+<span class="nc" id="L664">        return result;</span>
+    }
+
+    /**
+     * 判断某字符串是否都在ascii的范围内
+     * 
+     * @param str
+     * @return
+     */
+    public static boolean isAsciiStr(String str) {
+<span class="nc bnc" id="L674" title="All 2 branches missed.">        if (str == null) {</span>
+<span class="nc" id="L675">            return false;</span>
+        }
+
+<span class="nc" id="L678">        int length = str.length();</span>
+
+<span class="nc bnc" id="L680" title="All 2 branches missed.">        for (int i = 0; i &lt; length; i++) {</span>
+<span class="nc bnc" id="L681" title="All 2 branches missed.">            if (str.charAt(i) &gt; 255) {</span>
+<span class="nc" id="L682">                return false;</span>
+            }
+        }
+
+<span class="nc" id="L686">        return true;</span>
+    }
+
+    /**
+     * 判断某字符串是否数值型
+     * 
+     * @param str
+     * @return
+     */
+    public static boolean isNumeric(String str) {
+<span class="nc bnc" id="L696" title="All 2 branches missed.">        if (str == null) {</span>
+<span class="nc" id="L697">            return false;</span>
+        }
+
+<span class="nc" id="L700">        int length = str.length();</span>
+
+<span class="nc bnc" id="L702" title="All 2 branches missed.">        for (int i = 0; i &lt; length; i++) {</span>
+<span class="nc bnc" id="L703" title="All 2 branches missed.">            if (!Character.isDigit(str.charAt(i))) {</span>
+<span class="nc" id="L704">                return false;</span>
+            }
+        }
+
+<span class="nc" id="L708">        return true;</span>
+    }
+
+    /**
+     * 将字符串转换成小写。
+     * 
+     * &lt;p&gt;
+     * 如果字符串是&lt;code&gt;null&lt;/code&gt;则返回&lt;code&gt;null&lt;/code&gt;。
+     * &lt;/p&gt;
+     * 
+     * @param str 要转换的字符串
+     * 
+     * @return 大写字符串，如果原字符串为&lt;code&gt;null&lt;/code&gt;，则返回&lt;code&gt;null&lt;/code&gt;
+     */
+    public static String toLowerCase(String str) {
+<span class="nc bnc" id="L723" title="All 2 branches missed.">        if (str == null) {</span>
+<span class="nc" id="L724">            return null;</span>
+        }
+
+<span class="nc" id="L727">        return str.toLowerCase();</span>
+    }
+
+    /**
+     * 取得指定子串在字符串中出现的次数。
+     * 
+     * &lt;p&gt;
+     * 如果字符串为&lt;code&gt;null&lt;/code&gt;或空，则返回&lt;code&gt;0&lt;/code&gt;。
+     * 
+     * &lt;/p&gt;
+     * 
+     * @param str 要扫描的字符串
+     * @param subStr 子字符串
+     * 
+     * @return 子串在字符串中出现的次数，如果字符串为&lt;code&gt;null&lt;/code&gt;或空，则返回&lt;code&gt;0&lt;/code&gt;
+     */
+    public static int countMatches(String str, String subStr) {
+<span class="nc bnc" id="L744" title="All 8 branches missed.">        if ((str == null) || (str.length() == 0) || (subStr == null) || (subStr.length() == 0)) {</span>
+<span class="nc" id="L745">            return 0;</span>
+        }
+
+<span class="nc" id="L748">        int count = 0;</span>
+<span class="nc" id="L749">        int index = 0;</span>
+
+<span class="nc bnc" id="L751" title="All 2 branches missed.">        while ((index = str.indexOf(subStr, index)) != -1) {</span>
+<span class="nc" id="L752">            count++;</span>
+<span class="nc" id="L753">            index += subStr.length();</span>
+        }
+
+<span class="nc" id="L756">        return count;</span>
+    }
+    
+    /**
+     * 从inputReader中读出一行
+     * @param inputReader
+     * @return
+     * @throws IOException
+     */
+    public static String readLine(InputStreamReader inputReader) throws IOException {
+<span class="nc" id="L766">        StringBuffer sb = new StringBuffer();</span>
+        
+        char c;
+        int n;
+<span class="nc" id="L770">        int num = 0;</span>
+<span class="nc bnc" id="L771" title="All 2 branches missed.">        while((n = inputReader.read()) &gt; 0) {</span>
+<span class="nc" id="L772">            num ++;</span>
+<span class="nc" id="L773">            c = (char) n;</span>
+<span class="nc bnc" id="L774" title="All 4 branches missed.">            if(c == '\n' || c == '\r') {</span>
+<span class="nc" id="L775">                break;</span>
+            }
+<span class="nc" id="L777">            sb.append(c);</span>
+        }
+<span class="nc bnc" id="L779" title="All 2 branches missed.">        if(num == 0) {</span>
+<span class="nc" id="L780">            return null;</span>
+        }
+        
+<span class="nc" id="L783">        return sb.toString();</span>
+    }
+    
+    /**
+     * 获取文件的后缀
+     * @param file
+     * @return
+     */
+    public static String getFileExtName(String file) {
+<span class="nc bnc" id="L792" title="All 2 branches missed.">        if(isEmpty(file)) {</span>
+<span class="nc" id="L793">            return null;</span>
+        }
+        
+<span class="nc" id="L796">        int idx = file.lastIndexOf(&quot;.&quot;);</span>
+<span class="nc bnc" id="L797" title="All 2 branches missed.">        if(idx &lt; 0 ) {</span>
+<span class="nc" id="L798">            return file;</span>
+        }
+        
+<span class="nc" id="L801">        return file.substring(idx + 1);</span>
+    }
+    
+    /**
+     * 格式化string
+     * @param str
+     * @param obj
+     * @return
+     */
+    public static String formatString(String str, Object ... obj) {
+<span class="nc" id="L811">        return String.format(str, obj);</span>
+    }
+    
+    /**
+     * 取字符串后面几个len长度
+     * @param str
+     * @param len
+     * @return
+     */
+    public static String lastSubStr(String str, int len) {
+<span class="nc bnc" id="L821" title="All 2 branches missed.">        if(str == null) {</span>
+<span class="nc" id="L822">            return null;</span>
+        }
+        
+<span class="nc bnc" id="L825" title="All 2 branches missed.">        if(str.length() &lt;= len) {</span>
+<span class="nc" id="L826">            return str;</span>
+        }
+        
+<span class="nc" id="L829">        return str.substring(str.length() - len, str.length());</span>
+        
+    }
+    
+    /**
+     * 过滤掉ascii的字符串，主要用于取出中文文字
+     */
+    public static String filterAsciiStr(String str) {
+<span class="nc" id="L837">        StringBuffer sb = new StringBuffer();</span>
+        
+<span class="nc bnc" id="L839" title="All 2 branches missed.">        for(int i=0; i&lt;str.length(); i++) {</span>
+<span class="nc" id="L840">            char c = str.charAt(i);</span>
+<span class="nc bnc" id="L841" title="All 2 branches missed.">            if(c &gt; 255) {</span>
+<span class="nc" id="L842">                sb.append(c);</span>
+            }
+        }
+        
+<span class="nc" id="L846">        return sb.toString();</span>
+    }
+
+    /**
+     * 取出ascii的文本
+     */
+    public static String getAsciiStr(String str) {
+<span class="nc bnc" id="L853" title="All 2 branches missed.">        if(str == null) {</span>
+<span class="nc" id="L854">            return null;</span>
+        }
+        
+<span class="nc" id="L857">        StringBuffer sb = new StringBuffer();</span>
+        
+<span class="nc bnc" id="L859" title="All 2 branches missed.">        for(int i=0; i&lt;str.length(); i++) {</span>
+<span class="nc" id="L860">            char c = str.charAt(i);</span>
+<span class="nc bnc" id="L861" title="All 2 branches missed.">            if(c &lt; 255) {</span>
+<span class="nc" id="L862">                sb.append(c);</span>
+            }
+        }
+        
+<span class="nc" id="L866">        return trim(sb.toString());</span>
+    }
+    
+
+    /**
+     * 去除无用的字符串，只保留字母和数字
+     * @return
+     */
+    public static String trimUnusedStr(String str) {
+<span class="nc bnc" id="L875" title="All 2 branches missed.">        if(str == null) {</span>
+<span class="nc" id="L876">            return &quot;&quot;;</span>
+        }
+        
+<span class="nc" id="L879">        StringBuffer sb = new StringBuffer();</span>
+<span class="nc bnc" id="L880" title="All 2 branches missed.">        for(int i=0; i&lt;str.length(); i++) {</span>
+<span class="nc" id="L881">            char c = str.charAt(i);</span>
+<span class="nc bnc" id="L882" title="All 2 branches missed.">            if(Character.isLetterOrDigit(c)) {</span>
+<span class="nc" id="L883">                sb.append(c);</span>
+            }
+        }
+        
+<span class="nc" id="L887">        return sb.toString();</span>
+    }
+    
+    public static boolean isPhone(String phone){
+<span class="nc bnc" id="L891" title="All 2 branches missed.">        if(isEmpty(phone)){</span>
+<span class="nc" id="L892">            return false;</span>
+        }
+        try{
+<span class="nc" id="L895">            Pattern p = null;  </span>
+<span class="nc" id="L896">            Matcher m = null;  </span>
+<span class="nc" id="L897">            boolean b = false;   </span>
+<span class="nc" id="L898">            p = Pattern.compile(&quot;^[1][3,4,5,7,8][0-9]{9}$&quot;); // 验证手机号  </span>
+<span class="nc" id="L899">            m = p.matcher(phone);  </span>
+<span class="nc" id="L900">            b = m.matches();   </span>
+<span class="nc" id="L901">            return b;  </span>
+<span class="nc" id="L902">        }catch(Exception e){</span>
+<span class="nc" id="L903">            return false;</span>
+        }
+        
+        
+    }
+    
+
+    public static String escapeQueryChars(String s) {
+<span class="nc bnc" id="L911" title="All 2 branches missed.">        if(isEmpty(s)){</span>
+<span class="nc" id="L912">            return &quot;&quot;;</span>
+        }
+<span class="nc" id="L914">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc bnc" id="L915" title="All 2 branches missed.">        for (int i = 0; i &lt; s.length(); i++) {</span>
+<span class="nc" id="L916">          char c = s.charAt(i);</span>
+          // These characters are part of the query syntax and must be escaped
+<span class="nc bnc" id="L918" title="All 40 branches missed.">          if (c == '\\' || c == '+' || c == '-' || c == '!'  || c == '(' || c == ')' || c == ':'</span>
+            || c == '^' || c == '[' || c == ']' || c == '\&quot;' || c == '{' || c == '}' || c == '~'
+            || c == '*' || c == '?' || c == '|' || c == '&amp;'  || c == ';' || c == '/'
+<span class="nc bnc" id="L921" title="All 2 branches missed.">            || Character.isWhitespace(c)) {</span>
+<span class="nc" id="L922">            sb.append('\\');</span>
+          }
+<span class="nc" id="L924">          sb.append(c);</span>
+        }
+<span class="nc" id="L926">        return sb.toString();</span>
+      }
+
+    public static String genArrayInSql(String ...strings ){
+<span class="nc bnc" id="L930" title="All 4 branches missed.">        if(strings == null || strings.length == 0)return null;</span>
+<span class="nc" id="L931">        StringBuilder sb = new StringBuilder() ; </span>
+<span class="nc bnc" id="L932" title="All 2 branches missed.">        for (String string : strings) {</span>
+<span class="nc" id="L933">            sb.append(&quot;,'&quot;).append(string).append(&quot;'&quot;) ; </span>
+        }
+<span class="nc" id="L935">        return sb.substring(1) ; </span>
+    }
+    /**
+     * 有几位小数点
+     * @param str
+     * @param maxFractionDigits 小数点位数
+     * @return
+     */
+    public static boolean hasFractionDigits(String str,int maxFractionDigits) {
+<span class="nc bnc" id="L944" title="All 2 branches missed.">        if (str.contains(&quot;.&quot;)) {</span>
+<span class="nc" id="L945">            String[] arrayStr = str.split(&quot;[.]&quot;);</span>
+<span class="nc bnc" id="L946" title="All 2 branches missed.">            if (arrayStr.length == 2) {</span>
+<span class="nc bnc" id="L947" title="All 2 branches missed.">                if (arrayStr[1].length() == maxFractionDigits) {</span>
+<span class="nc" id="L948">                    boolean decimal = isNumeric(arrayStr[1]);</span>
+<span class="nc" id="L949">                    boolean integer = isNumeric(arrayStr[0]);</span>
+<span class="nc bnc" id="L950" title="All 4 branches missed.">                    return decimal &amp;&amp; integer;</span>
+                }
+            }
+        }
+<span class="nc" id="L954">        return false;</span>
+    }
+    /**
+     * 截取字符串+结束字符数
+     * @param str
+     * @param len
+     * @param endString
+     * @return
+     */
+    public static String subString(String str,int len,String endString){
+<span class="nc bnc" id="L964" title="All 2 branches missed.">        if(str==null){</span>
+<span class="nc" id="L965">            return null;</span>
+        }
+<span class="nc bnc" id="L967" title="All 2 branches missed.">        if(str.length()&lt;=len){</span>
+<span class="nc" id="L968">            return str;</span>
+        }
+<span class="nc" id="L970">        return str.substring(0, len)+endString;</span>
+    }
+    
+    /**
+     * 转UTF-8编码
+     */
+    public static String toUTF8(String str){
+<span class="nc" id="L977">    	String newStr = &quot;&quot;;</span>
+    	try {
+<span class="nc" id="L979">    		new String(str.getBytes(),&quot;UTF-8&quot;);</span>
+<span class="nc" id="L980">		} catch (UnsupportedEncodingException e) {</span>
+<span class="nc" id="L981">			e.printStackTrace();</span>
+<span class="nc" id="L982">		} </span>
+<span class="nc" id="L983">    	return newStr;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

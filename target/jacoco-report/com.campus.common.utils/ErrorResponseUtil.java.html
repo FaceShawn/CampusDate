@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ErrorResponseUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-campus-date</a> &gt; <a href="index.source.html" class="el_package">com.campus.common.utils</a> &gt; <span class="el_source">ErrorResponseUtil.java</span></div><h1>ErrorResponseUtil.java</h1><pre class="source lang-java linenums">package com.campus.common.utils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gson.Gson;
+
+/**
+ * @className ErrorResponseUtil.java
+ * @classDescription 返回错误信息
+ * 
+ */
+
+<span class="nc" id="L14">public class ErrorResponseUtil {</span>
+	
+	/**
+	 * errcode:
+	 * 
+	 * -1：系统繁忙，请稍后再试
+	 * 0：请求成功
+	 * 40001：缺少参数
+	 *
+	 */
+
+	/**
+	 * 获取响应Map对象
+	 *
+	 * @param errcode
+	 * @param errmsg
+	 * @return String
+	 */
+	public static String setResponse(String errcode ,String errmsg){
+
+<span class="nc" id="L34">		Map&lt;String,String&gt; response = new HashMap&lt;String,String&gt;();</span>
+<span class="nc" id="L35">		response.put(&quot;errcode&quot;, errcode) ;</span>
+<span class="nc" id="L36">		response.put(&quot;errmsg&quot;, errmsg) ;</span>
+<span class="nc" id="L37">		Gson gson = new Gson();</span>
+<span class="nc" id="L38">		return gson.toJson(response) ;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

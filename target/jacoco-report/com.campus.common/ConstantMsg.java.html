@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConstantMsg.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-campus-date</a> &gt; <a href="index.source.html" class="el_package">com.campus.common</a> &gt; <span class="el_source">ConstantMsg.java</span></div><h1>ConstantMsg.java</h1><pre class="source lang-java linenums">package com.campus.common;
+
+/**
+ * 静态常量
+ *
+ */
+<span class="nc" id="L7">public class ConstantMsg {</span>
+	
+	/**
+	 * 调试开关
+	 */
+	public static final boolean DEBUG = false;
+	public static final String DEBUG_GROUP = &quot;teacher&quot;;
+	
+	
+	/**
+	 * 参数状态
+	 */
+	public static final String STARTTIME_IS_NULL = &quot;starttime can not be null&quot;;
+	public static final String ENDTIME_IS_NULL 	 = &quot;endtime can not be null&quot;;
+	public static final String EMAIL_IS_NULL = &quot;email can not be null&quot;;
+	public static final String PASSWORD_IS_NULL = &quot;email can not be null&quot;;
+	public static final String CONFIRMPASSWORD_IS_NULL = &quot;email can not be null&quot;;
+	public static final String USERNAME_IS_NULL = &quot;username can not be null&quot;;
+	public static final String USERGROUP_IS_NULL = &quot;usergroup can not be null&quot;;
+	public static final String DEPTCODE_IS_NULL = &quot;dept can not be null&quot;;
+	public static final String FREE_DATE_IS_NULL = &quot;freeDate can not be null&quot;;
+	public static final String SESSION_CODE_IS_NULL = &quot;sessionCode can not be null&quot;;
+	public static final String OWNER_ID_IS_NULL = &quot;ownerId can not be null&quot;;
+	public static final String USER_LIST_IS_NULL = &quot;userList is null&quot;;
+	public static final String FREETIME_LIST_IS_NULL = &quot;freetimeList is null&quot;;
+	public static final String FREETIME_ID_IS_NULL = &quot;freetimeId is null&quot;;
+	public static final String TWO_PASSWORDS_ARE_NOT_SAME = &quot;two passwords are not same&quot;;
+	public static final String PASSWORD_CAN_NOT_BE_ENCRYPTED = &quot;password can not be encrypted&quot;;	// 密码无法被加密
+	
+	
+	/**
+	 * 用户登录注册操作状态
+	 */
+	public static final String LOGIN_SUCCESS = &quot;login successful&quot;;	// 登录成功
+	public static final String REGISTER_SUCCESS = &quot;register successful&quot;;	// 注册成功
+	public static final String PASSWORD_IS_ERROR = &quot;password is error&quot;;	// 密码错误
+	public static final String USER_IS_NOT_LOGIN = &quot;user is not login&quot;;	// 用户未登录
+	public static final String USER_IS_NOT_REGISTERED = &quot;user is not registered&quot;;	// 用户未注册
+	public static final String USER_IS_ALREADY_LOGIN = &quot;user is already login, do not login again&quot;;
+	public static final String USER_IS_ALREADY_REGISTERED = &quot;email is already registered, please turn to login&quot;;
+	public static final String USER_RESERVE_SUCCESS = &quot;user reserve successful&quot;;
+	public static final String USER_ALREADY_RESERVED = &quot;user already reserved&quot;;
+	
+	
+	/**
+	 * 用户组
+	 */
+	public static final String USERGROUP_STUDENT = &quot;student&quot;;
+	public static final String USERGROUP_TEACHER = &quot;teacher&quot;;
+	public static final String USERGROUP_ALU	 = &quot;alu&quot;;	// 校友
+	public static final String USERGROUP_ADMIN 	 = &quot;admin&quot;;
+	public static final String USER_IS_NOT_PERMITTED_TO_OOPERATE = &quot;user is not permitted to operate&quot;;
+	
+	
+	/**
+	 * 用户状态
+	 */
+	public static final String USER_STATE_UNCHECK = &quot;uncheck&quot;;
+	public static final String USER_STATE_CHECKED = &quot;checked&quot;;
+	
+	
+	/**
+	 * 空闲时间状态
+	 */
+	public static final String FREETIME_STATE_FREE = &quot;free&quot;;	// 空闲
+	public static final String FREETIME_STATE_BUSY = &quot;busy&quot;;	// 已满
+	public static final String FREETIME_STATE_RESERVED =&quot;reserved&quot;;	// 已被预约
+	
+	
+	/**
+	 * 添加空闲时间
+	 */
+	public static final String FREETIME_ADD_SUCCESS = &quot;add freetime success&quot;;
+	public static final String FREETIME_IS_NOT_ADDED = &quot;freetime is not added&quot;;
+	public static final String FREETIME_IS_ALREADY_ADDED = &quot;time is already added, please add another one&quot;;
+	
+	
+	/**
+	 * 院系
+	 */
+	public static final String DEPT_ALL = &quot;00&quot;;	// 所有院系
+	public static final String DEPT_CAR = &quot;01&quot;;	// 汽车工程学院
+	public static final String DEPT_INFO = &quot;02&quot;;	// 信息科学与工程学院
+	public static final String DEPT_MANAGE = &quot;03&quot;;	// 管理学院
+	public static final String DEPT_COMPUTER = &quot;04&quot;;	// 计算机科学与技术学院
+	public static final String DEPT_FOREGIN = &quot;05&quot;;	// 外国语学院
+	public static final String DEPT_MATH = &quot;06&quot;;	// 数学系
+	public static final String DEPT_SEA = &quot;07&quot;;	// 海洋学院
+	public static final String DEPT_METEA = &quot;08&quot;;	// 材料科学与工程学院
+	public static final String DEPT_BOAT = &quot;09&quot;;	// 船舶学院
+	public static final String DEPT_LIGHT = &quot;10&quot;;	// 光电科学系
+	public static final String DEPT_SOFT = &quot;11&quot;;	// 软件学院
+	public static final String DEPT_BUILDING = &quot;12&quot;;	// 土木工程系
+	public static final String DEPT_HUMAN = &quot;13&quot;;	// 人文学院
+	public static final String DEPT_NEW_ENERGY = &quot;14&quot;; // 新能源？
+	public static final String DEPT_OTHER = &quot;99&quot;;	//其他院系部门
+	
+	public static final String USER_RESERVE_NUM_IS_FULL = &quot;user reserved num is full&quot;;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
