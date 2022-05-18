@@ -1,0 +1,32 @@
+
+^
+java:S4488-"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Ú­Ç†
+c
+java:S44886"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(•Šöøÿÿÿÿ
+e
+java:S4488?"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(õé¨èûÿÿÿÿ
+3
+java:S2119J"Save and re-use this "Random".(¼İÅf
+n
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(µÊ»·ùÿÿÿÿ
+f
+java:S4488"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ú‘œçıÿÿÿÿ
+O	java:S106£"9Replace this use of System.out or System.err by a logger.(õâ¿ü
+T	java:S106¤"9Replace this use of System.out or System.err by a logger.(›ı„‘ûÿÿÿÿ
+4
+java:S2119­"Save and re-use this "Random".(¼İÅf
+E
+java:S2140å")Use "java.util.Random.nextInt()" instead.(ëŠÙÚûÿÿÿÿ
+O	java:S106ì"9Replace this use of System.out or System.err by a logger.(ñ‡è
+T	java:S106í"9Replace this use of System.out or System.err by a logger.(ïÔøÉøÿÿÿÿ
+O	java:S106õ"9Replace this use of System.out or System.err by a logger.(ğÔ‘¬
+W	java:S125œ"<This block of commented-out lines of code should be removed.(ºŸÌÛÿÿÿÿÿ
+O	java:S106©"9Replace this use of System.out or System.err by a logger.(·¥†¿
+6
+java:S3751ñ"Make this method non "private".(Ê¯´¬
+d
+java:S4488ğ"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ö‚íÜıÿÿÿÿ
+W	java:S125Ô"<This block of commented-out lines of code should be removed.(£µ…Œùÿÿÿÿ
+R	java:S125å"<This block of commented-out lines of code should be removed.(­³û
+d
+java:S4488"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ïşÒÊûÿÿÿÿ

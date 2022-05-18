@@ -1,0 +1,14 @@
+
+^
+java:S4488"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(‹μΟ
+Q	java:S125"<This block of commented-out lines of code should be removed.(εν²›
+V	java:S125 "<This block of commented-out lines of code should be removed.(΅τΊθϋÿÿÿÿ
+>	java:S108"")Either remove or fill this block of code.(²£‚ν
+c
+java:S4488+"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(¶όÿÿÿÿ
+Q	java:S125-"<This block of commented-out lines of code should be removed.(εν²›
+=	java:S1085")Either remove or fill this block of code.(ÿÒ„p
+V	java:S125:"<This block of commented-out lines of code should be removed.(΅τΊθϋÿÿÿÿ
+>	java:S108<")Either remove or fill this block of code.(²£‚ν
+a
+java:S1128"FRemove this unused import 'com.campus.common.utils.ErrorResponseUtil'.(’“„»ψÿÿÿÿ

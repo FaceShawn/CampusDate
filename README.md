@@ -524,8 +524,6 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 [JPA 注解（一） id table entity ](http://conkeyn.iteye.com/blog/602463)
 
-[Spring@Autowired注解与自动装配](https://blog.csdn.net/heyutao007/article/details/5981555)
-
 [SpringBoot中常用注解@Controller/@RestController/@RequestMapping](https://blog.csdn.net/u010412719/article/details/69710480)
 
 > 错误：
@@ -598,15 +596,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 
 [解决方案：java.lang.ClassNotFoundException: javax.xml.bind.JAXBException](https://blog.csdn.net/hadues/article/details/79188793)
 
-
-
-
-
-## 错误
-
-### [找不到或无法加载主类](https://my.oschina.net/u/3771868/blog/2088393)
-
-解决：新建项目时 spring boot 版本改为 1.5.19
+[找不到或无法加载主类](https://my.oschina.net/u/3771868/blog/2088393) 解决：新建项目时 spring boot 版本改为 1.5.19
 
 ## 日志
 

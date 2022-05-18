@@ -1,0 +1,28 @@
+
+k	java:S117'"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òÌ§€þÿÿÿÿ
+P
+java:S1854F":Remove this useless assignment to local variable "md5Pwd".(Ì¶¦ì
+X
+java:S1854S"=Remove this useless assignment to local variable "timeStamp".(¢‚–ˆþÿÿÿÿ
+`
+java:S4488!"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ß¢Í¤
+A
+java:S1481F"+Remove this unused "md5Pwd" local variable.(Ì¶¦ì
+I
+java:S1481S".Remove this unused "timeStamp" local variable.(¢‚–ˆþÿÿÿÿ
+]
+java:S4488n"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(‚½Œj
+Q	java:S125q"<This block of commented-out lines of code should be removed.(åí²›
+N	java:S106s"9Replace this use of System.out or System.err by a logger.(êÅÂð
+V	java:S125u"<This block of commented-out lines of code should be removed.(¡ôºèûÿÿÿÿ
+C	java:S108y")Either remove or fill this block of code.(¶æ¥Óýÿÿÿÿ
+_
+java:S4488‚"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ÕÄ÷¡
+R	java:S125„"<This block of commented-out lines of code should be removed.(åí²›
+>	java:S108Œ")Either remove or fill this block of code.(ÿÒ„p
+W	java:S125‘"<This block of commented-out lines of code should be removed.(¡ôºèûÿÿÿÿ
+D	java:S108“")Either remove or fill this block of code.(¶æ¥Óýÿÿÿÿ
+T
+java:S1128"9Remove this unused import 'org.springframework.ui.Model'.(ê†ýÿÿÿÿ
+l
+java:S1128"QRemove this unused import 'org.springframework.web.bind.annotation.PathVariable'.(¹ûñÅþÿÿÿÿ

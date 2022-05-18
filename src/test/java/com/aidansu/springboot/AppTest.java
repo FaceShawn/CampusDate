@@ -3,6 +3,9 @@ package com.aidansu.springboot;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Unit test for simple Application.
@@ -34,5 +37,10 @@ public class AppTest
     public void testApp()
     {
         assertTrue( true );
+    }
+
+    public void testBean() {
+        BeanFactory beanFactory = new ClassPathXmlApplicationContext("Beans.xml");
+        LoggerFactory.getLogger(AppTest.class);
     }
 }

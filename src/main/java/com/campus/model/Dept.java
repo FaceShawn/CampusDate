@@ -1,7 +1,7 @@
 package com.campus.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 /**
@@ -17,7 +17,7 @@ public class Dept implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
 
-	@Column(name="dept_code")
+	//@Column(name="dept_code")
 	private String deptCode;
 
 	@Column(name="dept_name")

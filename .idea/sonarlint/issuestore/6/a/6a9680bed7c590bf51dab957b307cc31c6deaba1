@@ -1,0 +1,78 @@
+
+g
+java:S1192¨"PDefine a constant instead of duplicating this literal "freetime/detail" 3 times.(öİğÈ
+c
+java:S1192Ê"GDefine a constant instead of duplicating this literal "errmsg" 9 times.(³åâ‚úÿÿÿÿ
+k
+java:S1192ë"ODefine a constant instead of duplicating this literal "myspace/my-add" 7 times.(‰»ãñúÿÿÿÿ
+_
+java:S1192Ø"HDefine a constant instead of duplicating this literal "nowUser" 5 times.(ü¢¡Ÿ
+f
+java:S1192Ú"JDefine a constant instead of duplicating this literal "freetimes" 4 times.(ğŞó¤şÿÿÿÿ
+j
+java:S1192Ë"NDefine a constant instead of duplicating this literal "freetime/list" 3 times.(å¦‚Åùÿÿÿÿ
+S
+java:S4973—"<Strings and Boxed types should be compared using "equals()".(ö¬‰ô
+c
+java:S44885"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Û•ôûÿÿÿÿ
+Œ
+java:S1130A"qRemove the declaration of thrown exception 'java.text.ParseException', as it cannot be thrown from method's body.(ä˜©£úÿÿÿÿ
+™
+java:S1130A"~Remove the declaration of thrown exception 'groovyjarjarcommonscli.ParseException', as it cannot be thrown from method's body.(ä˜©£úÿÿÿÿ
+`
+java:S4488?"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(¤¦Ø€
+D
+java:S1481G".Remove this unused "freeState" local variable.(°ŞÄş
+V	java:S125R"<This block of commented-out lines of code should be removed.(ù…¬¨ıÿÿÿÿ
+N	java:S106["9Replace this use of System.out or System.err by a logger.(õâ¿ü
+S	java:S106\"9Replace this use of System.out or System.err by a logger.(ÇÅ­åûÿÿÿÿ
+3
+java:S2119`"Save and re-use this "Random".(¼İÅf
+N	java:S106y"9Replace this use of System.out or System.err by a logger.(ñ‡è
+S	java:S106z"9Replace this use of System.out or System.err by a logger.(ÇÅ­åûÿÿÿÿ
+N	java:S106|"9Replace this use of System.out or System.err by a logger.(ğÔ‘¬
+>	java:S108}")Either remove or fill this block of code.(å¥‡
+W	java:S125”"<This block of commented-out lines of code should be removed.(ºû­şÿÿÿÿ
+T	java:S106¢"9Replace this use of System.out or System.err by a logger.(‚Ó±ùÿÿÿÿ
+;
+java:S3751Æ"Make this method non "private".(»ı°¢úÿÿÿÿ
+d
+java:S4488Å"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ùñÜÕùÿÿÿÿ
+;
+java:S3751ä"Make this method non "private".(Æœã¹ıÿÿÿÿ
+d
+java:S4488ã"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(Ø¥ÎŠûÿÿÿÿ
+6
+java:S3751ƒ"Make this method non "private".(›‡…
+d
+java:S4488‚"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(‘Ú®éüÿÿÿÿ
+W	java:S125"<This block of commented-out lines of code should be removed.(Á¼’™ıÿÿÿÿ
+;
+java:S3751£"Make this method non "private".(â½õÃıÿÿÿÿ
+_
+java:S4488¢"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(¬ïÕŞ
+n
+java:S3776Ç"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(¦ñÇ‡ûÿÿÿÿ
+
+java:S1130Ç"qRemove the declaration of thrown exception 'java.text.ParseException', as it cannot be thrown from method's body.(¦ñÇ‡ûÿÿÿÿ
+š
+java:S1130Ç"~Remove the declaration of thrown exception 'groovyjarjarcommonscli.ParseException', as it cannot be thrown from method's body.(¦ñÇ‡ûÿÿÿÿ
+f
+java:S4488Å"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(®–±ÿÿÿÿÿ
+W	java:S125É"<This block of commented-out lines of code should be removed.(¸Øÿƒÿÿÿÿÿ
+W	java:S125Ñ"<This block of commented-out lines of code should be removed.(½Â€Ãøÿÿÿÿ
+W	java:S125"<This block of commented-out lines of code should be removed.(•˜ì‰ıÿÿÿÿ
+W	java:S125¶"<This block of commented-out lines of code should be removed.(ñ¥ùšøÿÿÿÿ
+R	java:S125º"<This block of commented-out lines of code should be removed.(ñ±™Œ
+^
+java:S4488È"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(‚½Œj
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
+I
+java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ
+E
+java:S1128"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ
+V
+java:S1128";Remove this unused import 'com.campus.service.DeptService'.(ŠŠŒùÿÿÿÿÿ
+G
+java:S1128 "1Remove this unused import 'com.google.gson.Gson'.(–§

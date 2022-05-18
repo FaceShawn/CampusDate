@@ -10,6 +10,7 @@ import com.campus.model.User;
 import com.campus.service.DeptService;
 import com.campus.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,8 @@ public class UserController {
     /**
      * 跳转到用户登录页面
      */
+//    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    @Scope("singleton")
     @RequestMapping(value="/login" ,method = RequestMethod.GET)
     public String login(){
         return "user/login";
@@ -128,7 +131,7 @@ public class UserController {
             return ErrorResponseUtil.setResponse("400", ConstantMsg.PASSWORD_IS_ERROR);
         }
     }
-    
+
 
     /**
      * 用户注册
